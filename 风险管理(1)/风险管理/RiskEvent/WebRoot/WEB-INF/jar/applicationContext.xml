@@ -1,0 +1,447 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<beans
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+    <import  resource="applicationContext-dataunit.xml"/>
+    <import  resource="applicationContext-riskinput.xml"/>
+    <import  resource="applicationContext-riskflow.xml"/>
+    <import  resource="applicationContext-riskstatistics.xml"/>
+    <import  resource="applicationContext-manage.xml"/>
+    
+    <!-- 配置数据源 -->
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"
+			value="com.microsoft.sqlserver.jdbc.SQLServerDriver">
+		</property>
+		<property name="url"
+			value="jdbc:sqlserver://59.69.105.127:1433;databaseName=REDB">
+		</property>
+		<property name="username" value="sa"></property>
+		<property name="password" value="123"></property>
+	</bean>
+	
+	<!-- 配置sessionFactory，注意包名 -->
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+			<!-- 选择Hibernate 使用的方言 -->
+				<prop key="hibernate.dialect">
+					org.hibernate.dialect.SQLServerDialect
+				</prop>
+				<!-- 在控制台显示Hibernate执行的SQL语句 -->
+				<prop key="hibernate.show_sql">true</prop>
+			</props>
+		</property>
+		<property name="mappingResources">
+			<list>
+			<!-- 映射文件，如果有多个持久化类，则将有多个映射文件 -->
+				<value>com/model/RiskType.hbm.xml</value>
+				<value>com/model/Law.hbm.xml</value>
+				<value>com/model/Department.hbm.xml</value>
+				<value>com/model/Probability.hbm.xml</value>
+				<value>com/model/Operation.hbm.xml</value>
+				<value>com/model/Employee.hbm.xml</value>
+				<value>com/model/Client.hbm.xml</value>
+				<value>com/model/Reputation.hbm.xml</value>
+				<value>com/model/Safe.hbm.xml</value>
+				<value>com/model/Finance.hbm.xml</value>
+				<value>com/model/Risk.hbm.xml</value>
+				<value>com/model/RiskImpact.hbm.xml</value>
+				<value>com/model/RiskFile.hbm.xml</value>
+				<value>com/model/RiskManage.hbm.xml</value>
+				<value>com/model/FileManage.hbm.xml</value>
+				<value>com/model/RiskEvent.hbm.xml</value>
+				<value>com/model/RiskCheck.hbm.xml</value>
+				<value>com/model/Users.hbm.xml</value>
+				<value>com/model/EventFile.hbm.xml</value>
+				<value>com/model/DepStaView.hbm.xml</value>
+				<value>com/model/EventStaView2.hbm.xml</value>
+				<value>com/model/EventStaView.hbm.xml</value>
+				<value>com/model/EventImpactView.hbm.xml</value>
+				<value>com/model/SystemRole.hbm.xml</value>
+				<value>com/model/FunctionModule.hbm.xml</value>
+				<value>com/model/FunctionLimit.hbm.xml</value>		
+				<value>com/model/EventWarnView.hbm.xml</value> 
+				<value>com/model/UsersFunction.hbm.xml</value> 
+				<value>com/model/LawFile.hbm.xml</value>
+				<value>com/model/RiskStatus.hbm.xml</value>
+				<value>com/model/RiskStrategy.hbm.xml</value>
+				<value>com/model/Strategy.hbm.xml</value>
+				<value>com/model/UserStrategy.hbm.xml</value>
+				<value>com/model/LinkStaView2.hbm.xml</value>
+				<value>com/model/LinkStaView.hbm.xml</value>
+				<value>com/model/AllStaView.hbm.xml</value>
+				<value>com/model/FlowRule.hbm.xml</value>
+				<value>com/model/RiskRecord.hbm.xml</value>
+				<value>com/model/DepWarn.hbm.xml</value>
+			</list>
+		</property>		
+		</bean>
+		
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">   
+       <property name="sessionFactory">   
+         <ref local="sessionFactory" />   
+      </property>   
+    </bean>   
+ <bean id="UsersFunctionDAO" class="com.dao.UsersFunctionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean name="loginAction" class="com.action.loginAction">
+		<property name="userdao">
+			<ref bean="UsersDAO" />
+		</property>		
+		<property name="functiondao">
+			<ref bean="UsersFunctionDAO" />
+		</property>		
+	</bean>
+	<bean name="BackMenu" class="com.action.loginAction">
+	</bean>
+	<bean name="ExitSystem" class="com.action.loginAction">
+	</bean>
+	<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+	<bean name="ajaxRiskAction" class="com.action.AjaxRiskAction" scope="prototype">
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+	</bean>
+	<bean name="ajaxEventAction" class="com.action.AjaxRiskAction" scope="prototype">
+		<property name="riskeventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+	</bean>
+	<!-- AJAX  ”RiskImpact录入——财务影响“ -->
+	<bean name="ajaxFinAction" class="com.action.AjaxRiskAction" scope="prototype">
+		<property name="financeDao">
+			<ref bean="FinanceDAO"/>
+		</property>
+	</bean>
+	<!-- AJAX  ”RiskImpact录入——发生可能性影响“ -->
+	<bean name="ajaxProAction" class="com.action.AjaxRiskAction" scope="prototype">
+		<property name="probabilityDao">
+			<ref bean="ProbabilityDAO"/>
+		</property>
+	</bean>
+	<!-- AJAX  ”RiskImpact录入——我院声誉影响“ -->
+	<bean name="ajaxRepAction" class="com.action.AjaxRiskAction" scope="prototype">
+		<property name="reputationDao">
+			<ref bean="ReputationDAO"/>
+		</property>
+	</bean>
+	<!-- AJAX  ”RiskImpact录入——法律法规影响“ -->
+	<bean name="ajaxLawAction" class="com.action.AjaxRiskAction" scope="prototype">
+		<property name="lawDao">
+			<ref bean="LawDAO"/>
+		</property>
+	</bean>
+	<!-- AJAX  ”RiskImpact录入——客户关系影响“ -->
+	<bean name="ajaxCliAction" class="com.action.AjaxRiskAction" scope="prototype">
+		<property name="clientDao">
+			<ref bean="ClientDAO"/>
+		</property>
+	</bean>
+	<!-- AJAX  ”RiskImpact录入——员工满意度影响“ -->
+	<bean name="ajaxEmpAction" class="com.action.AjaxRiskAction" scope="prototype">
+		<property name="employeeDao">
+			<ref bean="EmployeeDAO"/>
+		</property>
+	</bean>
+	<!-- AJAX  ”RiskImpact录入——运营影响“ -->
+	<bean name="ajaxOpeAction" class="com.action.AjaxRiskAction" scope="prototype">
+		<property name="operationDao">
+			<ref bean="OperationDAO"/>
+		</property>
+	</bean>
+	<!-- AJAX  ”RiskImpact录入——安全健康环境影响“ -->
+	<bean name="ajaxSafAction" class="com.action.AjaxRiskAction" scope="prototype">
+		<property name="safeDao">
+			<ref bean="SafeDAO"/>
+		</property>
+	</bean>
+	<!--结束 AJAX -->
+	
+	
+	<!-- 开始”风险事件查询“ -->
+	<!-- ”显示全部风险事件信息“ -->
+	<bean name="RiskEventQueryAction" class="com.action.riskQuery.RiskEventQueryAction">
+		<property name="riskEventDao">
+	    	<ref bean="RiskEventDAO"/>
+		</property>
+	</bean>
+	<!-- ”本年度风险事件“ -->
+	<bean name="REQCurrentYearAction" class="com.action.riskQuery.RiskEventQueryAction">
+		<property name="riskEventDao">
+	    	<ref bean="RiskEventDAO"/>
+		</property>
+	</bean>
+	<!-- ”条件查询“ -->
+	<bean name="REQQueryAction" class="com.action.riskQuery.RiskEventQueryAction">
+		<property name="riskEventDao">
+	    	<ref bean="RiskEventDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”风险事件查询“ -->
+	
+	
+	
+	<bean id="RiskImpactDAO" class="com.dao.RiskImpactDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RiskEventDAO" class="com.dao.RiskEventDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="RiskFileDAO" class="com.dao.RiskFileDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RiskCheckDAO" class="com.dao.RiskCheckDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+	<bean id="RiskManageDAO" class="com.dao.RiskManageDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EventFileDAO" class="com.dao.EventFileDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="UsersDAO" class="com.dao.UsersDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DepStaViewDAO" class="com.dao.DepStaViewDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="EventStaView2DAO" class="com.dao.EventStaView2DAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+	<bean id="EventStaViewDAO" class="com.dao.EventStaViewDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>	
+	<bean id="EventImpactViewDAO" class="com.dao.EventImpactViewDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="SystemRoleDAO" class="com.dao.SystemRoleDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FunctionModuleDAO" class="com.dao.FunctionModuleDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="FunctionLimitDAO" class="com.dao.FunctionLimitDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+		<!-- 开始“风险事件预警”模块 -->
+	<bean id="EventWarnViewDAO" class="com.dao.EventWarnViewDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="UserStrategyDAO" class="com.dao.UserStrategyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="RiskStrategyDAO" class="com.dao.RiskStrategyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="StrategyDAO" class="com.dao.StrategyDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	
+	<bean name="riskWarnAction" class="com.action.riskFeedback.RiskWarnAction">
+		<property name="riskWarnDao">
+			<ref bean="EventWarnViewDAO"/>
+		</property>
+		<property name="userStrategyDao">
+			<ref bean="UserStrategyDAO"/>
+		</property>
+		<property name="riskStrategyDao">
+			<ref bean="RiskStrategyDAO"/>
+		</property>
+		<property name="strategyDao">
+			<ref bean="StrategyDAO"/>
+		</property>
+	</bean>
+	<bean name="riskWarnActionsearch" class="com.action.riskFeedback.RiskWarnAction">
+		<property name="riskWarnDao">
+			<ref bean="EventWarnViewDAO"/>
+		</property>
+		<property name="userStrategyDao">
+			<ref bean="UserStrategyDAO"/>
+		</property>
+		<property name="riskStrategyDao">
+			<ref bean="RiskStrategyDAO"/>
+		</property>
+		<property name="strategyDao">
+			<ref bean="StrategyDAO"/>
+		</property>
+	</bean>
+	<bean name="riskWarnSeekAction" class="com.action.riskFeedback.RiskWarnAction">
+		<property name="riskWarnDao">
+			<ref bean="EventWarnViewDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="riskImpactDao">
+			<ref bean="RiskImpactDAO"/>
+		</property>
+		<property name="riskManageDao">
+			<ref bean="RiskManageDAO"/>
+		</property>
+		<property name="riskCheckDao">
+			<ref bean="RiskCheckDAO"/>
+		</property>	
+	</bean>
+
+	<!-- 结束“风险事件预警”模块 -->
+	
+		<!-- 策略设置 -->
+		<bean name="RiskStrategyAction" class="com.action.riskStrategy.RiskStrategyAction">
+		<property name="strategyDao">
+			<ref bean="StrategyDAO"/>
+		</property>
+	</bean>
+	<!--
+	进入风险策略页面
+	-->
+	<bean name="RiskStrategyInfAction" class="com.action.riskStrategy.RiskStrategyAction">
+		<property name="strategyDao">
+			<ref bean="StrategyDAO"/>
+		</property>
+		<property name="riskStrategyDao">
+			<ref bean="RiskStrategyDAO"/>
+		</property>
+		
+	</bean>
+	<!--风险策略详细记录查看-->
+	<bean name="RiskStrategySeekAction" class="com.action.riskStrategy.RiskStrategyAction">
+		<property name="strategyDao">
+			<ref bean="StrategyDAO"/>
+		</property>
+		<property name="riskStrategyDao">
+			<ref bean="RiskStrategyDAO"/>
+		</property>
+		
+	</bean>
+	
+	
+	<bean id="LawFileDAO" class="com.dao.LawFileDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean name="UploadAction" class="com.action.file.UploadAction">
+	<property name="LawFileDao">
+			<ref bean="LawFileDAO"/>
+		</property>
+		<property name="UsersDao">
+			<ref bean="UsersDAO"/>
+		</property>	
+	</bean>
+	
+	<bean name="QueryAction" class="com.action.file.QueryAction">
+	<property name="LawFileDao">
+			<ref bean="LawFileDAO"/>
+		</property>
+		<property name="UsersDao">
+			<ref bean="UsersDAO"/>
+		</property>	
+	</bean>
+	
+	<bean name="DownloadAction" class="com.action.file.DownLoadAction">
+	<property name="LawFileDao">
+			<ref bean="LawFileDAO"/>
+		</property>
+		<property name="UsersDao">
+			<ref bean="UsersDAO"/>
+		</property>	
+	</bean>
+	
+
+	<bean name="Download1Action" class="com.action.file.DownLoadAction">
+	<property name="LawFileDao">
+			<ref bean="LawFileDAO"/>
+		</property>
+		<property name="UsersDao">
+			<ref bean="UsersDAO"/>
+		</property>	
+	</bean>
+	<bean name="DownloadceshiAction" class="com.action.file.ShowFileAction">
+	<property name="LawFileDao">
+			<ref bean="LawFileDAO"/>
+		</property>
+		<property name="UsersDao">
+			<ref bean="UsersDAO"/>
+		</property>	
+	</bean>
+
+	<bean id="RiskStatusDAO" class="com.dao.RiskStatusDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="LinkStaViewDAO" class="com.dao.LinkStaViewDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="LinkStaView2DAO" class="com.dao.LinkStaView2DAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<bean id="AllStaViewDAO" class="com.dao.AllStaViewDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="DepWarnDAO" class="com.dao.DepWarnDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	</beans>

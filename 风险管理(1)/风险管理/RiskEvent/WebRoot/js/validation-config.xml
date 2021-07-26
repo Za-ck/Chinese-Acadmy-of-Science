@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="GBK"?>
+<!DOCTYPE validation-config SYSTEM "validation-config.dtd">
+<validation-config lang="auto">
+	<!-- ”部门管理“模块 -->
+	<form id="depAddUpdateForm" show-error="alert" show-type="all">
+		<field name="depId" display-name="部门编号" onfail="">
+			<depend name="required" />
+			<depend name="commonChar" />
+			<depend name="maxLength" param0="20"/>
+		</field>
+		<field name="depName" display-name="部门名称">
+			<depend name="required" />
+			<!-- <depend name="chineseChar" /> -->
+			<depend name="depNameField"/>
+			<depend name="maxLength" param0="25"/>
+		</field>	
+	</form>
+	<!-- ”发生可能性“模块 -->
+	<form id="proAddUpdateForm" show-error="alert" show-type="all">
+		<field display-name="等级编号" name="proIdString" onfail="">
+			<depend name="required"/>
+			<depend name="integer" />
+		</field>		
+		<field display-name="发生可能性程度" name="proLevel" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="发生概率" name="proProbability" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+		<field display-name="针对大型灾害或事件类" name="proDisasterEvent" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+		<field display-name="针对日常运营" name="proDailyOperation" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+	</form>
+	<!-- ”维度管理“模块 -->
+	<form id="dimAddUpdateForm" show-error="alert" show-type="all">
+		<field display-name="维度编号" name="rdIdString" onfail="">
+			<depend name="required"/>
+			<depend name="integer"/>
+		</field>
+		<field display-name="维度名" name="rdDimName" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="25"/>
+		</field>		
+		<field display-name="增加分数" name="rdIncreaseScoreString" onfail="">
+			<depend name="required"/>
+			<depend name="integer" />
+		</field>
+		<field display-name="减少分数" name="rdDecreaseScoreString" onfail="">
+			<depend name="required"/>
+			<depend name="integer" />
+		</field>
+		<field display-name="权值" name="rdWeightString" onfail="">
+			<depend name="required"/>
+			<depend name="integer" />
+		</field>
+	</form>
+	<!-- ”运营“模块 -->
+	<form id="opeAddUpdateForm" show-error="alert" show-type="all">
+		<field display-name="等级编号" name="opeIdString" onfail="">
+			<depend name="required"/>
+			<depend name="integer" />
+		</field>
+		<field display-name="影响程度" name="opeLevel" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="影响描述" name="opeDetail" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+	</form>
+	<!-- ”安全健康环境“模块 -->
+	<form id="safAddUpdateForm" show-error="alert" show-type="all">
+		<field display-name="等级编号" name="safIdString" onfail="">
+			<depend name="required"/>
+			<depend name="integer" />
+		</field>
+		<field display-name="影响程度" name="safLevel" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="安全事故" name="safSafety" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+		<field display-name="环境描述" name="safEnvironment" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+	</form>
+	<!-- ”法律法规“模块 -->
+	<form id="lawAddUpdateForm" show-error="alert" show-type="all">
+		<field display-name="等级编号" name="lawIdString" onfail="">
+			<depend name="required"/>
+			<depend name="integer" />
+		</field>
+		<field display-name="影响程度" name="lawLevel" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="影响描述" name="lawDetail" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+	</form>
+	<!-- ”客户关系“模块 -->
+	<form id="cliAddUpdateForm" show-error="alert" show-type="all">
+		<field display-name="等级编号" name="cliIdString" onfail="">
+			<depend name="required"/>
+			<depend name="integer" />
+		</field>
+		<field display-name="影响程度" name="cliLevel" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="影响描述" name="cliDetail" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+	</form>
+	<!-- ”员工满意度“模块 -->
+	<form id="empAddUpdateForm" show-error="alert" show-type="all">
+		<field display-name="等级编号" name="empIdString" onfail="">
+			<depend name="required"/>
+			<depend name="integer" />
+		</field>
+		<field display-name="影响程度" name="empLevel" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="影响描述" name="empDetail" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+	</form>
+	<!-- ”声誉“模块 -->
+	<form id="repAddUpdateForm" show-error="alert" show-type="all">
+		<field display-name="等级编号" name="repIdString" onfail="">
+			<depend name="required"/>
+			<depend name="integer" />
+		</field>
+		<field display-name="影响程度" name="repLevel" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="企业声誉" name="repDetail" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+		<field display-name="监管机构或上级单位" name="repSuperior" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+		<field display-name="合作伙伴" name="repPartner" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+		<field display-name="员工或公众关注" name="repPublic" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+	</form>
+	<!-- ”财务“模块 -->
+	<form id="finAddUpdateForm" show-error="alert" show-type="all">
+		<field display-name="等级编号" name="finIdString" onfail="">
+			<depend name="required"/>
+			<depend name="integer" />
+		</field>
+		<field display-name="影响描述" name="finDetail" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="250"/>
+		</field>
+		<field display-name="净资产" name="finAsset" onfail="">
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="营业收入" name="finIncome" onfail="">
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="利润总额" name="finProfit" onfail="">
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="资产总额" name="finProperty" onfail="">
+			<depend name="maxLength" param0="25"/>
+		</field>
+	</form>
+	<!-- ”风险类型“模块 -->
+	<form id="rtAddUpdateForm" show-error="alert" show-type="all">
+		<field display-name="风险类型编号" name="rtId" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="10"/>
+		</field>
+		<field display-name="风险类型名称" name="rtName" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="风险类型描述" name="rtRemark" onfail="">
+			<depend name="maxLength" param0="25"/>
+		</field>
+	</form>
+	<!-- ”风险“模块 -->
+	<form id="risAddUpdateForm" show-error="alert" show-type="all">
+		<field display-name="风险类型" name="riskTypeId" onfail="">
+			<depend name="required"/>
+		</field>
+		<field display-name="风险数字编号" name="riskNumId" onfail="">
+			<depend name="required"/>
+			<depend name="integerRange" param0="0" param1="10000"/>
+		</field>
+		<field display-name="风险名称" name="riskName" onfail="">
+			<depend name="required"/>
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field display-name="归口部门" name="riskDep" onfail="">
+			<depend name="required"/>
+		</field>
+	</form>
+	<!-- ”录入情况查询“模块 -->
+	<form id="riskEventInputQuery" show-error="alert"  show-type="all">
+		<field display-name="起始日期" name="dateFrom" onfail="">
+			<depend name="required"/>
+			<depend name="date" />
+		</field>
+		<field display-name="终止日期" name="dateTo" onfail="">
+			<depend name="required"/>
+			<depend name="date" />
+		</field>
+	</form>
+		
+		<!-- 文件上传验证 -->
+	    <form id="uploadForm" show-error="alert" show-type="all">
+		<field name="filetitle" display-name="文件主题" onfail="">
+			<depend name="required" />	
+			<depend name="maxLength" param0="50"/>		
+		</field>
+		<field name="fileremark" display-name="文件描述">
+			<depend name="required" />
+			<depend name="maxLength" param0="250"/>			
+		</field>		
+		</form>
+		<form id="strategyadd" show-error="alert" show-type="all">
+		<field name="strategyName" display-name="风险策略名称" onfail="">
+			<depend name="required" />	
+			<depend name="maxLength" param0="50"/>			
+		</field>	
+		<field name="riskDeps" display-name="责任部门" onfail="">
+			<depend name="required" />				
+		</field>
+		</form>
+
+		 <form id="celuForm" show-error="alert" show-type="all">
+		<field name="stragValue" display-name="风险策略设置最小值" onfail="">
+			<depend name="required" />			
+		</field>
+		<field name="stragStatue" display-name="风险策略预警状态">
+			<depend name="required" />			
+		</field>
+		<field name="stragColor" display-name="风险策略预警颜色">
+			<depend name="required" />			
+		</field>
+		<field name="remark" display-name="风险策略设置最大值">
+			<depend name="required" />			
+		</field>		
+		</form>
+		
+		 <!-- 新增密码验证 -->
+	    <form id="passwordForm" show-error="alert" show-type="all">
+		<field name="userPassword" display-name="旧密码" onfail="">
+			<depend name="required" />
+			<depend name="commonChar" />
+		</field>
+		<field name="newPassword" display-name="新密码">
+			<depend name="required" />
+			<depend name="commonChar" />
+		</field>
+		<field name="confirmPassword" display-name="确认密码">
+			<depend name="equalsField" param0="newPassword"/>
+		</field>
+		</form>
+		
+		 <!-- 新增用户验证 -->
+	    <form id="userAddUpdate" show-error="alert" show-type="all">
+		<field name="userId" display-name="登录账号" onfail="">
+			<depend name="required" />
+			<depend name="commonChar" />
+			<depend name="maxLength" param0="20"/>
+		</field>
+		<field name="userName" display-name="姓名">
+			<depend name="required" />
+			<depend name="chineseChar" />
+			<depend name="maxLength" param0="10"/>
+		</field>
+		<field name="userIdcard" display-name="身份证号">
+			<depend name="pid" />
+		</field>
+		<field name="userTel" display-name="办公电话">
+		<depend name="required" />
+			<depend name="officeTel"/>
+		</field>
+		<field name="userCellphone" display-name="手机">
+		<depend name="required" />
+		<depend name="cellPhone"/>
+		</field>
+		<field name="userEmail" display-name="E-mail">
+		<depend name="required" />
+			<depend name="email" />
+		</field>
+		</form>
+		
+		 <!-- 新增角色验证 -->
+	    <form id="limitAddManage" show-error="alert" show-type="all">
+		<field name="roleName" display-name="角色名称" onfail="">
+			<depend name="required" />
+			<depend name="maxLength" param0="10"/>
+		</field>
+		</form>
+		<!-- 风险事件录入验证 -->
+		<form id="riskEventInput" show-error="alert" show-type="all">		
+		<field name="risktype" display-name="风险类别一级名称" onfail="">
+			<depend name="required"/>
+		</field>
+		<field name="riskname" display-name="风险类别二级名称" onfail="">
+			<depend name="required"/>
+		</field>
+		<field name="eventname" display-name="事件名称" onfail="">
+			<depend name="required" />
+			<depend name="maxLength" param0="25"/>
+		</field>
+		<field name="riskremark" display-name="风险事件描述" onfail="">
+			<depend name="required" />
+			<depend name="maxLength" param0="500"/>
+		</field>
+		</form>
+		
+		<form id="riskImpactInput" show-error="alert" show-type="all">
+		<field name="kpi" display-name="绩效指标" onfail="">
+			<depend name="required" />
+			<depend name="maxLength" param0="500"/>
+		</field>
+		<field name="busarea" display-name="影响的业务领域" onfail="">
+			<depend name="required" />
+			<depend name="maxLength" param0="250"/>
+		</field>
+		<field name="allFileId" display-name="涉及流程" onfail="">
+			<depend name="required" />
+		</field>	
+		<field name="financedegree" display-name="对财务的影响程度" onfail="">
+			<depend name="required" />
+		</field>
+		<field name="finance" display-name="对财务的影响描述" onfail="">
+			<depend name="maxLength" param0="250"/>
+		</field>
+		<field name="prodegree" display-name="发生可能性程度" onfail="">
+			<depend name="required" />
+		</field>
+		
+		<field name="famedegree" display-name="对我院声誉的影响程度" onfail="">
+			<depend name="required" />
+		</field>
+		<field name="fame" display-name="对我院声誉的影响描述" onfail="">
+			<depend name="maxLength" param0="250"/>
+		</field>
+		
+		<field name="lawdegree" display-name="对法律法规的影响程度" onfail="">
+			<depend name="required" />
+		</field>
+		<field name="law" display-name="对法律法规的影响描述" onfail="">
+			<depend name="maxLength" param0="250"/>
+		</field>
+		
+		<field name="clientdegree" display-name="对客户关系的影响程度" onfail="">
+			<depend name="required" />
+		</field>
+		<field name="client" display-name="对客户关系的影响描述" onfail="">
+			<depend name="maxLength" param0="250"/>
+		</field>
+		
+		<field name="employeedegree" display-name="对员工满意度的影响程度" onfail="">
+			<depend name="required" />
+		</field>
+		<field name="employee" display-name="对员工满意度的影响描述" onfail="">
+			<depend name="maxLength" param0="250"/>
+		</field>
+		
+		<field name="operationdegree" display-name="对运营的影响程度" onfail="">
+			<depend name="required" />
+		</field>
+		<field name="operation" display-name="对运营的影响描述" onfail="">
+			<depend name="maxLength" param0="250"/>
+		</field>
+		
+		<field name="safedegree" display-name="对人员健康环保的影响程度" onfail="">
+			<depend name="required" />
+		</field>
+		<field name="safe" display-name="对人员健康环保的影响描述" onfail="">
+			<depend name="maxLength" param0="250"/>
+		</field>
+        
+		</form>
+		<!-- 风险管理 -->
+		<form id="riskManageInput" show-error="alert" show-type="all">
+		<field name="strategy" display-name="基本态度" onfail="">
+			<depend name="required" />
+		</field>
+		<field name="plandate" display-name="采取措施的时间计划" onfail="">
+			<depend name="required" />
+		</field>	
+		<field name="control" display-name="可控性" onfail="">
+			<depend name="required" />
+			<depend name="maxLength" param0="500"/>
+		</field>
+		<field name="planresource" display-name="计划投入资源" onfail="">
+			<depend name="required" />
+			<depend name="maxLength" param0="500"/>
+		</field>
+		<field name="reply" display-name="具体的应对措施" onfail="">
+			<depend name="required" />
+			<depend name="maxLength" param0="500"/>
+		</field>	
+	    </form>
+		<!-- 风险流转 -->
+		<form id="departmentCheck1" show-error="alert" show-type="all">
+		<field name="feedback" display-name="反馈意见" onfail="">
+			<depend name="required" />
+			<depend name="maxLength" param0="500"/>
+		</field>	
+	    </form>
+	   <!-- 新建风险报告 -->
+	   <!--  <form id="riskReportInput" show-error="windows" show-type="all">		
+		<field name="reportname" display-name="报告名称" onfail="">
+			<depend name="required"/>
+		</field>
+		<field name="annual" display-name="年度区间" onfail="">
+			<depend name="required"/>
+			<depend name="time" />
+		</field>
+		<field name="reportremark" display-name="补充描述" onfail="">
+			<depend name="maxLength" param0="500"/>
+		</field>
+		
+		</form>  -->
+		
+		<!-- 部门报告提交录入验证 -->
+		<form id="riskReportDepInput" show-error="windows" show-type="all">		
+		<field name="reportname" display-name="报告名称" onfail="">
+			<depend name="required"/>
+		</field>
+		
+		<field name="annual" display-name="年度区间" onfail="">
+			<depend name="required"/>
+			<depend name="time" />
+		</field>
+		</form>
+		
+		<!-- 部门报告提交审核验证 -->
+		<form id="riskReportDepCheck" show-error="windows" show-type="all">		
+		<field name="handleview" display-name="处理意见" onfail="">
+			<depend name="required"/>
+		</field>
+		<field name="reportname" display-name="报告名称" onfail="">
+			<depend name="required"/>
+		</field>
+		<field display-name="报告编写人" name="writer">
+			<depend name="required"/>
+		</field>
+		</form>
+		
+		<!-- 汇总报告提交录入验证 -->
+		<form id="riskReportCheckInput" show-error="windows" show-type="all">		
+		<field name="reportname" display-name="报告名称" onfail="">
+			<depend name="required"/>
+		</field>
+		
+		<field name="annual" display-name="年度区间" onfail="">
+			<depend name="required"/>
+			<depend name="time" />
+		</field>
+		</form>
+		
+		<!-- 汇总报告审核验证 -->
+		<form id="riskReportCheckCheck" show-error="windows" show-type="all">		
+		<field name="reportname" display-name="报告名称" onfail="">
+			<depend name="required"/>
+		</field>
+		
+		<field name="handleview" display-name="处理意见" onfail="">
+			<depend name="required"/>
+		</field>
+		</form>
+</validation-config>

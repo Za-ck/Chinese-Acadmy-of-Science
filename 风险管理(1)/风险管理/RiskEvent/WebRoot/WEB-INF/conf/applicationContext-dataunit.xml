@@ -1,0 +1,786 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<beans
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+
+	<!-- 开始”数据字典“ -->
+
+	<!-- 开始”部门管理“模块 -->
+	
+	<!-- ”显示部门信息“ -->
+	<bean name="DepartmentAction" class="com.action.dataUnit.departmentAction">
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="DepAddUpdateAction" class="com.action.dataUnit.departmentAction">
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="departmentChangedDao">
+		    <ref bean="DepartmentChangedDAO"/>
+		</property> 
+		<property name="riskAssessAccountDao">
+			<ref bean="RiskAssessAccountDAO"/>
+		</property>
+	</bean>
+	<!-- ”批量删除“ -->
+	<bean name="DepMultiDelAction" class="com.action.dataUnit.departmentAction">
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		<property name="userStrategyDao">
+			<ref bean="UserStrategyDAO"/>
+		</property>
+	</bean>
+	<bean name="ajaxDepMultiDelAction" class="com.action.dataUnit.departmentAction">
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		<property name="userStrategyDao">
+			<ref bean="UserStrategyDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="DepDelAction" class="com.action.dataUnit.departmentAction">
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		<property name="userStrategyDao">
+			<ref bean="UserStrategyDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="DepReadAction" class="com.action.dataUnit.departmentAction">
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="DepUpdatePreAction" class="com.action.dataUnit.departmentAction">
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+	</bean>
+	<!-- ”根据部门名称查询信息“ -->
+	<bean name="DepSearchAction" class="com.action.dataUnit.departmentAction">
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+	</bean>
+	<!-- 设置考核部门之前显示已经设置的考核部门 -->
+	<bean name="DepAssessPreAction" class="com.action.dataUnit.departmentAction">
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+	</bean>
+	<!-- 设置考核部门 -->
+	<bean name="DepartmentAssessAction" class="com.action.dataUnit.departmentAction">
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+	</bean>
+	<!-- 结束”部门管理“模块 -->
+	
+	<!-- 开始”风险类型“模块 -->
+	<bean id="RiskTypeDAO" class="com.dao.RiskTypeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示风险类型信息“ -->
+	<bean name="RiskTypeAction" class="com.action.dataUnit.RiskTypeAction">
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="RTAddUpdateAction" class="com.action.dataUnit.RiskTypeAction">
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+	</bean>
+	<!--”批量删除“ -->
+	<bean name="RTMultiDelAction" class="com.action.dataUnit.RiskTypeAction">
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="RTDelAction" class="com.action.dataUnit.RiskTypeAction">
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="RTReadAction" class="com.action.dataUnit.RiskTypeAction">
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="RTUpdatePreAction" class="com.action.dataUnit.RiskTypeAction">
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”风险类型“模块 -->
+	
+	<!-- 开始”风险“模块 -->
+	<bean id="RiskDAO" class="com.dao.RiskDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示风险信息“ -->	
+	<bean name="RiskAction" class="com.action.dataUnit.RiskAction">
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+		<property name="riskQueryViewDao">
+			<ref bean="RiskQueryViewDAO"/>
+		</property>
+	</bean>
+	<!-- ”导出风险信息“ -->	
+	<bean name="RiskExcelAction" class="com.action.dataUnit.RiskAction">
+		<property name="riskQueryViewDao">
+			<ref bean="RiskQueryViewDAO"/>
+		</property>	
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="RisAddUpdateAction" class="com.action.dataUnit.RiskAction">
+		
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="flowRuleDao">
+			<ref bean="FlowRuleDAO"/>
+		</property>	
+		<property name="riskQueryViewDao">
+			<ref bean="RiskQueryViewDAO"/>
+		</property>		
+	</bean>
+	<!-- ”批量新增“ -->
+	<bean name="RisAddBatchAction" class="com.action.dataUnit.RiskAction">
+		
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+		<property name="flowRuleDao">
+			<ref bean="FlowRuleDAO"/>
+		</property>	
+		<property name="riskQueryViewDao">
+			<ref bean="RiskQueryViewDAO"/>
+		</property>
+		<property name="riskFileDao">
+			<ref bean="RiskFileDAO"/>
+		</property>	
+	</bean>
+	<!--”批量删除“ -->
+	<bean name="RisMultiDelAction" class="com.action.dataUnit.RiskAction">
+	
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+		<property name="riskQueryViewDao">
+			<ref bean="RiskQueryViewDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="RisDelAction" class="com.action.dataUnit.RiskAction">
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+		<property name="riskQueryViewDao">
+			<ref bean="RiskQueryViewDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="RisReadAction" class="com.action.dataUnit.RiskAction">
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+		<property name="riskQueryViewDao">
+			<ref bean="RiskQueryViewDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="RisUpdatePreAction" class="com.action.dataUnit.RiskAction">
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+		<property name="riskQueryViewDao">
+			<ref bean="RiskQueryViewDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增前显示要编辑的对象的信息“ -->
+	<bean name="RisAddPreAction" class="com.action.dataUnit.RiskAction">
+	
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+		<property name="riskQueryViewDao">
+			<ref bean="RiskQueryViewDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增前显示要编辑的对象的信息“ -->
+	<bean name="RisAddBatchPreAction" class="com.action.dataUnit.RiskAction">
+	
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+		<property name="riskQueryViewDao">
+			<ref bean="RiskQueryViewDAO"/>
+		</property>
+	</bean>
+	<!-- ”根据风险类型查询信息“ -->
+	<bean name="RisSearchAction" class="com.action.dataUnit.RiskAction">
+	
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO"/>
+		</property>
+		<property name="riskQueryViewDao">
+			<ref bean="RiskQueryViewDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”风险类型“模块 -->
+	
+	<!-- 开始”发生可能性“模块 -->
+	<bean id="ProbabilityDAO" class="com.dao.ProbabilityDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示发生可能性信息“ -->
+	<bean name="ProbabilityAction" class="com.action.dataUnit.ProbabilityAction">
+		<property name="probabilityDao">
+			<ref bean="ProbabilityDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="ProAddUpdateAction" class="com.action.dataUnit.ProbabilityAction">
+		<property name="probabilityDao">
+			<ref bean="ProbabilityDAO"/>
+		</property>
+	</bean>
+	<!--”批量删除“ -->
+	<bean name="ProMultiDelAction" class="com.action.dataUnit.ProbabilityAction">
+		<property name="probabilityDao">
+			<ref bean="ProbabilityDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="ProDelAction" class="com.action.dataUnit.ProbabilityAction">
+		<property name="probabilityDao">
+			<ref bean="ProbabilityDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="ProReadAction" class="com.action.dataUnit.ProbabilityAction">
+		<property name="probabilityDao">
+			<ref bean="ProbabilityDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="ProUpdatePreAction" class="com.action.dataUnit.ProbabilityAction">
+		<property name="probabilityDao">
+			<ref bean="ProbabilityDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”发生可能性“模块 -->
+	
+	<!-- 开始”运营“模块 -->
+	<bean id="OperationDAO" class="com.dao.OperationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示针对运营的风险影响程度评估信息“ -->
+	<bean name="OperationAction" class="com.action.dataUnit.OperationAction">
+		<property name="operationDao">
+			<ref bean="OperationDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="OpeAddUpdateAction" class="com.action.dataUnit.OperationAction">
+		<property name="operationDao">
+			<ref bean="OperationDAO"/>
+		</property>
+	</bean>
+	<!-- ”批量删除“ -->
+	<bean name="OpeMultiDelAction" class="com.action.dataUnit.OperationAction">
+		<property name="operationDao">
+			<ref bean="OperationDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="OpeDelAction" class="com.action.dataUnit.OperationAction">
+		<property name="operationDao">
+			<ref bean="OperationDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="OpeReadAction" class="com.action.dataUnit.OperationAction">
+		<property name="operationDao">
+			<ref bean="OperationDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="OpeUpdatePreAction" class="com.action.dataUnit.OperationAction">
+		<property name="operationDao">
+			<ref bean="OperationDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”运营“模块 -->
+		
+	<!-- 开始”安全健康环境“模块 -->
+	<bean id="SafeDAO" class="com.dao.SafeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示针对安全健康环境的影响评定等级信息“ -->
+	<bean name="SafeAction" class="com.action.dataUnit.SafeAction">
+		<property name="safeDao">
+			<ref bean="SafeDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="SafAddUpdateAction" class="com.action.dataUnit.SafeAction">
+		<property name="safeDao">
+			<ref bean="SafeDAO"/>
+		</property>
+	</bean>
+	<!-- ”批量删除“ -->
+	<bean name="SafMultiDelAction" class="com.action.dataUnit.SafeAction">
+		<property name="safeDao">
+			<ref bean="SafeDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="SafDelAction" class="com.action.dataUnit.SafeAction">
+		<property name="safeDao">
+			<ref bean="SafeDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="SafReadAction" class="com.action.dataUnit.SafeAction">
+		<property name="safeDao">
+			<ref bean="SafeDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="SafUpdatePreAction" class="com.action.dataUnit.SafeAction">
+		<property name="safeDao">
+			<ref bean="SafeDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”安全健康环境“模块 -->
+	
+	<!-- 开始”法律法规“模块 -->
+	<bean id="LawDAO" class="com.dao.LawDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示针对法律法规的影响评定等级信息“ -->
+	<bean name="LawAction" class="com.action.dataUnit.LawAction">
+		<property name="lawDao">
+			<ref bean="LawDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="LawAddUpdateAction" class="com.action.dataUnit.LawAction">
+		<property name="lawDao">
+			<ref bean="LawDAO"/>
+		</property>
+	</bean>
+	<!-- ”批量删除“ -->
+	<bean name="LawMultiDelAction" class="com.action.dataUnit.LawAction">
+		<property name="lawDao">
+			<ref bean="LawDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="LawDelAction" class="com.action.dataUnit.LawAction">
+		<property name="lawDao">
+			<ref bean="LawDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="LawReadAction" class="com.action.dataUnit.LawAction">
+		<property name="lawDao">
+			<ref bean="LawDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="LawUpdatePreAction" class="com.action.dataUnit.LawAction">
+		<property name="lawDao">
+			<ref bean="LawDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”法律法规“模块 -->
+	
+	<!-- 开始”客户关系“模块 -->
+	<bean id="ClientDAO" class="com.dao.ClientDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示针对客户关系的影响评定等级信息“ -->
+	<bean name="ClientAction" class="com.action.dataUnit.ClientAction">
+		<property name="clientDao">
+			<ref bean="ClientDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="CliAddUpdateAction" class="com.action.dataUnit.ClientAction">
+		<property name="clientDao">
+			<ref bean="ClientDAO"/>
+		</property>
+	</bean>
+	<!-- ”批量删除“ -->
+	<bean name="CliMultiDelAction" class="com.action.dataUnit.ClientAction">
+		<property name="clientDao">
+			<ref bean="ClientDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="CliDelAction" class="com.action.dataUnit.ClientAction">
+		<property name="clientDao">
+			<ref bean="ClientDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="CliReadAction" class="com.action.dataUnit.ClientAction">
+		<property name="clientDao">
+			<ref bean="ClientDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="CliUpdatePreAction" class="com.action.dataUnit.ClientAction">
+		<property name="clientDao">
+			<ref bean="ClientDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”客户关系“模块 -->
+	<!-- 结束”客户关系“模块 -->
+	
+	<!-- 开始”员工满意度“模块 -->
+	<!-- 开始”员工满意度“模块 -->
+	<bean id="EmployeeDAO" class="com.dao.EmployeeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示针对员工满意度的影响评定等级信息“ -->
+	<bean name="EmployeeAction" class="com.action.dataUnit.EmployeeAction">
+		<property name="employeeDao">
+			<ref bean="EmployeeDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="EmpAddUpdateAction" class="com.action.dataUnit.EmployeeAction">
+		<property name="employeeDao">
+			<ref bean="EmployeeDAO"/>
+		</property>
+	</bean>
+	<!-- ”批量删除“ -->
+	<bean name="EmpMultiDelAction" class="com.action.dataUnit.EmployeeAction">
+		<property name="employeeDao">
+			<ref bean="EmployeeDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="EmpDelAction" class="com.action.dataUnit.EmployeeAction">
+		<property name="employeeDao">
+			<ref bean="EmployeeDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="EmpReadAction" class="com.action.dataUnit.EmployeeAction">
+		<property name="employeeDao">
+			<ref bean="EmployeeDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="EmpUpdatePreAction" class="com.action.dataUnit.EmployeeAction">
+		<property name="employeeDao">
+			<ref bean="EmployeeDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”员工满意度“模块 -->
+
+	<!-- 开始”声誉“模块 -->
+	<bean id="ReputationDAO" class="com.dao.ReputationDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示针对声誉的影响评定等级信息“ -->
+	<bean name="ReputationAction" class="com.action.dataUnit.ReputationAction">
+		<property name="reputationDao">
+			<ref bean="ReputationDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="RepAddUpdateAction" class="com.action.dataUnit.ReputationAction">
+		<property name="reputationDao">
+			<ref bean="ReputationDAO"/>
+		</property>
+	</bean>
+	<!-- ”批量删除“ -->
+	<bean name="RepMultiDelAction" class="com.action.dataUnit.ReputationAction">
+		<property name="reputationDao">
+			<ref bean="ReputationDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="RepDelAction" class="com.action.dataUnit.ReputationAction">
+		<property name="reputationDao">
+			<ref bean="ReputationDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="RepReadAction" class="com.action.dataUnit.ReputationAction">
+		<property name="reputationDao">
+			<ref bean="ReputationDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="RepUpdatePreAction" class="com.action.dataUnit.ReputationAction">
+		<property name="reputationDao">
+			<ref bean="ReputationDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”声誉“模块 -->
+
+	<!-- 开始”财务“模块 -->
+	<bean id="FinanceDAO" class="com.dao.FinanceDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示针对财务的影响评定等级信息“ -->
+	<bean name="FinanceAction" class="com.action.dataUnit.FinanceAction">
+		<property name="financeDao">
+			<ref bean="FinanceDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="FinAddUpdateAction" class="com.action.dataUnit.FinanceAction">
+		<property name="financeDao">
+			<ref bean="FinanceDAO"/>
+		</property>
+	</bean>
+	<!-- ”批量删除“ -->
+	<bean name="FinMultiDelAction" class="com.action.dataUnit.FinanceAction">
+		<property name="financeDao">
+			<ref bean="FinanceDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="FinDelAction" class="com.action.dataUnit.FinanceAction">
+		<property name="financeDao">
+			<ref bean="FinanceDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="FinReadAction" class="com.action.dataUnit.FinanceAction">
+		<property name="financeDao">
+			<ref bean="FinanceDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="FinUpdatePreAction" class="com.action.dataUnit.FinanceAction">
+		<property name="financeDao">
+			<ref bean="FinanceDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”财务“模块 -->
+	
+	<!-- 开始”管理规定文件“模块 -->
+	<bean id="FileManageDAO" class="com.dao.FileManageDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示文件信息“ -->
+	<bean name="FileAction" class="com.action.dataUnit.FileAction">
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO"/>
+		</property>
+		
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="FilAddUpdateAction" class="com.action.dataUnit.FileAction">
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO"/>
+		</property>
+		<property name="riskFileDao">
+			<ref bean="RiskFileDAO"/>
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+	</bean>
+	<!-- ”批量删除“ -->
+	<bean name="FilMultiDelAction" class="com.action.dataUnit.FileAction">
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO"/>
+		</property>
+		<property name="riskFileDao">
+			<ref bean="RiskFileDAO"/>
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="FilReadAction" class="com.action.dataUnit.FileAction">
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO"/>
+		</property>
+		<property name="riskFileDao">
+			<ref bean="RiskFileDAO"/>
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="FilUpdatePreAction" class="com.action.dataUnit.FileAction">
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO"/>
+		</property>
+		<property name="riskFileDao">
+			<ref bean="RiskFileDAO"/>
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增前显示要编辑的对象的信息“ -->
+	<bean name="FilAddPreAction" class="com.action.dataUnit.FileAction">
+		<property name="riskDao">
+			<ref bean="RiskDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”管理规定文件“模块 -->
+	
+	<!-- 开始”维度管理“模块 -->
+	<bean id="RiskDimensionDAO" class="com.dao.RiskDimensionDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示维度信息“ -->
+	<bean name="DimManageAction" class="com.action.dataUnit.DimManageAction">
+		<property name="dimManageDao">
+			<ref bean="RiskDimensionDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="DimManageAddUpdateAction" class="com.action.dataUnit.DimManageAction">
+		<property name="dimManageDao">
+			<ref bean="RiskDimensionDAO"/>
+		</property>
+	</bean>
+	<!--”批量删除“ -->
+	<bean name="DimManageMultiDelAction" class="com.action.dataUnit.DimManageAction">
+		<property name="dimManageDao">
+			<ref bean="RiskDimensionDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="DimManageDelAction" class="com.action.dataUnit.DimManageAction">
+		<property name="dimManageDao">
+			<ref bean="RiskDimensionDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="DimManageShowAction" class="com.action.dataUnit.DimManageAction">
+		<property name="dimManageDao">
+			<ref bean="RiskDimensionDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”维度管理“模块 -->
+	<!-- 开始”填报标准“模块 -->
+	<bean id="InputStandardDAO" class="com.dao.InputStandardDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<!-- ”显示维度信息“ -->
+	<bean name="InputStandardAction" class="com.action.dataUnit.InputStandardAction">
+		<property name="inputStandardDao">
+			<ref bean="InputStandardDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="InputStandardAddUpdateAction" class="com.action.dataUnit.InputStandardAction">
+		<property name="inputStandardDao">
+			<ref bean="InputStandardDAO"/>
+		</property>
+	</bean>
+	<!--”批量删除“ -->
+	<bean name="InputStandardMultiDelAction" class="com.action.dataUnit.InputStandardAction">
+		<property name="inputStandardDao">
+			<ref bean="InputStandardDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="InputStandardDelAction" class="com.action.dataUnit.InputStandardAction">
+		<property name="inputStandardDao">
+			<ref bean="InputStandardDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="InputStandardShowAction" class="com.action.dataUnit.InputStandardAction">
+		<property name="inputStandardDao">
+			<ref bean="InputStandardDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”维度管理“模块 -->
+	<!-- 结束”数据字典“ -->
+	</beans>

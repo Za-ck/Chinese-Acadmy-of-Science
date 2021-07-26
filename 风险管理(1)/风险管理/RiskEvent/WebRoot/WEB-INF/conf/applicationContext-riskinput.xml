@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<!-- 开始“风险事件录入” -->
+
+	<!-- “新增风险事件”模块 -->
+	<bean name="RiskAddUpdateAction" class="com.action.riskInput.RiskInputAction">
+
+		<property name="riskeventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskmanageDao">
+			<ref bean="RiskManageDAO" />
+		</property>
+		<property name="riskimpactDao">
+			<ref bean="RiskImpactDAO" />
+		</property>
+		<property name="eventFileDao">
+			<ref bean="EventFileDAO" />
+		</property>
+		<property name="eventFlowFileDao">
+			<ref bean="EventFlowFileDAO" />
+		</property>
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO" />
+		</property>
+		<property name="reputationDao">
+			<ref bean="ReputationDAO" />
+		</property>
+		<property name="probabilityDao">
+			<ref bean="ProbabilityDAO" />
+		</property>
+		<property name="financeDao">
+			<ref bean="FinanceDAO" />
+		</property>
+		<property name="safeDao">
+			<ref bean="SafeDAO" />
+		</property>
+		<property name="lawDao">
+			<ref bean="LawDAO" />
+		</property>
+		<property name="clientDao">
+			<ref bean="ClientDAO" />
+		</property>
+		<property name="employeeDao">
+			<ref bean="EmployeeDAO" />
+		</property>
+		<property name="operationDao">
+			<ref bean="OperationDAO" />
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO" />
+		</property>
+		<property name="riskDepQueryViewDao">
+			<ref bean="RiskDepQueryViewDAO" />
+		</property>
+	</bean>
+
+	<bean name="getRiskEventAction" class="com.action.riskInput.RiskInputAction">
+
+		<property name="riskeventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO" />
+		</property>
+		<property name="riskDepQueryViewDao">
+			<ref bean="RiskDepQueryViewDAO" />
+		</property>
+	</bean>
+	<bean name="ImpactAddUpdateAction" class="com.action.riskInput.ImpactInputAction">
+
+		<property name="riskimpactDao">
+			<ref bean="RiskImpactDAO" />
+		</property>
+		<property name="riskmanageDao">
+			<ref bean="RiskManageDAO" />
+		</property>
+		<property name="riskeventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+		<property name="financeDao">
+			<ref bean="FinanceDAO" />
+		</property>
+		<property name="probabilityDao">
+			<ref bean="ProbabilityDAO" />
+		</property>
+		<property name="reputationDao">
+			<ref bean="ReputationDAO" />
+		</property>
+		<property name="lawDao">
+			<ref bean="LawDAO" />
+		</property>
+		<property name="clientDao">
+			<ref bean="ClientDAO" />
+		</property>
+		<property name="employeeDao">
+			<ref bean="EmployeeDAO" />
+		</property>
+		<property name="operationDao">
+			<ref bean="OperationDAO" />
+		</property>
+		<property name="safeDao">
+			<ref bean="SafeDAO" />
+		</property>
+		<property name="eventFileDao">
+			<ref bean="EventFileDAO" />
+		</property>
+		<property name="eventFlowFileDao">
+			<ref bean="EventFlowFileDAO" />
+		</property>
+		
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO" />
+		</property>
+	</bean>
+	<!-- impactInput__涉及流程 -->
+	<!--
+		<bean name="ImpFileAction"
+		class="com.action.riskInput.ImpactInputAction">
+	-->
+	<!--		<property name="riskeventDao">-->
+	<!--	    	<ref bean="RiskEventDAO"/>-->
+	<!--		</property>-->
+	<!--		<property name="eventFileDao">-->
+	<!--	    	<ref bean="EventFileDAO"/>-->
+	<!--		</property>-->
+	<!--		<property name="fileManageDao">-->
+	<!--	    	<ref bean="FileManageDAO"/>-->
+	<!--		</property>-->
+	<!--		<property name="riskFileDao">-->
+	<!--	    	<ref bean="RiskFileDAO"/>-->
+	<!--		</property>-->
+	<!--	</bean>-->
+	<bean name="ImpFileAction1" class="com.action.riskInput.ImpactInputAction">
+
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO" />
+		</property>
+		<property name="riskFileViewDao">
+			<ref bean="RiskFileViewDAO"/>
+		</property>
+	</bean>	
+	<bean name="ImpFileAction2" class="com.action.riskInput.ImpactInputAction">
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO" />
+		</property>
+		<property name="riskFileViewDao">
+			<ref bean="RiskFileViewDAO"/>
+		</property>
+	</bean>
+	<bean name="addFlowFileAction" class="com.action.riskInput.ImpactInputAction">
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO" />
+		</property>
+		<property name="riskFileViewDao">
+			<ref bean="RiskFileViewDAO" />
+		</property>
+	</bean>
+	<bean name="deleteFlowFileAction" class="com.action.riskInput.ImpactInputAction">
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO" />
+		</property>
+	</bean>
+
+	<bean name="ManageAddUpdateAction" class="com.action.riskInput.ManageInputAction" scope="prototype">
+		<property name="riskeventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="usersDao">
+			<ref bean="UsersDAO" />
+		</property>
+		<property name="riskmanageDao">
+			<ref bean="RiskManageDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		<property name="riskRecordDao">
+	       <ref bean="RiskRecordDAO"/>
+	    </property>
+	</bean>
+	<bean name="getRiskManageAction" class="com.action.riskInput.ManageInputAction">
+		<property name="riskmanageDao">
+			<ref bean="RiskManageDAO" />
+		</property>
+	</bean>
+	<!-- 开始”录入情况查询“模块 -->
+	<!-- ”显示录入的风险事件信息“ -->
+	<bean name="RiskEventInputQueryAction" class="com.action.riskInput.RiskEventInputQueryAction">
+
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO" />
+		</property>
+		<property name="riskDepQueryViewDao">
+			<ref bean="RiskDepQueryViewDAO" />
+		</property>
+		<property name="riskEventDepQueryViewDao">
+			<ref bean="RiskEventDepQueryViewDAO"/>
+		</property>
+	</bean>
+	<!-- ”显示录入的风险事件信息“ -->
+	<!-- 这条链接是从外部系统链接进来的 -->
+	<bean name="Out_RiskEventInputQueryAction" class="com.action.riskInput.RiskEventInputQueryAction">
+
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+		<property name="usersDao">
+			<ref bean="UsersDAO" />
+		</property>
+		<property name="functiondao">
+			<ref bean="UsersFunctionDAO" />
+		</property>
+	</bean>
+	<!-- ”批量删除“ -->
+	<bean name="REIQMultiDelAction" class="com.action.riskInput.RiskEventInputQueryAction" scope="prototype">
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+		<property name="eventFileDao">
+			<ref bean="EventFileDAO" />
+		</property>
+		<property name="eventFlowFileDao">
+			<ref bean="EventFlowFileDAO" />
+		</property>
+		<property name="riskEventDepQueryViewDao">
+			<ref bean="RiskEventDepQueryViewDAO"/>
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="REIQDelAction" class="com.action.riskInput.RiskEventInputQueryAction">
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+		<property name="eventFileDao">
+			<ref bean="EventFileDAO" />
+		</property>
+	</bean>
+	<!-- 利用ajax删除风险事件 -->
+	<bean name="AjaxREIQDelAction" class="com.action.riskInput.RiskEventInputQueryAction">
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+		<property name="eventFileDao">
+			<ref bean="EventFileDAO" />
+		</property>
+		<property name="riskManageDao">
+			<ref bean="RiskManageDAO" />
+		</property>
+		<property name="riskassesssituationDao">
+			<ref bean="RiskAssessSituationDAO" />
+		</property>
+	</bean>
+	<!-- ”查看“ -->
+	<bean name="REIQReadAction" class="com.action.riskInput.RiskEventInputQueryAction">
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO" />
+		</property>
+		<property name="riskImpactDao">
+			<ref bean="RiskImpactDAO" />
+		</property>
+		<property name="riskManageDao">
+			<ref bean="RiskManageDAO" />
+		</property>
+		<property name="riskRecordDao">
+			<ref bean="RiskRecordDAO" />
+		</property>
+		<property name="financeDao">
+			<ref bean="FinanceDAO" />
+		</property>
+		<property name="probabilityDao">
+			<ref bean="ProbabilityDAO" />
+		</property>
+		<property name="reputationDao">
+			<ref bean="ReputationDAO" />
+		</property>
+		<property name="lawDao">
+			<ref bean="LawDAO" />
+		</property>
+		<property name="clientDao">
+			<ref bean="ClientDAO" />
+		</property>
+		<property name="employeeDao">
+			<ref bean="EmployeeDAO" />
+		</property>
+		<property name="operationDao">
+			<ref bean="OperationDAO" />
+		</property>
+		<property name="safeDao">
+			<ref bean="SafeDAO" />
+		</property>
+		<property name="eventFileDao">
+			<ref bean="EventFileDAO" />
+		</property>
+		<property name="eventFlowFileDao">
+			<ref bean="EventFlowFileDAO" />
+		</property>
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO" />
+		</property>
+		<property name="riskDepQueryViewDao">
+			<ref bean="RiskDepQueryViewDAO"/>
+		</property>
+		<property name="usersDao">
+			<ref bean="UsersDAO"/>
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="REIQUpdatePreAction" class="com.action.riskInput.RiskEventInputQueryAction">
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO" />
+		</property>
+		<property name="riskDepQueryViewDao">
+			<ref bean="RiskDepQueryViewDAO" />
+		</property>
+	</bean>
+	<!-- ”本月录入事件“ -->
+	<bean name="REIQShowCurrentMonthInfo" class="com.action.riskInput.RiskEventInputQueryAction">
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+	</bean>
+	<!-- ”高级查询“ -->
+	<bean name="REIQQueryAction" class="com.action.riskInput.RiskEventInputQueryAction">
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+		<property name="riskEventDepQueryViewDao">
+			<ref bean="RiskEventDepQueryViewDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”录入情况查询“模块 -->
+	<!-- 结束“风险事件录入” -->
+
+	<bean name="RiskHandleAction" class="com.action.riskInput.RiskHandleAction">
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="riskManageDao">
+			<ref bean="RiskManageDAO" />
+		</property>
+		<property name="riskDao">
+			<ref bean="RiskDAO" />
+		</property>
+	</bean>
+</beans>

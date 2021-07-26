@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<beans
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+
+	<!-- 开始个人信息查看修改 -->
+	<bean name="personInfoAction" class="com.action.manage.personAction">
+		<property name="userdao">
+			<ref bean="UsersDAO" />
+		</property>
+	</bean>
+	
+	<!-- 开始角色查看 -->
+	<bean name="roleQueryAction" class="com.action.manage.systemAction">
+		<property name="systemRoledao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+	</bean>
+	<!-- 提交角色权限 -->
+	<bean name="roleSubmitAction" class="com.action.manage.systemAction">
+		<property name="functionLimitdao">
+			<ref bean="FunctionLimitDAO" />
+		</property>
+		<property name="systemRoledao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+	</bean>
+	<bean name="SelectListAction" class="com.services.SelectList">
+		<property name="systemRoledao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+	</bean>
+	<!-- 开始查看角色所有的权限 -->
+	<bean name="limitQueryAction" class="com.action.manage.systemAction">
+	
+		<property name="systemRoledao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+		<property name="functionModuledao">
+			<ref bean="FunctionModuleDAO" />
+		</property>
+		<property name="functionLimitdao">
+			<ref bean="FunctionLimitDAO" />
+		</property>		
+	</bean>
+	<bean name="roleMultiDelAction" class="com.action.manage.systemAction">
+		
+		<property name="systemRoledao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+		<property name="functionLimitdao">
+			<ref bean="FunctionLimitDAO" />
+		</property>		
+	</bean>
+	
+	<!-- 开始”用户管理“模块 -->
+	<!-- ”显示用户信息“ -->
+	<bean name="UserManageAction" class="com.action.manage.UserManageAction">
+	
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="usersDao">
+			<ref bean="UsersDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增|编辑“ -->
+	<bean name="UMAddUpdateAction" class="com.action.manage.UserManageAction">
+		<property name="usersDao">
+			<ref bean="UsersDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="roleDao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO" />
+		</property>
+		<property name="userMapDao">
+			<ref bean="UserMapDAO"/>
+		</property>
+	</bean>
+		<!-- ”返回“ 2019.4liu-->
+	<bean name="UUpdateBackAction" class="com.action.manage.UserManageAction">
+		<property name="usersDao">
+			<ref bean="UsersDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="roleDao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO" />
+		</property>
+	</bean>
+	<!-- ”批量删除“ -->
+	<bean name="UMMultiDelAction" class="com.action.manage.UserManageAction">
+		<property name="usersDao">
+			<ref bean="UsersDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="roleDao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO" />
+		</property>
+	</bean>
+	<!-- ”删除“ -->
+	<bean name="UMDelAction" class="com.action.manage.UserManageAction">
+		<property name="usersDao">
+			<ref bean="UsersDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="roleDao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO" />
+		</property>
+	</bean>
+	<!-- ”编辑前显示要编辑的对象的信息“ -->
+	<bean name="UMUpdatePreAction" class="com.action.manage.UserManageAction">
+		<property name="usersDao">
+			<ref bean="UsersDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="roleDao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+		<property name="userMapDao">
+			<ref bean="UserMapDAO"/>
+		</property>
+	</bean>
+	<!-- ”新增前要显示的信息“ -->
+	<bean name="UMAddPreAction" class="com.action.manage.UserManageAction">
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="roleDao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+	</bean>
+	
+	<!-- ”密码初始化“ -->
+	<bean name="UMResetAction" class="com.action.manage.UserManageAction">
+		<property name="usersDao">
+			<ref bean="UsersDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="roleDao">
+			<ref bean="SystemRoleDAO" />
+		</property>
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO" />
+		</property>
+	</bean>
+	<!-- 结束”用户管理“模块 -->
+	</beans>

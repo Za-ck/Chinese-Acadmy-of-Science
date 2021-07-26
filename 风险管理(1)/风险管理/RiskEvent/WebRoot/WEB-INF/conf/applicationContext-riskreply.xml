@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<!-- 开始"风险应对" -->
+
+	<!-- 风险应对措施列表 -->
+	<bean name="riskReplyAction" class="com.action.riskReply.replyMeasureAction"
+		scope="prototype">
+		<property name="riskReplyViewDAO">
+			<ref bean="RiskReplyViewDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+	</bean>
+
+	<!-- 风险应对措施列表统计查询 -->
+	<bean name="MeasureQueryAction" class="com.action.riskReply.replyMeasureAction">
+		<property name="riskReplyViewDAO">
+			<ref bean="RiskReplyViewDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+	</bean>
+
+	<!-- 风险应对措施列表统计结果导出 -->
+	<bean name="measureExcelAction" class="com.action.riskReply.replyMeasureAction">
+	</bean>
+
+	<!-- 开始风险应对管理 -->
+	<!-- 风险应对管理列表 -->
+	<bean name="replyManageAction" class="com.action.riskReply.replyManageAction"
+		scope="prototype">
+		<property name="allAnalysisViewDAO">
+			<ref bean="AllAnalysisViewDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskManageDao">
+			<ref bean="RiskManageDAO" />
+		</property>
+	</bean>
+
+	<!-- 应对管理页面的结果导出 -->
+	<bean name="manageExcelAction" class="com.action.riskReply.replyManageAction">
+	</bean>
+
+	<!-- 风险应对操作 -->
+	<bean name="riskReplyManageAction" class="com.action.riskReply.replyManageAction">
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskManageDao">
+			<ref bean="RiskManageDAO" />
+		</property>
+		<property name="allAnalysisViewDAO">
+			<ref bean="AllAnalysisViewDAO" />
+		</property>
+		<property name="riskAssessSituationDAO">
+			<ref bean="RiskAssessSituationDAO" />
+		</property>
+		<property name="userDAO">
+			<ref bean="UsersDAO" />
+		</property>
+	</bean>
+
+	<!-- 配置JobFactory 
+	<bean id="RiskReplyJobFactory" class="com.util.RiskReplyJobFactory"></bean>-->
+	
+	<!-- 添加Job,定时进行风险应对的待处理推送工作 -->
+	<bean name="RiskReplyNotifyJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass" value="com.services.RiskReplyNotifyJob" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="timeout" value="5" />
+				<entry key="riskReplyViewDAO" value-ref="RiskReplyViewDAO" />
+				<entry key="userDAO" value-ref="UsersDAO" />
+				<entry key="departmentDAO" value-ref="DepartmentDAO" />
+			</map>
+		</property>
+	</bean>
+
+	<!-- 配置作业调度的触发方式,使用CronTriggerBean,每天固定时间进行更新 -->
+	<bean id="cronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="RiskReplyNotifyJob" />
+		<!-- 每天21:00运行一次 -->
+		<property name="cronExpression" value="0 0 * * * ?" />
+	</bean>
+
+	<!-- 配置调度工厂 -->
+	<bean id="scheduler"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTrigger" />
+			</list>
+		</property>
+		<!--  <property name="jobFactory" ref="RiskReplyJobFactory"></property> -->
+	</bean>
+
+</beans>

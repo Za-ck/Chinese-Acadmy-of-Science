@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<beans
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+
+	<!-- 开始"风险事件流转" -->
+<!-- 开始”风险事件状态查询“ -->
+	<!-- ”显示全部风险事件状态“ -->
+	<bean name="RiskStatusAction" class="com.action.riskFlow.RiskFlowAction" scope="prototype">
+		<property name="riskEventDao">
+	    	<ref bean="RiskEventDAO"/>
+		</property>		
+		<property name="flowRuleDao">
+	    	<ref bean="FlowRuleDAO"/>
+		</property>
+		<property name="riskRecordDao">
+	       <ref bean="RiskRecordDAO"/>
+	    </property>	
+	     <property name="departmentDao">
+	     	<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskDao">
+	    	<ref bean="RiskDAO"/>
+		</property> 
+		<property name="functionLimitDao">
+	    	<ref bean="FunctionLimitDAO"/>
+		</property>
+		<property name="riskDepQueryViewDao">
+			<ref bean="RiskDepQueryViewDAO"/>
+		</property>
+		<property name="usersDao">
+			<ref bean="UsersDAO"/>
+		</property>
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		<property name="eventFlowFileDao">
+			<ref bean="EventFlowFileDAO"/>
+		</property>
+	</bean>
+	<!-- ”显示全部风险事件状态“ -->
+	<!-- 这条链接是从外部系统链接进来的 -->
+	<bean name="Out_RiskStatusAction" class="com.action.riskFlow.RiskFlowAction">
+	
+		<property name="riskEventDao">
+	    	<ref bean="RiskEventDAO"/>
+		</property>		
+		<property name="flowRuleDao">
+	    	<ref bean="FlowRuleDAO"/>
+		</property>
+		<property name="riskRecordDao">
+	       <ref bean="RiskRecordDAO"/>
+	    </property>	
+	     <property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="riskDao">
+	    	<ref bean="RiskDAO"/>
+		</property> 
+		<property name="functionLimitDao">
+	    	<ref bean="FunctionLimitDAO"/>
+		</property> 
+		<property name="usersDao">
+			<ref bean="UsersDAO" />
+		</property>		
+		<property name="functiondao">
+			<ref bean="UsersFunctionDAO" />
+		</property>
+		<property name="riskDepQueryViewDao">
+			<ref bean="RiskDepQueryViewDAO"/>
+		</property>	
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		<property name="eventFlowFileDao">
+			<ref bean="EventFlowFileDAO"/>
+		</property>
+	</bean>
+	<!-- 结束”风险事件状态查询“ -->
+	<bean name="DepVerifyAction" class="com.action.riskFlow.RiskFlowAction">
+	
+		<property name="riskEventDao">
+	    	<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="riskManageDao">
+           <ref bean="RiskManageDAO"/>	
+	    </property>
+	    <property name="riskImpactDao">
+	       <ref bean="RiskImpactDAO"/>
+	    </property>
+	    <property name="riskRecordDao">
+	       <ref bean="RiskRecordDAO"/>
+	    </property>
+	    <property name="eventFileDao">
+			<ref bean="EventFileDAO"/>
+		</property>
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO"/>
+		</property>
+		<property name="usersDao">
+			<ref bean="UsersDAO"/>
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskDepQueryViewDao">
+			<ref bean="RiskDepQueryViewDAO"/>
+		</property>
+		<property name="eventFlowFileDao">
+			<ref bean="EventFlowFileDAO"/>
+		</property>
+	</bean>
+	<bean name="DepPassAction" class="com.action.riskFlow.RiskFlowAction" scope="prototype">
+	
+		<property name="riskEventDao">
+	    	<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="riskImpactDao">
+	       <ref bean="RiskImpactDAO"/>
+	    </property>    
+	    <property name="flowRuleDao">
+	       <ref bean="FlowRuleDAO"/>
+	    </property>
+	    <property name="riskRecordDao">
+	       <ref bean="RiskRecordDAO"/>
+	    </property>
+	    <property name="usersDao">
+	       <ref bean="UsersDAO"/>
+	    </property>
+	    <property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="functionLimitDao">
+	    	<ref bean="FunctionLimitDAO"/>
+		</property>	
+		<property name="userMapDao">
+	    	<ref bean="UserMapDAO"/>
+		</property>
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		<property name="riskDepQueryViewDao">
+			<ref bean="RiskDepQueryViewDAO"/>
+		</property>
+		<property name="riskAssessDao">
+	       <ref bean="RiskAssessDAO"/>
+	    </property>
+	    <property name="riskassesssituationDao">
+	       <ref bean="RiskAssessSituationDAO"/>
+	    </property>
+	    <property name="riskManageDao">
+           <ref bean="RiskManageDAO"/>	
+	    </property>
+	    <property name="eventFlowFileDao">
+			<ref bean="EventFlowFileDAO"/>
+		</property>
+	</bean>
+	
+	<!-- 结束"风险事件流转" -->
+	<!-- 风险流转策略设置 -->
+	<bean name="RiskFlowSettingAction" class="com.action.riskFlow.RiskFlowSettingAction">
+	
+		<property name="riskDAO">
+	    	<ref bean="RiskDAO"/>
+		</property>  
+	    <property name="flowRuleDao">
+	       <ref bean="FlowRuleDAO"/>
+	    </property>
+	    <property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+	</bean>
+	<!-- 流传策略查询 -->
+	<bean name="yearQueryAction" class="com.action.riskFlow.RiskFlowSettingAction">
+	
+	    <property name="flowRuleDao">
+	       <ref bean="FlowRuleDAO"/>
+	    </property>
+	    
+	</bean>
+	<!-- 回撤风险事件 -->
+	<bean name="RERecallAction"  class="com.action.riskFlow.RiskFlowAction" scope="prototype">
+	    <property name="riskEventDao">
+	    	<ref bean="RiskEventDAO"/>
+		</property>
+	    <property name="flowRuleDao">
+	       <ref bean="FlowRuleDAO"/>
+	    </property>
+	    <property name="riskRecordDao">
+	       <ref bean="RiskRecordDAO"/>
+	    </property>
+	    <property name="usersDao">
+	       <ref bean="UsersDAO"/>
+	    </property>
+	    <property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="userMapDao">
+	    	<ref bean="UserMapDAO"/>
+		</property>
+		<property name="riskDepQueryViewDao">
+			<ref bean="RiskDepQueryViewDAO"/>
+		</property>
+		
+		<property name="functionLimitDao">
+	    	<ref bean="FunctionLimitDAO"/>
+	    </property>
+	    
+	</bean>
+	
+	<bean name="RERevocation"  class="com.action.riskFlow.RiskFlowAction">
+	    <property name="riskEventDao">
+	    	<ref bean="RiskEventDAO"/>
+		</property>
+	    <property name="flowRuleDao">
+	       <ref bean="FlowRuleDAO"/>
+	    </property>
+	    <property name="riskRecordDao">
+	       <ref bean="RiskRecordDAO"/>
+	    </property>
+	    <property name="usersDao">
+	       <ref bean="UsersDAO"/>
+	    </property>
+	    <property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="userMapDao">
+	    	<ref bean="UserMapDAO"/>
+		</property>
+		<property name="riskDepQueryViewDao">
+			<ref bean="RiskDepQueryViewDAO"/>
+		</property>
+	    
+	    <property name="functionLimitDao">
+	    	<ref bean="FunctionLimitDAO"/>
+	    </property>
+	    
+	</bean>
+	
+	</beans>

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<beans
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean name="riskAssessByNumAction" class="com.action.riskAssess.RiskAssessAction">
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskAssessViewDao">
+	    	<ref bean="RiskAssessViewDAO"/>
+		</property>
+		<property name="riskDimensionDao">
+	    	<ref bean="RiskDimensionDAO"/>
+		</property>
+		<property name="inputStandardDao">
+	    	<ref bean="InputStandardDAO"/>
+		</property>
+		<property name="riskAssessSituationViewDao">
+			<ref bean="RiskAssessSituationViewDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+	</bean>
+	<bean name="riskAssessBySituationAction" class="com.action.riskAssess.RiskAssessAction">
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskAssessViewDao">
+	    	<ref bean="RiskAssessViewDAO"/>
+		</property>
+		<property name="riskDimensionDao">
+	    	<ref bean="RiskDimensionDAO"/>
+		</property>
+		<property name="riskAssessSituationViewDao">
+			<ref bean="RiskAssessSituationViewDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="inputStandardDao">
+	    	<ref bean="InputStandardDAO"/>
+		</property>
+	</bean>
+	
+	<bean name="riskAssessBySynthesizeAction" class="com.action.riskAssess.RiskAssessAction">
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskAssessViewDao">
+	    	<ref bean="RiskAssessViewDAO"/>
+		</property>
+		<property name="riskDimensionDao">
+	    	<ref bean="RiskDimensionDAO"/>
+		</property>
+		<property name="riskAssessSituationViewDao">
+			<ref bean="RiskAssessSituationViewDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="inputStandardDao">
+	    	<ref bean="InputStandardDAO"/>
+		</property>
+	</bean>
+	<bean name="riskAssessQueryAction" class="com.action.riskAssess.RiskAssessAction">
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="departmentChangedDao">
+	    	<ref bean="DepartmentChangedDAO"/>
+		</property>
+		<property name="riskAssessViewDao">
+	    	<ref bean="RiskAssessViewDAO"/>
+		</property>
+		<property name="riskDimensionDao">
+	    	<ref bean="RiskDimensionDAO"/>
+		</property>
+		<property name="riskAssessSituationViewDao">
+			<ref bean="RiskAssessSituationViewDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="inputStandardDao">
+	    	<ref bean="InputStandardDAO"/>
+		</property>
+	</bean>
+	<bean name="riskAssessQueryAction2" class="com.action.riskAssess.RiskAssessAction">
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskAssessViewDao">
+	    	<ref bean="RiskAssessViewDAO"/>
+		</property>
+		<property name="riskDimensionDao">
+	    	<ref bean="RiskDimensionDAO"/>
+		</property>
+		<property name="riskAssessSituationViewDao">
+			<ref bean="RiskAssessSituationViewDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="inputStandardDao">
+	    	<ref bean="InputStandardDAO"/>
+		</property>
+	</bean>
+	<bean name="riskAssessQueryAction3" class="com.action.riskAssess.RiskAssessAction">
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskAssessViewDao">
+	    	<ref bean="RiskAssessViewDAO"/>
+		</property>
+		<property name="riskDimensionDao">
+	    	<ref bean="RiskDimensionDAO"/>
+		</property>
+		<property name="riskAssessSituationViewDao">
+			<ref bean="RiskAssessSituationViewDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="inputStandardDao">
+	    	<ref bean="InputStandardDAO"/>
+		</property>
+	</bean>
+	<bean name="riskAssessUnFinishedAction" class="com.action.riskAssess.RiskAssessAction">
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskAssessViewDao">
+	    	<ref bean="RiskAssessViewDAO"/>
+		</property>
+		<property name="riskDimensionDao">
+	    	<ref bean="RiskDimensionDAO"/>
+		</property>
+		<property name="riskAssessSituationViewDao">
+			<ref bean="RiskAssessSituationViewDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="inputStandardDao">
+	    	<ref bean="InputStandardDAO"/>
+		</property>
+	</bean>
+	<bean name="riskAssessPassAction" class="com.action.riskAssess.RiskAssessPassAction">
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskAssessViewDao">
+	    	<ref bean="RiskAssessViewDAO"/>
+		</property>
+		<property name="riskDimensionDao">
+	    	<ref bean="RiskDimensionDAO"/>
+		</property>
+		<property name="riskAssessSituationDao">
+			<ref bean="RiskAssessSituationDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="riskAssessAccountDAO">
+			<ref bean="RiskAssessAccountDAO"/>
+		</property>
+	</bean>
+	<bean name="riskAssessPassedAction" class="com.action.riskAssess.RiskAssessPassAction">
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskAssessViewDao">
+	    	<ref bean="RiskAssessViewDAO"/>
+		</property>
+		<property name="riskDimensionDao">
+	    	<ref bean="RiskDimensionDAO"/>
+		</property>
+		<property name="riskAssessSituationDao">
+			<ref bean="RiskAssessSituationDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="riskAssessAccountDAO">
+			<ref bean="RiskAssessAccountDAO"/>
+		</property>
+	</bean>
+	<bean name="riskAssessAssessAction" class="com.action.riskAssess.RiskAssessPassAction">
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskAssessViewDao">
+	    	<ref bean="RiskAssessViewDAO"/>
+		</property>
+		<property name="riskDimensionDao">
+	    	<ref bean="RiskDimensionDAO"/>
+		</property>
+		<property name="riskAssessSituationDao">
+			<ref bean="RiskAssessSituationDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="riskAssessAccountDAO">
+			<ref bean="RiskAssessAccountDAO"/>
+		</property>
+	</bean>
+	<bean name="riskAssessAssessedAction" class="com.action.riskAssess.RiskAssessPassAction">
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskAssessViewDao">
+	    	<ref bean="RiskAssessViewDAO"/>
+		</property>
+		<property name="riskDimensionDao">
+	    	<ref bean="RiskDimensionDAO"/>
+		</property>
+		<property name="riskAssessSituationDao">
+			<ref bean="RiskAssessSituationDAO"/>
+		</property>
+		<property name="riskEventDao">
+			<ref bean="RiskEventDAO"/>
+		</property>
+		<property name="riskAssessAccountDAO">
+			<ref bean="RiskAssessAccountDAO"/>
+		</property>
+	</bean>
+	</beans>
+	

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<beans
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+
+	<!-- 开始"风险事件统计" -->
+	<!--按部门名称统计 -->
+	<!-- 按部门名称查询 -->
+	<bean name="depQueryAction" class="com.action.riskStatistics.depQueryAction">
+		
+		<property name="depStaViewDAO">
+	    	<ref bean="DepStaViewDAO"/>
+		</property>
+		<property name="depStaView1DAO">
+	    	<ref bean="DepStaView1DAO"/>
+		</property>
+		<property name="departmentDAO">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskTypeDAO">
+	    	<ref bean="RiskTypeDAO"/>
+		</property>
+	</bean>
+	<!-- 结束按部门名称查询 -->
+	
+	
+	<!-- 按部门名称统计结果导出 -->
+	<bean name="depExcelAction" class="com.action.riskStatistics.depQueryAction">
+	</bean>
+	
+	<!-- 按事件编号统计查询 -->
+	<bean name="eventQueryAction" class="com.action.riskStatistics.eventQueryAction">
+	
+		<property name="eventStaView2DAO">
+	    	<ref bean="EventStaView2DAO"/>
+		</property>
+		<property name="eventStaViewDAO">
+	    	<ref bean="EventStaViewDAO"/>
+		</property>
+		<!-- 修改                                                                                                                                                       -->
+		<property name="eventStaView4DAO">
+	    	<ref bean="EventStaView4DAO"/>
+		</property>
+		<property name="eventStaView3DAO">
+	    	<ref bean="EventStaView3DAO"/>
+		</property>
+		<property name="riskDAO">
+	    	<ref bean="RiskDAO"/>
+		</property>
+		<property name="riskTypeDAO">
+	    	<ref bean="RiskTypeDAO"/>
+		</property>
+	</bean>
+	
+	<!-- 按事件编号统计结果导出 -->
+	<bean name="eventExcelAction" class="com.action.riskStatistics.eventQueryAction">
+	</bean>
+	
+	<!-- 按事件编号统计中点击部门个数出现部门名称 -->
+	<bean name="depnumSQAction" class="com.action.riskStatistics.eventQueryAction">
+	
+		<property name="eventStaViewDAO">
+	    	<ref bean="EventStaViewDAO"/>
+		</property>
+		<!-- 修改                                                                                                                              -->
+		<property name="eventStaView3DAO">
+	    	<ref bean="EventStaView3DAO"/>
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+	</bean>
+	
+	<!-- 按环节统计查询 -->
+	<bean name="linkQueryAction" class="com.action.riskStatistics.linkQueryAction">
+		<property name="linkStaView2DAO">
+	    	<ref bean="LinkStaView2DAO"/>
+		</property>
+		<property name="linkStaViewDAO">
+	    	<ref bean="LinkStaViewDAO"/>
+		</property>
+		<property name="linkStaView4DAO">
+	    	<ref bean="LinkStaView4DAO"/>
+		</property>
+		<property name="linkStaView3DAO">
+	    	<ref bean="LinkStaView3DAO"/>
+		</property>
+	</bean>
+	
+	<!-- 按环节统计结果导出 -->
+	<bean name="linkExcelAction" class="com.action.riskStatistics.linkQueryAction">
+	</bean>
+	
+	<!-- 按环节统计中点击部门个数出现部门名称 -->
+	<bean name="depnumLQAction" class="com.action.riskStatistics.linkQueryAction">
+	<property name="linkStaViewDAO">
+	    	<ref bean="LinkStaViewDAO"/>
+		</property>
+		<property name="linkStaView3DAO">
+	    	<ref bean="LinkStaView3DAO"/>
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+	</bean>
+	
+	
+	<!-- 风险事件汇总统计查询 -->
+	<bean name="allQueryAction" class="com.action.riskStatistics.allQueryAction">
+		<property name="allStaViewDAO">
+	    	<ref bean="AllStaViewDAO"/>
+		</property>
+		<property name="allStaView1DAO">
+	    	<ref bean="AllStaView1DAO"/>
+		</property>
+		<property name="eventFileDao">
+			<ref bean="EventFileDAO" />
+		</property>
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO" />
+		</property>
+		<property name="eventFlowFileDao">
+			<ref bean="EventFlowFileDAO" />
+		</property>
+	</bean>
+	
+	<!-- 风险事件汇总统计结果导出 -->
+	<bean name="allExcelAction" class="com.action.riskStatistics.allQueryAction">
+		<property name="eventFlowFileDao">
+			<ref bean="EventFlowFileDAO" />
+		</property>
+	</bean>
+	
+	<!--汇总统计后点击涉及流程显示具体的文件  -->
+	<bean name="flowAQAction" class="com.action.riskStatistics.allQueryAction">
+	<property name="allStaViewDAO">
+	    	<ref bean="AllStaViewDAO"/>
+		</property>
+		<property name="allStaView1DAO">
+	    	<ref bean="AllStaView1DAO"/>
+		</property>
+		<property name="eventFileDao">
+			<ref bean="EventFileDAO" />
+		</property>
+		<property name="fileManageDao">
+			<ref bean="FileManageDAO" />
+		</property>
+	</bean>
+	
+	<!-- 关键风险列表统计查询 -->
+	<bean name="keyQueryAction" class="com.action.riskStatistics.keyQueryAction">
+		<property name="keyStaViewDAO">
+	    	<ref bean="KeyStaViewDAO"/>
+		</property>
+		<property name="departmentDAO">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+	</bean>
+	
+	<!-- 关键风险列表统计结果导出 -->
+	<bean name="keyExcelAction" class="com.action.riskStatistics.keyQueryAction">
+	</bean>
+	
+	<!-- 全面风险报告生成 -->
+	<bean name="riskReportAction" class="com.action.riskStatistics.riskReportAction">
+	<property name="riskDAO">
+	    	<ref bean="RiskDAO"/>
+	</property>
+	<property name="riskTypeDAO">
+	    	<ref bean="RiskTypeDAO"/>
+	</property>
+	<property name="probabilityDao">
+			<ref bean="ProbabilityDAO"/>
+	</property>
+	<property name="operationDao">
+			<ref bean="OperationDAO"/>
+		</property>
+		<property name="reportViewDao">
+			<ref bean="ReportViewDAO"/>
+		</property>
+	</bean>
+	
+	
+	
+	</beans>

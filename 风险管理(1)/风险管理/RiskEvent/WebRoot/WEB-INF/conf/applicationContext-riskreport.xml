@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!--风险报告启动流程(录入)-->
+	<bean name="RiskReportInputAction" class="com.action.riskReport.RiskReportInputAction">
+
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO"/>
+		</property>
+		
+		<property name="reportRiskDao">
+			<ref bean="ReportRiskDAO"/>
+		</property>
+		
+		<property name="reportTaskDao">
+			<ref bean = "ReportTaskDAO"/>
+		</property>
+		
+		<property name="reportRiskDepDao">
+			<ref bean="ReportRiskDepDAO"/>
+		</property>
+		
+		<property name="reportRiskFileDao">
+			<ref bean="ReportRiskFileDAO"/>
+		</property>
+		
+		<property name="reportFlowRuleDao">
+			<ref bean="ReportFlowRuleDAO"/>
+		</property>
+		
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		
+		<property name="formInfoDao">
+			<ref bean="FormInfoDAO"/>
+		</property>
+		
+		
+	</bean>
+	
+	<!-- 风险报告启动流程(查看) -->
+	<bean name="RiskReportReadAction" class="com.action.riskReport.RiskReportReadAction">
+		<property name="reportRiskDao">
+			<ref bean="ReportRiskDAO"/>
+		</property>
+		
+		<property name="reportTaskDao">
+			<ref bean = "ReportTaskDAO"/>
+		</property>
+		
+		<property name="reportRiskDepDao">
+			<ref bean="ReportRiskDepDAO"/>
+		</property>
+		
+		<property name="reportRiskFileDao">
+			<ref bean="ReportRiskFileDAO"/>
+		</property>
+		
+		<property name="reportFlowRuleDao">
+			<ref bean="ReportFlowRuleDAO"/>
+		</property>
+		
+		<property name="readFlowViewDao">
+			<ref bean="ReadFlowViewDAO" />
+		</property>
+		
+		<property name="formInfoDao">
+			<ref bean="FormInfoDAO"/>
+		</property>
+	</bean>
+	
+	<!-- 部门报告提交(录入) -->
+	<bean name="RiskReportDepInputAction" class="com.action.riskReport.RiskReportDepInputAction">
+	 
+		<property name="reportDepartmentDao">
+			<ref bean="ReportDepartmentDAO"/>
+		</property>
+		
+		<property name="reportFlowRuleDao">
+			<ref bean="ReportFlowRuleDAO"/>
+		</property>
+	
+		<property name="reportDepFileDao">
+			<ref bean="ReportDepFileDAO" />
+		</property>
+		
+		<property name="reportRiskDao">
+			<ref bean="ReportRiskDAO"/>
+		</property>
+		
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		
+		<property name="reportTaskRiskViewDao">
+			<ref bean="ReportTaskRiskViewDAO"/>
+		</property>
+		
+		<property name="reportTaskDao">
+			<ref bean = "ReportTaskDAO"/>
+		</property>
+		
+		<property name="departmentDao">
+			<ref bean = "DepartmentDAO" />
+		</property>
+		
+		<property name="reportRiskDepDao">
+			<ref bean="ReportRiskDepDAO"/>
+		</property>
+		<property name="formInfoDao">
+			<ref bean="FormInfoDAO"/>
+		</property>
+		
+		<property name="reportRiskFileDao">
+			<ref bean="ReportRiskFileDAO"/>
+		</property>
+		
+		<property name="usersDao">
+			<ref bean="UsersDAO"/>
+		</property>
+		
+		
+	</bean>
+	
+	<!-- 部门报告提交(审核) -->
+	<bean name="RiskReportDepCheckAction" class="com.action.riskReport.RiskReportDepCheckAction" >
+		
+		<property name="reportDepartmentDao">
+			<ref bean="ReportDepartmentDAO"/>
+		</property>
+		
+		<property name="reportFlowRuleDao">
+			<ref bean="ReportFlowRuleDAO"/>
+		</property>
+	
+		<property name="reportDepFileDao">
+			<ref bean="ReportDepFileDAO" />
+		</property>
+		
+		<property name="reportRiskDao">
+			<ref bean="ReportRiskDAO"/>
+		</property>
+		
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		
+		<property name="reportTaskRiskViewDao">
+			<ref bean="ReportTaskRiskViewDAO"/>
+		</property>
+		
+		<property name="reportTaskDao">
+			<ref bean = "ReportTaskDAO"/>
+		</property>
+		
+		<property name="departmentDao">
+			<ref bean = "DepartmentDAO" />
+		</property>
+		
+		<property name="formInfoDao">
+			<ref bean="FormInfoDAO"/>
+		</property>
+		
+		<property name="reportMessageDao">
+			<ref bean="ReportMessageDAO"/>
+		</property>
+		
+		<property name="reportRiskFileDao">
+			<ref bean="ReportRiskFileDAO"/>
+		</property>
+		
+		<property name="usersDao">
+			<ref bean="UsersDAO"/>
+		</property>
+		
+	</bean>
+	
+	<!-- 部门报告提交(查看) -->
+	<bean name="RiskReportDepReadAction" class="com.action.riskReport.RiskReportDepReadAction">
+		<property name="reportDepartmentDao">
+			<ref bean="ReportDepartmentDAO"/>
+		</property>
+		
+		<property name="reportFlowRuleDao">
+			<ref bean="ReportFlowRuleDAO"/>
+		</property>
+	
+		<property name="reportDepFileDao">
+			<ref bean="ReportDepFileDAO" />
+		</property>
+		
+		<property name="reportRiskDao">
+			<ref bean="ReportRiskDAO"/>
+		</property>
+		
+		<property name="reportTaskDao">
+			<ref bean = "ReportTaskDAO"/>
+		</property>
+		
+		<property name="readFlowViewDao">
+			<ref bean="ReadFlowViewDAO" />
+		</property>
+		
+		<property name="formInfoDao">
+			<ref bean="FormInfoDAO"/>
+		</property>
+		
+		<property name="reportRiskFileDao">
+			<ref bean="ReportRiskFileDAO"/>
+		</property>
+		
+		<property name="usersDao">
+			<ref bean="UsersDAO"/>
+		</property>
+		
+		<property name="departmentDao">
+			<ref bean = "DepartmentDAO" />
+		</property>
+		
+	</bean>
+	
+	<!-- 汇总报告审批流程 -->
+	<bean name="RiskReportCheckInputAction" class="com.action.riskReport.RiskReportCheckInputAction">
+	
+		<property name="reportCheckDao">
+			<ref bean="ReportCheckDAO"/>
+		</property>
+		
+		<property name="reportFlowRuleDao">
+			<ref bean="ReportFlowRuleDAO"/>
+		</property>
+	
+		<property name="reportCheckFileDao">
+			<ref bean="ReportCheckFileDAO" />
+		</property>
+		
+		<property name="reportRiskDao">
+			<ref bean="ReportRiskDAO"/>
+		</property>
+		
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		
+		<property name="reportTaskDao">
+			<ref bean = "ReportTaskDAO"/>
+		</property>
+		
+		<property name="formInfoDao">
+			<ref bean="FormInfoDAO"/>
+		</property>
+		
+		<property name="reportRiskFileDao">
+			<ref bean="ReportRiskFileDAO"/>
+		</property>
+		
+		<property name="reportDepFileDao">
+			<ref bean="ReportDepFileDAO" />
+		</property>
+		
+		<property name="departmentDao">
+			<ref bean = "DepartmentDAO" />
+		</property>
+		
+		<property name="usersDao">
+			<ref bean="UsersDAO"/>
+		</property>
+		
+	</bean>
+	
+	<bean name="RiskReportCheckCheckAction" class="com.action.riskReport.RiskReportCheckCheckAction">
+	
+		<property name="reportCheckDao">
+			<ref bean="ReportCheckDAO"/>
+		</property>
+		
+		<property name="reportFlowRuleDao">
+			<ref bean="ReportFlowRuleDAO"/>
+		</property>
+	
+		<property name="reportCheckFileDao">
+			<ref bean="ReportCheckFileDAO" />
+		</property>
+		
+		<property name="reportRiskDao">
+			<ref bean="ReportRiskDAO"/>
+		</property>
+		
+		<property name="usersQueryViewDao">
+			<ref bean="UsersQueryViewDAO"/>
+		</property>
+		
+		<property name="departmentDao">
+			<ref bean = "DepartmentDAO" />
+		</property>
+		
+		<property name="reportTaskDao">
+			<ref bean = "ReportTaskDAO"/>
+		</property>
+		
+		<property name="formInfoDao">
+			<ref bean="FormInfoDAO"/>
+		</property>
+		
+		<property name="reportRiskFileDao">
+			<ref bean="ReportRiskFileDAO"/>
+		</property>
+		
+		<property name="usersDao">
+			<ref bean="UsersDAO"/>
+		</property>
+		
+		<property name="reportDepFileDao">
+			<ref bean="ReportDepFileDAO" />
+		</property>
+		
+	</bean >
+	
+	<!-- 查看汇总报告审批流程 -->
+	<bean name="RiskReportCheckReadAction" class="com.action.riskReport.RiskReportCheckReadAction"> 
+		<property name="reportCheckDao">
+			<ref bean="ReportCheckDAO"/>
+		</property>
+		
+		<property name="reportFlowRuleDao">
+			<ref bean="ReportFlowRuleDAO"/>
+		</property>
+	
+		<property name="reportCheckFileDao">
+			<ref bean="ReportCheckFileDAO" />
+		</property>
+		
+		<property name="reportRiskDao">
+			<ref bean="ReportRiskDAO"/>
+		</property>
+		
+		<property name="reportTaskDao">
+			<ref bean = "ReportTaskDAO"/>
+		</property>
+		
+		<property name="readFlowViewDao">
+			<ref bean="ReadFlowViewDAO" />
+		</property>
+		
+		<property name="formInfoDao">
+			<ref bean="FormInfoDAO"/>
+		</property>
+		
+		<property name="usersDao">
+			<ref bean="UsersDAO"/>
+		</property>
+		
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO"/>
+		</property>
+		
+		<property name="reportRiskFileDao">
+			<ref bean="ReportRiskFileDAO"/>
+		</property>
+		
+		<property name="reportDepFileDao">
+			<ref bean="ReportDepFileDAO" />
+		</property>
+		
+	</bean>
+	<!-- 上面是汇总报告审批流程 -->
+	
+	<!-- 任务台账 -->
+	<bean name="RiskReportProcessAction" class="com.action.riskReport.RiskReportProcessAction" init-method="init">
+		<property name="reportFlowRuleDao">
+			<ref bean="ReportFlowRuleDAO"/>
+		</property>
+		<property name="reportFlowRuleInfoDao">
+			<ref bean="ReportFlowRuleInfoDAO"/>
+		</property>
+		<property name="reportTaskRiskViewDao">
+			<ref bean="ReportTaskRiskViewDAO"/>
+		</property>
+		<property name="reportTaskDao">
+			<ref bean="ReportTaskDAO"/>
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO"/>
+		</property>
+		
+		
+	</bean>
+	
+	<!-- 报告台账 -->
+	<bean name="RiskReportAction" class="com.action.riskReport.RiskReportAction">
+		<property name="reportFlowRuleDao">
+			<ref bean="ReportFlowRuleDAO"/>
+		</property>
+		<property name="reportFlowRuleInfoDao">
+			<ref bean="ReportFlowRuleInfoDAO"/>
+		</property>
+		<property name="reportTaskRiskViewDao">
+			<ref bean="ReportTaskRiskViewDAO"/>
+		</property>
+		<property name="reportTaskDao">
+			<ref bean="ReportTaskDAO"/>
+		</property>
+	</bean>
+	
+	<bean name="ReportReadAction" class="com.action.riskReport.ReportReadAction" init-method="init">
+		<property name="reportRiskDao">
+			<ref bean="ReportRiskDAO"/>
+		</property>
+		<property name="reportDepartmentDao">
+			<ref bean="ReportDepartmentDAO"/>
+		</property>
+		<property name="reportCheckDao">
+			<ref bean="ReportCheckDAO"/>
+		</property>
+		<property name="reportRiskDepDao">
+			<ref bean="ReportRiskDepDAO"/>
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="reportFlowRuleInfoDao">
+			<ref bean="ReportFlowRuleInfoDAO"/>
+		</property>
+		<!-- 添加ReportTaskRiskView的dao -->
+		<property name="reportTaskRiskViewDao">
+			<ref bean="ReportTaskRiskViewDAO"/>
+		</property>
+	</bean>
+</beans>

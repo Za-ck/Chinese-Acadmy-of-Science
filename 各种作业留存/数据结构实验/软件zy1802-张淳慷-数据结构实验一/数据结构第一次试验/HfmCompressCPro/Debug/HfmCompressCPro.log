@@ -1,0 +1,7 @@
+﻿  Compress.cpp
+C:\Users\Administrator\Desktop\数据结构第一次试验\HfmCompressCPro\Compress.cpp(61,6): warning C4101: “i”: 未引用的局部变量
+  Main.cpp
+C:\Users\Administrator\Desktop\数据结构第一次试验\HfmCompressCPro\Main.cpp(15,7): warning C4101: “filename1”: 未引用的局部变量
+  Huffman.cpp
+  正在生成代码...
+  HfmCompressCPro.vcxproj -> C:\Users\Administrator\Desktop\数据结构第一次试验\Debug\HfmCompressCPro.exe

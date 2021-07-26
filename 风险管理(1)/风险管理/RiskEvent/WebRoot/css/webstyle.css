@@ -1,0 +1,135 @@
+ body{
+ background-color: white;
+ margin-top:5px;
+ }
+ .queryDiv{
+ border-left: 2px solid #e2e1e1;
+ border-right: 2px solid #e2e1e1;
+ padding-left:5px;
+ padding-top:2px;
+ padding-bottom:0px;
+ height:30px;
+ text-align: left;
+ background-color: #e6e6e6;
+ }
+ .queryDiv span{
+ margin-left:5px;
+ margin-top:5px;
+ line-height: 30px;
+ font-size:13;
+ color:#717171;
+ }
+  .queryDiv input{
+ margin-left:5px;
+ font-size:13;
+ }
+ .queryDiv image{
+ line-height: 30px;
+ cursor:pointer;
+ }
+ .toptitle{
+height:35px;
+
+}
+.toptitleleft{
+width:20px; 
+float:left;
+margin-right:-20px;
+height:35px;
+background-image: url('/RiskEvent/frame/images/topleft.png');
+}
+.toptitlemiddle{
+
+height:35px;
+width:auto;
+margin:0px 20px;
+background-image: url('/RiskEvent/frame/images/top.png');
+}
+.topttileright{
+width:20px;
+height:35px;
+float:right;
+margin-left:-20px;
+background-image: url('/RiskEvent/frame/images/topright.png');
+}
+
+.toptitlemiddle span{
+height:35px;
+line-height:35px;
+font-family: sans-serif;
+font-size:15;
+font-weight:bolder;
+color:#1281d3;
+}
+.tablesquery{
+    color:#818181;
+    font-size:14px;
+    border-collapse:collapse;
+	border:2px solid #dddddd;
+}
+.tablesquery tr td a{
+width:100px;
+color:#818181;
+text-decoration:none;
+font-size:13px; 
+font-family:Arial, Helvetica, sans-serif; 
+cursor: pointer;
+height:32px;
+}
+.tablesquery tr td a:hover{
+color:#1383f5;
+}
+.tablesquery tr td a img {
+float:left;
+border:0; 
+}
+.tablesquery tr td a input {
+	cursor:poniter;
+float:left;
+border:0; 
+}
+.tablesquery tr td a span {
+float:left;
+height:32px;
+line-height:32px;
+}
+.MainDiv{
+border:2px solid #eff0f1;
+background-color: #f9f9f9;}
+.CPanel table{width:100%;}
+legend{margin-top:5px;color:#1383f5;font-size:15px; font-family:Arial, Helvetica, sans-serif; }
+.contentInfo {margin-top:8px;}
+.contentInfo tr td{color:#818181;font-size:14px;font-family:Arial, Helvetica, sans-serif; }
+input.text{border:1px solid #1383f5;font-size:13px;font-family: Verdana, Arial, Helvetica, sans-serif;height:20px;color:#717171;}
+textarea{border:1px solid #1383f5;color:#717171;}
+.upload{width:64px; border:0px; cursor:pointer; height:64px;background-image:url(/RiskEvent/frame/icon/Cardboard Box Upload.png);}
+.save{width:58px; border:0px; cursor:pointer; height:26px;background-image:url(/RiskEvent/frame/images/savebutton.png);}
+.back{width:58px; border:0px; cursor:pointer; height:26px;background-image:url(/RiskEvent/frame/images/backbutton.png);}
+.red{color: #f00;}
+.querybutton{cursor:pointer;}
+
+.linktable2{
+    width:100%;	
+	margin-left:8px;
+	margin-top:10px;
+	border:1px solid #e2e1e1;
+}
+.linktable{
+	width:100%;
+	margin-left:8px;
+	margin-top:10px;
+	border:1px solid #e2e1e1;
+}
+.linktable thead tr th{
+	border:1px solid #dadbdb;
+	height:30px;
+	color:#818181;
+	font-size: 15px;
+	background-image: url("/RiskEvent/IconPage/images/thbg.png");
+}
+.linktable tbody tr td{
+	border:1px solid #e2e1e1;
+	color:#818181;
+	font-size: 14px;
+	height:35px;
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+
+	<class name="com.model.UsersQueryView" table="UsersQueryView"
+		schema="dbo" catalog="REDB">
+		<id name="userId" type="java.lang.String">
+			<column name="User_Id" length="20" />
+		</id>
+		<property name="userName" type="java.lang.String">
+			<column name="User_name" length="20" />
+		</property>
+		<property name="userCellphone" type="java.lang.String">
+			<column name="User_cellphone" length="20" />
+		</property>
+		<property name="userTel" type="java.lang.String">
+			<column name="User_tel" length="20" />
+		</property>
+		<property name="userEmail" type="java.lang.String">
+			<column name="User_email" length="50" />
+		</property>
+		<property name="srName" type="java.lang.String">
+			<column name="SR_name" length="20" />
+		</property>
+		<property name="depName" type="java.lang.String">
+			<column name="Dep_name" length="50" />
+		</property>
+		<property name="userRname" type="java.lang.String">
+            <column name="User_rname" length="20" />
+        </property>
+        <property name="depId" type="java.lang.String">
+            <column name="Dep_Id" length="20" />
+        </property>
+        <property name="srReid" type="java.lang.String">
+            <column name="SR_reid" length="20" />
+        </property>
+        <property name="srId" type="java.lang.Integer">
+            <column name="SR_Id" />
+        </property>
+	</class>
+
+</hibernate-mapping>

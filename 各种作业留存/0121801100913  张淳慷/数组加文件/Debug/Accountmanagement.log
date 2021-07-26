@@ -1,0 +1,5 @@
+﻿  card_service.c
+  main.c
+  正在生成代码...
+E:\c语言实验\前三次\card_service.c(36): warning C4715: “queryCard”: 不是所有的控件路径都返回值
+  Accountmanagement.vcxproj -> E:\c语言实验\前三次\Debug\Accountmanagement.exe

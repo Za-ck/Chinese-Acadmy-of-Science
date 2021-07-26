@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.model.ReadFlowView" table="ReadFlowView" schema="dbo" catalog="REDB">
+    	<id name="retId" type="java.lang.Integer">
+            <column name="RET_Id" />
+        </id>
+        
+        <property name="rfAction" type="java.lang.String">
+            <column name="RF_action" length="50" />
+        </property>
+        <property name="frFlowName" type="java.lang.String">
+            <column name="FR_flowName" length="50" />
+        </property>
+        <property name="retFlowId" type="java.lang.String">
+            <column name="RET_flowId" length="50" />
+        </property>
+        <property name="retUserName" type="java.lang.String">
+            <column name="RET_userName" length="20" />
+        </property>
+        <property name="retDepName" type="java.lang.String">
+            <column name="RET_depName" length="50" />
+        </property>
+        <property name="retProcessTime" type="java.lang.String">
+            <column name="RET_processTime" length="50" />
+        </property>
+        <property name="retFormId" type="java.lang.String">
+            <column name="RET_formId" length="50" />
+        </property>
+        <property name="retReportName" type="java.lang.String">
+            <column name="RET_reportName" length="255" />
+        </property>
+        <property name="retUserId" type="java.lang.String">
+            <column name="RET_userId" length="20" />
+        </property>
+        <property name="retTaskFlag" type="java.lang.Integer">
+            <column name="RET_taskFlag" />
+        </property>
+    </class>
+</hibernate-mapping>

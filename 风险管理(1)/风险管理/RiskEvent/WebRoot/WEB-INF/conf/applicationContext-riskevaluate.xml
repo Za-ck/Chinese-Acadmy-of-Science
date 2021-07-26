@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- 开始“风险评估” -->
+
+	<!-- “风险因素识别”模块 -->
+	<bean name="RiskEvaluateInputAction" class="com.action.riskEvaluate.RiskEvaluateInputAction">
+		<property name="riskEvaluateInternationDao">
+			<ref bean="RiskEvaluateInternationDAO" />
+		</property>
+	</bean>
+	<bean name="RiskEvaluateResultAction" class="com.action.riskEvaluate.RiskEvaluateResultAction">
+		<property name="investmentProjectDao">
+			<ref bean="InvestmentProjectDAO" />
+		</property>
+		<property name="projectElementDao">
+			<ref bean="ProjectElementDAO" />
+		</property>
+		<property name="riskEvaluateInternationDao">
+			<ref bean="RiskEvaluateInternationDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="investmentProjectNameDAO">
+			<ref bean="InvestmentProjectNameDAO" />
+		</property>
+	</bean>
+	<bean name="RiskEvaluateContractInputAction" class="com.action.riskEvaluate.RiskEvaluateContractInputAction">
+		<property name="riskEvaluateInternationDao">
+			<ref bean="RiskEvaluateInternationDAO" />
+		</property>
+	</bean>
+	<bean name="RiskEvaluateContractResultAction" class="com.action.riskEvaluate.RiskEvaluateContractResultAction">
+		<property name="investmentProjectDao">
+			<ref bean="InvestmentProjectDAO" />
+		</property>
+		<property name="projectElementDao">
+			<ref bean="ProjectElementDAO" />
+		</property>
+		<property name="riskEvaluateInternationDao">
+			<ref bean="RiskEvaluateInternationDAO" />
+		</property>
+		<property name="departmentDao">
+			<ref bean="DepartmentDAO" />
+		</property>
+		<property name="investmentProjectNameDAO">
+			<ref bean="InvestmentProjectNameDAO" />
+		</property>
+	</bean>
+	<!-- 动态添加可能原因 -->
+	<bean name="AddElementAction" class="com.action.riskEvaluate.AddElementAction">
+	</bean>
+	<!-- 报告导出 -->
+	<bean name="evaluateReportAction" class="com.action.riskEvaluate.evaluateReportAction">
+	    <property name="investmentProjectDao">
+			<ref bean="InvestmentProjectDAO" />
+		</property>
+		<property name="projectElementDao">
+			<ref bean="ProjectElementDAO" />
+		</property>
+	</bean>
+	
+	
+   <!-- 结束“风险评估” -->
+</beans>

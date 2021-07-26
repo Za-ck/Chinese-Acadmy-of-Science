@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<!-- 开始"风险应对" -->
+
+	<!-- 风险应对措施列表 -->
+	<bean name="riskSuperviseAction" class="com.action.riskSupervise.riskSuperviseAction">
+		<property name="riskReplyViewDAO">
+			<ref bean="RiskReplyViewDAO" />
+		</property>
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+	</bean>
+	
+	<!-- 风险应对措施列表统计结果导出 -->
+	<bean name="superviseExcelAction" class="com.action.riskSupervise.riskSuperviseAction">
+	</bean>
+
+
+</beans>

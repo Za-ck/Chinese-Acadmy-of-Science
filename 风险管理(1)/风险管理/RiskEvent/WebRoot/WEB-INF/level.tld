@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+                        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+ <tlib-version>1.0</tlib-version>
+ <jsp-version>1.2</jsp-version>
+ <short-name>Level</short-name>
+ <uri>level</uri>
+ <tag>
+  <name>level</name>
+  <tag-class>com.action.levelAction</tag-class>
+  <body-content>JSP</body-content>
+  <attribute>
+   <name>level</name>
+   <required>yes</required>
+   <rtexprvalue>false</rtexprvalue>
+   <description>生成的等级填写"1","2","3"</description>
+  </attribute>
+  <attribute>
+   <name>imagelist</name>
+   <rtexprvalue>yes</rtexprvalue>
+   <description>图片所属组别编号</description>
+  </attribute>
+  <attribute>
+   <name>id</name>
+   <rtexprvalue>false</rtexprvalue>
+  </attribute>
+ </tag>
+</taglib>
+
+

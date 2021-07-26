@@ -1,0 +1,2267 @@
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.objectFactory" value="spring" />
+	
+	<!-- design by jq 2017-05-07 
+	<constant name="struts.action.extension" value="do.action"/>
+    <constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+    <constant name="struts.ui.theme" value="simple" />       
+    end! -->
+
+
+	<!--  <include file="Struts-default.xml"/>-->
+	<constant name="struts.multipart.paeser" value="cos"></constant>
+
+	<constant name="struts.multipart.maxSize" value="5000000000" />
+
+	<package name="default" extends="struts-default">
+		<!--正常登录-->
+		<action name="loginAction" class="loginAction" method="login">
+			<result name="success">/frame/frame.html</result>
+			<result name="fail">/login.jsp?operation=login*result=fail</result>
+		</action>
+		<!--单点登录，自动获取机器用户名登录-->
+		<action name="loginSingleSystemAction" class="loginSingleSystemAction"
+			method="loginSingleSystem">
+			<result name="success">/frame/frame.html</result>
+			<result name="fail">/login.jsp</result>
+		</action>
+		<!-- ”返回首页“ -->
+		<action name="BackMenu" class="BackMenu" method="backMenu">
+			<result name="success">/frame/frame.html</result>
+		</action>
+		<!-- ”退出登录“ -->
+		<action name="ExitSystem" class="ExitSystem" method="exitSystem">
+
+			<result name="success">/login.jsp</result>
+		</action>
+		
+		<action name="ajaxRiskAction" class="ajaxRiskAction" method="ajaxRisk"></action>
+
+		<action name="ajaxRiskNumAction" class="ajaxRiskAction" method="ajaxRiskNum"></action>
+		<action name="ajaxEventAction" class="ajaxEventAction" method="ajaxEvent"></action>
+		<!-- ”RiskImpact录入——财务影响“ -->
+		<action name="ajaxFinAction" class="ajaxFinAction" method="ajaxFin"></action>
+		<!-- ”RiskImpact录入——发生可能性影响“ -->
+		<action name="ajaxProAction" class="ajaxProAction" method="ajaxPro"></action>
+		<!-- ”RiskImpact录入——我院声誉影响“ -->
+		<action name="ajaxRepAction" class="ajaxRepAction" method="ajaxRep"></action>
+		<!-- ”RiskImpact录入——法律法规影响“ -->
+		<action name="ajaxLawAction" class="ajaxLawAction" method="ajaxLaw"></action>
+		<!-- ”RiskImpact录入——客户关系影响“ -->
+		<action name="ajaxCliAction" class="ajaxCliAction" method="ajaxCli"></action>
+		<!-- ”RiskImpact录入——员工满意度影响“ -->
+		<action name="ajaxEmpAction" class="ajaxEmpAction" method="ajaxEmp"></action>
+		<!-- ”RiskImpact录入——运营影响“ -->
+		<action name="ajaxOpeAction" class="ajaxOpeAction" method="ajaxOpe"></action>
+		<!-- ”RiskImpact录入——安全健康环境影响“ -->
+		<action name="ajaxSafAction" class="ajaxSafAction" method="ajaxSaf"></action>
+		
+		<!-- 风险事件库的待办 -->
+		<action name="processAction_*" class="ProcessAction" method="{1}">
+			<result name="unprocessed">/UnProcessed.jsp</result>
+			<result name="processed">/Processed.jsp</result>
+		</action>
+		<!-- 风险事件库的消息 -->
+		<action name="reportMessageAction_*" class="ReportMessageAction" method="{1}">
+			<result>/Message.jsp</result>
+		</action>
+		<!-- 以上是风险事件库的待办 -->
+		
+	</package>
+
+
+	<!-- 开始”数据字典“ -->
+	<package name="dataUnit" extends="struts-default">
+		<!-- 开始”部门管理“模块 -->
+		<!-- ”显示部门信息“ -->
+		<action name="DepartmentAction" class="DepartmentAction"
+			method="depManage">
+			<result name="success">/DataUnit/Department/Department.jsp</result>
+			<result name="fail">/DataUnit/Department/Department.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="DepAddUpdateAction" class="DepAddUpdateAction"
+			method="depAddUpdate">
+			<result name="success">/DataUnit/Department/Department.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/Department/DepartmentAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="DepMultiDelAction" class="DepMultiDelAction"
+			method="depMultiDel">
+			<result name="success">/DataUnit/Department/Department.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/Department/Department.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- 利用ajax删除部门 -->
+		<action name="ajaxDepMultiDelAction" class="ajaxDepMultiDelAction" method="ajaxDepMultiDel"/>
+		<!-- ”删除“ -->
+		<action name="DepDelAction" class="DepDelAction" method="depDelete">
+			<result name="success">/DataUnit/Department/Department.jsp</result>
+			<result name="fail">/DataUnit/Department/Department.jsp</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="DepReadAction" class="DepReadAction" method="depRead">
+			<result name="success">/DataUnit/Department/DepartmentRead.jsp</result>
+			<result name="fail">/DataUnit/Department/Department.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="DepUpdatePreAction" class="DepUpdatePreAction"
+			method="depUpdatePrepare">
+			<result name="success">/DataUnit/Department/DepartmentAddUpdate.jsp
+			</result>
+			<result name="fail">/DataUnit/Department/Department.jsp</result>
+		</action>
+		<!-- ”根据部门名称查询信息“ -->
+		<action name="DepSearchAction" class="DepSearchAction" method="depSearch">
+			<result name="success">/DataUnit/Department/Department.jsp</result>
+			<result name="fail">/DataUnit/Department/Department.jsp</result>
+		</action>
+		<!-- 设置考核部门之前显示已经设置的考核部门 -->
+		<action name="DepAssessPreAction" class="DepAssessPreAction" method="depAssessPreare">
+		
+			<result name="success">/DataUnit/DepartmentAssess/DepartmentAssess.jsp</result>
+		
+		</action>
+		<!-- 设置考核部门 -->
+		<action name="DepartmentAssessAction" class="DepartmentAssessAction" method="depAssess">
+			
+		</action>
+		<!-- 结束”部门管理“模块 -->
+
+
+		<!-- 开始”风险类型“模块 -->
+		<!-- ”显示风险类型信息“ -->
+		<action name="RiskTypeAction" class="RiskTypeAction" method="rtManage">
+			<result name="success">/DataUnit/RiskType/RiskType.jsp</result>
+			<result name="fail">/DataUnit/RiskType/RiskType.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="RTAddUpdateAction" class="RTAddUpdateAction"
+			method="rtAddUpdate">
+			<result name="success">/DataUnit/RiskType/RiskType.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/RiskType/RiskTypeAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="RTMultiDelAction" class="RTMultiDelAction"
+			method="rtMultiDel">
+			<result name="success">/DataUnit/RiskType/RiskType.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/RiskType/RiskType.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="RTDelAction" class="RTDelAction" method="rtDelete">
+			<result name="success">/DataUnit/RiskType/RiskType.jsp</result>
+			<result name="fail">/DataUnit/RiskType/RiskType.jsp</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="RTReadAction" class="RTReadAction" method="rtRead">
+			<result name="success">/DataUnit/RiskType/RiskTypeRead.jsp</result>
+			<result name="fail">/DataUnit/RiskType/RiskType.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="RTUpdatePreAction" class="RTUpdatePreAction"
+			method="rtUpdatePrepare">
+			<result name="success">/DataUnit/RiskType/RiskTypeAddUpdate.jsp</result>
+			<result name="fail">/DataUnit/RiskType/RiskType.jsp</result>
+		</action>
+		<!-- 结束”风险类型“模块 -->
+
+
+		<!-- 开始”风险“模块 -->
+		<!-- ”显示风险信息“ -->
+		<action name="RiskAction" class="RiskAction" method="risManage">
+			<result name="success">/DataUnit/Risk/Risk.jsp</result>
+			<result name="fail">/DataUnit/Risk/Risk.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="RisAddUpdateAction" class="RisAddUpdateAction"
+			method="risAddUpdate">
+
+			<result name="success">/DataUnit/Risk/Risk.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/Risk/RiskAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量新增“ -->
+		<action name="RisAddBatchAction" class="RisAddBatchAction"
+			method="risAddBatch">
+
+			<result name="success">/DataUnit/Risk/Risk.jsp?operation=addBatch*result=success
+			</result>
+			<result name="fail">/DataUnit/Risk/Risk.jsp?operation=addBatch*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="RisMultiDelAction" class="RisMultiDelAction"
+			method="risMultiDel">
+
+			<result name="success">/DataUnit/Risk/Risk.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/Risk/Risk.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”批量启用无效风险 “ -->
+		<action name="RisMultiEnableAction" class="RisMultiDelAction"
+			method="risMultiEnable">
+
+			<result name="success">/DataUnit/Risk/Risk.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/Risk/Risk.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="RisDelAction" class="RisDelAction" method="risDelete">
+			<result name="success">/DataUnit/Risk/Risk.jsp</result>
+			<result name="fail">/DataUnit/Risk/Risk.jsp</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="RisReadAction" class="RisReadAction" method="risRead">
+			<result name="success">/DataUnit/Risk/RiskRead.jsp</result>
+			<result name="fail">/DataUnit/Risk/Risk.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="RisUpdatePreAction" class="RisUpdatePreAction"
+			method="risUpdatePrepare">
+
+			<result name="success">/DataUnit/Risk/RiskAddUpdate.jsp</result>
+			<result name="fail">/DataUnit/Risk/Risk.jsp</result>
+		</action>
+		<!-- ”新增前显示要编辑的对象的信息“ -->
+		<action name="RisAddPreAction" class="RisAddPreAction" method="risAddPrepare">
+
+			<result name="success">/DataUnit/Risk/RiskAddUpdate.jsp</result>
+			<result name="fail">/DataUnit/Risk/Risk.jsp</result>
+		</action>
+		<!-- ”批量新增前显示要编辑的对象的信息“ -->
+		<action name="RisAddBatchPreAction" class="RisAddBatchPreAction"
+			method="risAddBatchPrepare">
+
+			<result name="success">/DataUnit/Risk/RiskAddBatch.jsp</result>
+			<result name="fail">/DataUnit/Risk/Risk.jsp</result>
+		</action>
+		<!-- ”根据风险类型查询信息“ -->
+		<action name="RisSearchAction" class="RisSearchAction" method="risSearch">
+			<result name="success">/DataUnit/Risk/Risk.jsp</result>
+			<result name="fail">/DataUnit/Risk/Risk.jsp</result>
+		</action>
+		<!-- ”查询无效风险“ -->
+		<action name="RisSearchDeletedAction" class="RisSearchAction"
+			method="risSearchDeleted">
+
+			<result name="success">/DataUnit/Risk/Risk.jsp</result>
+			<result name="fail">/DataUnit/Risk/Risk.jsp</result>
+		</action>
+		<!-- ”风险信息导出“ -->
+		<action name="RiskExcelAction" class="RiskExcelAction" method="exportRiskExcel">
+			<result name="fail">/DataUnit/Risk/emptyExcel.jsp</result>
+		</action>
+		<!-- ”添加风险流转策略“ -->
+		<action name="addriskFlow2" class="RisAddUpdateAction" method="addriskFlow2">
+			<result name="success" >/SystemManage/Process1.jsp</result><!-- type="redirectAction" -->
+			<result name="fail">/DataUnit/Risk/Risk.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- 结束”风险“模块 -->
+
+
+		<!-- 开始”发生可能性“模块 -->
+		<!-- ”显示发生可能性信息“ -->
+		<action name="ProbabilityAction" class="ProbabilityAction"
+			method="proManage">
+			<result name="success">/DataUnit/Probability/Probability.jsp</result>
+			<result name="fail">/DataUnit/Probability/Probability.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="ProAddUpdateAction" class="ProAddUpdateAction"
+			method="proAddUpdate">
+			<result name="success">/DataUnit/Probability/Probability.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/Probability/ProbabilityAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="ProMultiDelAction" class="ProMultiDelAction"
+			method="proMultiDel">
+			<result name="success">/DataUnit/Probability/Probability.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/Probability/Probability.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="ProDelAction" class="ProDelAction" method="proDelete">
+			<result name="success">/DataUnit/Probability/Probability.jsp</result>
+			<result name="fail">/DataUnit/Probability/Probability.jsp</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="ProReadAction" class="ProReadAction" method="proRead">
+			<result name="success">/DataUnit/Probability/ProbabilityRead.jsp
+			</result>
+			<result name="fail">/DataUnit/Probability/Probability.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="ProUpdatePreAction" class="ProUpdatePreAction"
+			method="proUpdatePrepare">
+			<result name="success">/DataUnit/Probability/ProbabilityAddUpdate.jsp
+			</result>
+			<result name="fail">/DataUnit/Probability/Probability.jsp</result>
+		</action>
+		<!-- 结束”发生可能性“模块 -->
+
+
+		<!-- 开始”运营“模块 -->
+		<!-- ”显示针对运营的风险影响程度评估信息“ -->
+		<action name="OperationAction" class="OperationAction" method="opeManage">
+			<result name="success">/DataUnit/Operation/Operation.jsp</result>
+			<result name="fail">/DataUnit/Operation/Operation.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="OpeAddUpdateAction" class="OpeAddUpdateAction"
+			method="opeAddUpdate">
+			<result name="success">/DataUnit/Operation/Operation.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/Operation/OperationAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="OpeMultiDelAction" class="OpeMultiDelAction"
+			method="opeMultiDel">
+			<result name="success">/DataUnit/Operation/Operation.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/Operation/Operation.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="OpeDelAction" class="OpeDelAction" method="opeDelete">
+			<result name="success">/DataUnit/Operation/Operation.jsp</result>
+			<result name="fail">/DataUnit/Operation/Operation.jsp</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="OpeReadAction" class="OpeReadAction" method="opeRead">
+			<result name="success">/DataUnit/Operation/OperationRead.jsp</result>
+			<result name="fail">/DataUnit/Operation/Operation.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="OpeUpdatePreAction" class="OpeUpdatePreAction"
+			method="opeUpdatePrepare">
+			<result name="success">/DataUnit/Operation/OperationAddUpdate.jsp
+			</result>
+			<result name="fail">/DataUnit/Operation/Operation.jsp</result>
+		</action>
+		<!-- 结束”运营“模块 -->
+
+		<!-- 开始”安全健康环境“模块 -->
+		<!-- ”显示针对安全健康环境的影响评定等级信息“ -->
+		<action name="SafeAction" class="SafeAction" method="safManage">
+			<result name="success">/DataUnit/Safe/Safe.jsp</result>
+			<result name="fail">/DataUnit/Safe/Safe.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="SafAddUpdateAction" class="SafAddUpdateAction"
+			method="safAddUpdate">
+			<result name="success">/DataUnit/Safe/Safe.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/Safe/SafeAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="SafMultiDelAction" class="SafMultiDelAction"
+			method="safMultiDel">
+			<result name="success">/DataUnit/Safe/Safe.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/Safe/Safe.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="SafDelAction" class="SafDelAction" method="safDelete">
+			<result name="success">/DataUnit/Safe/Safe.jsp</result>
+			<result name="fail">/DataUnit/Safe/Safe.jsp</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="SafReadAction" class="SafReadAction" method="safRead">
+			<result name="success">/DataUnit/Safe/SafeRead.jsp</result>
+			<result name="fail">/DataUnit/Safe/Safe.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="SafUpdatePreAction" class="SafUpdatePreAction"
+			method="safUpdatePrepare">
+			<result name="success">/DataUnit/Safe/SafeAddUpdate.jsp</result>
+			<result name="fail">/DataUnit/Safe/Safe.jsp</result>
+		</action>
+		<!-- 结束”安全健康环境“模块 -->
+
+		<!-- 开始”法律法规“模块 -->
+		<!-- ”显示显示针对法律法规的影响评定等级信息“ -->
+		<action name="LawAction" class="LawAction" method="lawManage">
+			<result name="success">/DataUnit/Law/Law.jsp</result>
+			<result name="fail">/DataUnit/Law/Law.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="LawAddUpdateAction" class="LawAddUpdateAction"
+			method="lawAddUpdate">
+			<result name="success">/DataUnit/Law/Law.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/Law/LawAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="LawMultiDelAction" class="LawMultiDelAction"
+			method="lawMultiDel">
+			<result name="success">/DataUnit/Law/Law.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/Law/Law.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="LawDelAction" class="LawDelAction" method="lawDelete">
+			<result name="success">/DataUnit/Law/Law.jsp</result>
+			<result name="fail">/DataUnit/Law/Law.jsp</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="LawReadAction" class="LawReadAction" method="lawRead">
+			<result name="success">/DataUnit/Law/LawRead.jsp</result>
+			<result name="fail">/DataUnit/Law/Law.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="LawUpdatePreAction" class="LawUpdatePreAction"
+			method="lawUpdatePrepare">
+			<result name="success">/DataUnit/Law/LawAddUpdate.jsp</result>
+			<result name="fail">/DataUnit/Law/Law.jsp</result>
+		</action>
+		<!-- 结束”法律法规“模块 -->
+
+		<!-- 开始”客户关系“模块 -->
+		<!-- ”显示针对客户关系的影响评定等级信息“ -->
+		<action name="ClientAction" class="ClientAction" method="cliManage">
+			<result name="success">/DataUnit/Client/Client.jsp</result>
+			<result name="fail">/DataUnit/Client/Client.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="CliAddUpdateAction" class="CliAddUpdateAction"
+			method="cliAddUpdate">
+			<result name="success">/DataUnit/Client/Client.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/Client/ClientAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="CliMultiDelAction" class="CliMultiDelAction"
+			method="cliMultiDel">
+			<result name="success">/DataUnit/Client/Client.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/Client/Client.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="CliDelAction" class="CliDelAction" method="cliDelete">
+			<result name="success">/DataUnit/Client/Client.jsp</result>
+			<result name="fail">/DataUnit/Client/Client.jsp</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="CliReadAction" class="CliReadAction" method="cliRead">
+			<result name="success">/DataUnit/Client/ClientRead.jsp</result>
+			<result name="fail">/DataUnit/Client/Client.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="CliUpdatePreAction" class="CliUpdatePreAction"
+			method="cliUpdatePrepare">
+			<result name="success">/DataUnit/Client/ClientAddUpdate.jsp</result>
+			<result name="fail">/DataUnit/Client/Client.jsp</result>
+		</action>
+		<!-- 结束”客户关系“模块 -->
+
+		<!-- 开始”员工满意度“模块 -->
+		<!-- ”显示针对员工满意度的影响评定等级信息“ -->
+		<action name="EmployeeAction" class="EmployeeAction" method="empManage">
+			<result name="success">/DataUnit/Employee/Employee.jsp</result>
+			<result name="fail">/DataUnit/Employee/Employee.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="EmpAddUpdateAction" class="EmpAddUpdateAction"
+			method="empAddUpdate">
+			<result name="success">/DataUnit/Employee/Employee.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/Employee/EmployeeAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="EmpMultiDelAction" class="EmpMultiDelAction"
+			method="empMultiDel">
+			<result name="success">/DataUnit/Employee/Employee.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/Employee/Employee.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="EmpDelAction" class="EmpDelAction" method="empDelete">
+			<result name="success">/DataUnit/Employee/Employee.jsp</result>
+			<result name="fail">/DataUnit/Employee/Employee.jsp</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="EmpReadAction" class="EmpReadAction" method="empRead">
+			<result name="success">/DataUnit/Employee/EmployeeRead.jsp</result>
+			<result name="fail">/DataUnit/Employee/Employee.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="EmpUpdatePreAction" class="EmpUpdatePreAction"
+			method="empUpdatePrepare">
+			<result name="success">/DataUnit/Employee/EmployeeAddUpdate.jsp</result>
+			<result name="fail">/DataUnit/Employee/Employee.jsp</result>
+		</action>
+		<!-- 结束”员工满意度“模块 -->
+
+		<!-- 开始”声誉“模块 -->
+		<!-- ”显示针对院声誉的影响评定等级信息“ -->
+		<action name="ReputationAction" class="ReputationAction"
+			method="repManage">
+			<result name="success">/DataUnit/Reputation/Reputation.jsp</result>
+			<result name="fail">/DataUnit/Reputation/Reputation.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="RepAddUpdateAction" class="RepAddUpdateAction"
+			method="repAddUpdate">
+			<result name="success">/DataUnit/Reputation/Reputation.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/Reputation/ReputationAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="RepMultiDelAction" class="RepMultiDelAction"
+			method="repMultiDel">
+			<result name="success">/DataUnit/Reputation/Reputation.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/Reputation/Reputation.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="RepDelAction" class="RepDelAction" method="repDelete">
+			<result name="success">/DataUnit/Reputation/Reputation.jsp</result>
+			<result name="fail">/DataUnit/Reputation/Reputation.jsp</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="RepReadAction" class="RepReadAction" method="repRead">
+			<result name="success">/DataUnit/Reputation/ReputationRead.jsp</result>
+			<result name="fail">/DataUnit/Reputation/Reputation.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="RepUpdatePreAction" class="RepUpdatePreAction"
+			method="repUpdatePrepare">
+			<result name="success">/DataUnit/Reputation/ReputationAddUpdate.jsp
+			</result>
+			<result name="fail">/DataUnit/Reputation/Reputation.jsp</result>
+		</action>
+		<!-- 结束”声誉“模块 -->
+
+		<!-- 开始”财务“模块 -->
+		<!-- ”显示针对财务的影响评定等级信息“ -->
+		<action name="FinanceAction" class="FinanceAction" method="finManage">
+			<result name="success">/DataUnit/Finance/Finance.jsp</result>
+			<result name="fail">/DataUnit/Finance/Finance.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="FinAddUpdateAction" class="FinAddUpdateAction"
+			method="finAddUpdate">
+			<result name="success">/DataUnit/Finance/Finance.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/Finance/FinanceAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="FinMultiDelAction" class="FinMultiDelAction"
+			method="finMultiDel">
+			<result name="success">/DataUnit/Finance/Finance.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/Finance/Finance.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="FinDelAction" class="FinDelAction" method="finDelete">
+			<result name="success">/DataUnit/Finance/Finance.jsp</result>
+			<result name="fail">/DataUnit/Finance/Finance.jsp</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="FinReadAction" class="FinReadAction" method="finRead">
+			<result name="success">/DataUnit/Finance/FinanceRead.jsp</result>
+			<result name="fail">/DataUnit/Finance/Finance.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="FinUpdatePreAction" class="FinUpdatePreAction"
+			method="finUpdatePrepare">
+			<result name="success">/DataUnit/Finance/FinanceAddUpdate.jsp</result>
+			<result name="fail">/DataUnit/Finance/Finance.jsp</result>
+		</action>
+		<!-- 结束”财务“模块 -->
+
+		<!-- 开始”管理规定文件“模块 -->
+		<!-- ”显示文件信息“ -->
+		<action name="FileAction" class="FileAction" method="filManage">
+			<result name="success">/DataUnit/File/File.jsp</result>
+			<result name="fail">/DataUnit/File/File.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="FilAddUpdateAction" class="FilAddUpdateAction"
+			method="filAddUpdate">
+			<result name="success">/DataUnit/File/File.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/File/FileAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="FilMultiDelAction" class="FilMultiDelAction"
+			method="filMultiDel">
+			<result name="success">/DataUnit/File/File.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/File/File.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”查看“ -->
+		<action name="FilReadAction" class="FilReadAction" method="filRead">
+			<result name="success">/DataUnit/File/FileRead.jsp</result>
+			<result name="fail">/DataUnit/File/File.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="FilUpdatePreAction" class="FilUpdatePreAction"
+			method="filUpdatePrepare">
+			<result name="success">/DataUnit/File/FileAddUpdate.jsp</result>
+			<result name="fail">/DataUnit/File/File.jsp</result>
+		</action>
+		<!-- ”新增前显示要编辑的对象的信息“ -->
+		<action name="FilAddPreAction" class="FilAddPreAction" method="filAddPrepare">
+			<result name="success">/DataUnit/File/FileAddUpdate.jsp</result>
+			<result name="fail">/DataUnit/File/File.jsp</result>
+		</action>
+		<action name="FileSelectAction" class="FileAction" method="selectFile">
+			<result name="success">/DataUnit/File/File.jsp</result>
+		</action>
+		<!-- 结束”管理规定文件“模块 -->
+
+		<!-- 开始维度管理模块 -->
+		<!-- ”显示维度性信息“ -->
+		<action name="DimManageAction" class="DimManageAction" method="DimManage">
+			<result name="success">/DataUnit/DimManage/DimManage.jsp</result>
+			<result name="fail">/DataUnit/DimManage/DimManage.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="DimManageAddUpdateAction" class="DimManageAddUpdateAction"
+			method="dimAddUpdate">
+			<result name="success">/DataUnit/DimManage/DimManage.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/DimManage/DimManageAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="DimManageMultiDelAction" class="DimManageMultiDelAction"
+			method="dimMultiDel">
+			<result name="success">/DataUnit/DimManage/DimManage.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/DimManage/DimManage.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="DimManageDelAction" class="DimManageDelAction"
+			method="dimDelete">
+			<result name="success">/DataUnit/DimManage/DimManage.jsp</result>
+			<result name="fail">/DataUnit/DimManage/DimManage.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="DimManageShowAction" class="DimManageShowAction"
+			method="dimUpdatePrepare">
+			<result name="success">/DataUnit/DimManage/DimManageAddUpdate.jsp
+			</result>
+			<result name="fail">/DataUnit/DimManage/DimManage.jsp</result>
+		</action>
+		<!-- 结束”维度管理“模块 -->
+		
+		<!-- 开始填报标准模块 -->
+		<!-- ”显示填报标准信息“ -->
+		<action name="InputStandardAction" class="InputStandardAction" method="InputStandardManage">
+			<result name="success">/DataUnit/InputStandard/InputStandard.jsp</result>
+			<result name="fail">/DataUnit/InputStandard/InputStandard.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="InputStandardAddUpdateAction" class="InputStandardAddUpdateAction"
+			method="standardAddUpdate">
+			<result name="success">/DataUnit/InputStandard/InputStandard.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/DataUnit/InputStandard/InputStandardAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="InputStandardMultiDelAction" class="InputStandardMultiDelAction"
+			method="standardMultiDel">
+			<result name="success">/DataUnit/InputStandard/InputStandard.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/DataUnit/InputStandard/InputStandard.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="InputStandardDelAction" class="InputStandardDelAction"
+			method="standardDelete">
+			<result name="success">/DataUnit/InputStandard/InputStandard.jsp</result>
+			<result name="fail">/DataUnit/InputStandard/InputStandard.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="InputStandardShowAction" class="InputStandardShowAction"
+			method="standardUpdatePrepare">
+			<result name="success">/DataUnit/InputStandard/InputStandardAddUpdate.jsp
+			</result>
+			<result name="fail">/DataUnit/InputStandard/InputStandard.jsp</result>
+		</action>
+		<!-- 结束”填报标准“模块 -->
+	</package>
+	<!-- 结束”数据字典“ -->
+
+	<!--
+		开始”项目评估因素识别**********************************************************************************************************************“
+	-->
+	<package name="riskEvaluate" extends="struts-default">
+		<action name="RiskEvaluateInputAction" class="RiskEvaluateInputAction"
+			method="getRiskFactor">
+
+			<result name="success">/RiskEvaluate/RiskEvaluateInput.jsp</result>
+		</action>
+		<action name="RiskEvaluateResultAction" class="RiskEvaluateResultAction"
+			method="getEvaluateResult">
+			<result name="success">/RiskEvaluate/RiskEvaluateResult.jsp</result>
+			<result name="fail">/RiskEvaluate/RiskEvaluateInput.jsp</result>
+		</action>
+		<action name="RiskEvaluateContractInputAction" class="RiskEvaluateContractInputAction"
+			method="getRiskFactor">
+
+			<result name="success">/RiskEvaluate/RiskEvaluateContractInput.jsp
+			</result>
+		</action>
+		<action name="RiskEvaluateContractResultAction" class="RiskEvaluateContractResultAction"
+			method="getEvaluateResult">
+			<result name="success">/RiskEvaluate/RiskEvaluateResult.jsp
+			</result>
+			<result name="fail">/RiskEvaluate/RiskEvaluateContractInput.jsp
+			</result>
+		</action>
+		<action name="RiskEvaluateGJQueryAction" class="RiskEvaluateResultAction"
+			method="RiskEvaluateGJQuery">
+			<result name="success">/RiskEvaluate/RiskEvaluateGJQuery.jsp
+			</result>
+		</action>
+		<action name="RiskEvaluateGJQueryByConditonAction" class="RiskEvaluateResultAction"
+			method="RiskEvaluateGJQueryByCondition">
+			<result name="success">/RiskEvaluate/RiskEvaluateGJQuery.jsp
+			</result>
+		</action>
+			<action name="RiskEvaluateContractQueryAction" class="RiskEvaluateContractResultAction"
+			method="RiskEvaluateGCQuery">
+			<result name="success">/RiskEvaluate/RiskEvaluateContractQuery.jsp
+			</result>
+		</action>
+		<action name="RiskEvaluateContractQueryByConditonAction" class="RiskEvaluateContractResultAction"
+			method="RiskEvaluateGCQueryByCondition">
+			<result name="success">/RiskEvaluate/RiskEvaluateContractQuery.jsp
+			</result>
+			
+		</action>
+
+
+		<action name="AddElement" class="AddElementAction" method="addElement">
+			<result name="success">/RiskEvaluate/addElement.jsp</result>
+		</action>
+
+		<action name="evaluateReportAction" class="evaluateReportAction"
+			method="exportWord">
+
+		</action>
+			<action name="tempEvaluateReportAction" class="evaluateReportAction"
+			method="tempExportWord">
+
+		</action>
+
+        <action name="RiskEvaluateDetailAction" class="RiskEvaluateResultAction"
+			method="getEvaluateResultByProjectId">
+			<result name="success">/RiskEvaluate/RiskEvaluateDetail.jsp</result>
+		</action>
+		  <action name="updateEvaluateReportAction" class="RiskEvaluateResultAction"
+			method="updateEvaluateResult">
+			<result name="fail">/RiskEvaluate/RiskEvaluateResult.jsp</result>
+			<result name="success">/RiskEvaluate/RiskEvaluateResult.jsp</result>
+		</action>
+		  <action name="selectProjectName" class="RiskEvaluateResultAction"
+			method="selectProjectName">
+			<result name="fail">/RiskEvaluate/SelectProjectName.jsp</result>
+			<result name="success">/RiskEvaluate/SelectProjectName.jsp</result>
+		</action>
+		  <action name="selectContractProjectName" class="RiskEvaluateContractResultAction"
+			method="selectProjectName">
+			<result name="fail">/RiskEvaluate/SelectContractProjectName.jsp</result>
+			<result name="success">/RiskEvaluate/SelectContractProjectName.jsp</result>
+		</action>
+		  <action name="ajaxAddProjectAction" class="RiskEvaluateResultAction"
+			method="addProjectName">
+		</action>
+		<action name="ajaxAddContractProjectAction" class="RiskEvaluateContractResultAction"
+			method="addProjectName">
+		</action>
+		  <action name="ajaxSaveProjectAction" class="RiskEvaluateResultAction"
+			method="saveProject">
+		</action>
+		  <action name="ajaxUpdateProjectAction" class="RiskEvaluateResultAction"
+			method="updateProject">
+		</action>
+	</package>
+	<!-- 结束”项目评估因素识别“ -->
+
+
+
+
+
+	<!-- 开始”风险事件录入“ -->
+	<package name="riskInput" extends="struts-default">
+		<action name="RiskAddUpdateAction" class="RiskAddUpdateAction"
+			method="riskInput">
+
+			<result name="success">/RiskInput/RiskImpact.jsp</result>
+			<result name="fail">/RiskInput/RiskImpact.jsp</result>
+		</action>
+		<!-- 新增时显示录入部门 -->
+		<action name="GetDepMessageAction" class="RiskAddUpdateAction"
+			method="getDepMessage">
+			<result name="success">/RiskInput/RiskEventInput.jsp</result>
+		</action>
+
+		<action name="ImpactAddUpdateAction" class="ImpactAddUpdateAction"
+			method="impactInput">
+
+			<result name="success">/RiskInput/RiskManage.jsp</result>
+		</action>
+
+		<action name="getRiskEventAction" class="getRiskEventAction"
+			method="getRiskEvent">
+
+			<result name="success">/RiskInput/RiskEventInput.jsp</result>
+			<result name="fail">/RiskInput/RiskEventInput.jsp</result>
+			<result name="notallowed" type="redirect">riskInput/RiskEventInputQueryAction?operation=addupdate*result=notallowed
+			</result>
+		</action>
+
+		<action name="getRiskImpactAction" class="ImpactAddUpdateAction"
+			method="getRiskImpact">
+
+			<result name="success">/RiskInput/RiskImpact.jsp</result>
+		</action>
+		<action name="ManageUpdateAction" class="ManageAddUpdateAction"
+			method="manageInput">
+
+			<result name="success">/RiskInput/SubmitConfirm.jsp</result>
+		</action>
+		<action name="getRiskManageAction" class="getRiskManageAction"
+			method="getRiskManage">
+			<result name="success">/RiskInput/RiskManage.jsp</result>
+		</action>
+		<action name="SubmitConfirmAction" class="ManageAddUpdateAction"
+			method="eventSubmit">
+
+			<result name="success" type="redirect">riskInput/RiskEventInputQueryAction?operation=submitto*result=success
+			</result>
+			<result name="fail" type="redirect">riskInput/RiskEventInputQueryAction?operation=submitto*result=fail
+			</result>
+
+		</action>
+		<!-- impactInput__涉及流程 -->
+		<action name="ImpFileAction1" class="ImpFileAction1" method="selectFile3">
+			<result name="success">/RiskInput/SelectFile3.jsp</result>
+		</action>
+		<action name="ImpFileAction2" class="ImpFileAction2" method="selectFile2">
+			<result name="success">/RiskInput/SelectFile2.jsp</result>
+		</action>
+		<!-- 添加流程文件 -->
+		<action name="addFlowFile" class="addFlowFileAction" method="selectFlowFile">
+			<result name="success">/RiskInput/SelectFlowFile1.jsp</result>
+		</action>
+		<action name="deleteFlowFile" class="deleteFlowFileAction"
+			method="deleteFlowFile">
+			<result name="success">/RiskInput/DeleteFlowFile.jsp</result>
+		</action>
+
+		<!-- 开始”录入情况查询“模块 -->
+		<!-- ”显示录入的风险事件信息“ -->
+		<action name="RiskEventInputQueryAction" class="RiskEventInputQueryAction"
+			method="reiqManage">
+
+			<result name="success">/RiskInput/RiskEventInputQuery.jsp</result>
+			<result name="fail">/RiskInput/RiskEventInputQuery.jsp</result>
+		</action>
+		<!-- ”显示录入的风险事件信息“ -->
+		<!-- 这条链接是从外部系统链接进来的 -->
+		<action name="Out_RiskEventInputQueryAction" class="Out_RiskEventInputQueryAction"
+			method="Out_reiqManage">
+
+			<result name="Out_Success">/frame/Out_frame.html</result>
+			<result name="Out_Fail">/loginQuick.jsp</result>
+		</action>
+
+		<!-- ”批量删除“ -->
+		<action name="REIQMultiDelAction" class="REIQMultiDelAction"
+			method="reiqMultiDel">
+			<result name="success">/RiskInput/RiskEventInputQuery.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/RiskInput/RiskEventInputQuery.jsp?operation=delete*result=fail
+			</result>
+			<result name="notallowed" type="redirect">riskInput/RiskEventInputQueryAction?operation=delete*result=notallowed
+			</result>
+			<result name="notallowedother" type="redirect">riskInput/RiskEventInputQueryAction?operation=delete*result=notallowedother
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="REIQDelAction" class="REIQDelAction" method="reiqDelete">
+			<result name="success">/RiskInput/RiskEventInputQuery.jsp</result>
+			<result name="fail">/RiskInput/RiskEventInputQuery.jsp</result>
+		</action>
+		<!-- 利用ajax删除 -->
+		<action name="ajaxREIQDelAction" class="AjaxREIQDelAction" method="ajaxReiqDelete">
+			
+		</action>
+		<!-- ”查看“ -->
+		<action name="REIQReadAction" class="REIQReadAction" method="reiqRead">
+
+			<result name="success">/RiskInput/RiskEventInputRead.jsp</result>
+			<result name="reply">/RiskReply/RiskEventInputRead.jsp</result>
+			<result name="inputQuery">/RiskInput/RiskEventInputQuery.jsp</result>
+			<result name="query">/RiskQuery/RiskEventQuery.jsp</result>
+		</action>
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="REIQUpdatePreAction" class="REIQUpdatePreAction"
+			method="reiqUpdatePrepare">
+			<result name="success">/RiskInput/RiskEventInput.jsp</result>
+			<result name="fail">/RiskInput/RiskEventInputQuery.jsp</result>
+		</action>
+		<!-- ”本月录入事件“ -->
+		<action name="REIQShowCurrentMonthInfo" class="REIQShowCurrentMonthInfo"
+			method="reiqShowCurrentMonthInfo">
+			<result name="success">/RiskInput/RiskEventInputQuery.jsp</result>
+			<result name="fail">/RiskInput/RiskEventInputQuery.jsp</result>
+		</action>
+		<!-- ”高级查询“ -->
+		<action name="REIQQueryAction" class="REIQQueryAction" method="reiqQuery">
+			<result name="success">/RiskInput/RiskEventInputQuery.jsp</result>
+			<result name="fail">/RiskInput/RiskEventInputQuery.jsp</result>
+		</action>
+		<action name="eventQueryExportAction" class="eventQueryExportAction"
+			method="exportExcel">
+			<result name="fail">/DataUnit/Risk/emptyExcel.jsp</result>
+		</action>
+		
+		<action name="eventQueryExportAction1" class="eventQueryExportAction1"
+			method="exportExcel1">
+			<result name="fail">/DataUnit/Risk/emptyExcel.jsp</result>
+		</action>
+		
+		<!-- 结束”录入情况查询“模块 -->
+		<!-- 风险处理模块开始-->
+		<action name="RiskHandleQueryAction" class="RiskHandleAction"
+			method="rhQuery">
+			<result name="success">/RiskInput/RiskHandleQuery.jsp</result>
+		</action>
+		<action name="RiskHandleAction" class="RiskHandleAction"
+			method="riskhandle">
+			<result name="success">/RiskInput/RiskHandleQuery.jsp?operation=handled*result=success
+			</result>
+			<result name="fail">/RiskInput/RiskHandleQuery.jsp?operation=handled*result=fail
+			</result>
+		</action>
+		<action name="RisknotHandleAction" class="RiskHandleAction"
+			method="risknothandle">
+			<result name="success">/RiskInput/RiskHandleQuery.jsp?operation=nothandle*result=success
+			</result>
+			<result name="fail">/RiskInput/RiskHandleQuery.jsp?operation=nothandle*result=fail
+			</result>
+		</action>
+		<!-- 风险处理模块高级查询 -->
+		<action name="REHQueryAction" class="RiskHandleAction" method="rhAdvancedQuery">
+			<result name="success">/RiskInput/RiskHandleQuery.jsp</result>
+		</action>
+		<!-- 风险处理模块结束-->
+
+		<!-- 事件管理模块-->
+		<action name="AllEventQueryAction" class="RiskEventAllQueryAction"
+			method="getAllEvent">
+			<result name="success">/SystemManage/EventManage.jsp</result>
+			<result name="fail">/SystemManage/EventManage.jsp</result>
+		</action>
+		<action name="AllStateEventDeleteAction" class="RiskEventAllQueryAction"
+			method="deleteAllEvent">
+			<result name="success">/SystemManage/EventManage.jsp</result>
+			<result name="fail">/SystemManage/EventManage.jsp</result>
+		</action>
+		<action name="AllStateEventDeleteTaskAction" class="RiskEventAllQueryAction" method="deleteAllEventTask">
+			<result name="success">/SystemManage/EventManage.jsp?operation=deleteTask*result=success</result>
+    		<result name="fail">/SystemManage/EventManage.jsp?operation=deleteTask*result=fail</result>
+		</action>
+		<action name="AllEventIOQueryAction" class="RiskEventAllQueryAction"
+			method="getEventbycondition">
+
+			<result name="success">/SystemManage/EventManage.jsp</result>
+			<result name="fail">/SystemManage/EventManage.jsp</result>
+		</action>
+	</package>
+	<!-- 结束”风险事件录入“ -->
+
+	<!-- 开始”风险事件查询“ -->
+	<package name="riskQuery" extends="struts-default">
+		<!-- ”显示全部风险事件信息“ -->
+		<action name="RiskEventQueryAction" class="RiskEventQueryAction"
+			method="reqManage">
+			
+			<result name="success">/RiskQuery/RiskEventQuery.jsp</result>
+			<result name="fail">/RiskQuery/RiskEventQuery.jsp</result>
+		</action>
+		<!-- ”本年度风险事件“ -->
+		<action name="REQCurrentYearAction" class="REQCurrentYearAction"
+			method="reqCurrentYear">
+			<result name="success">/RiskQuery/RiskEventQuery.jsp</result>
+			<result name="fail">/RiskQuery/RiskEventQuery.jsp</result>
+		</action>
+		<!-- ”条件查询“ -->
+		<action name="REQQueryAction" class="REQQueryAction" method="reqQuery">
+			<result name="success">/RiskQuery/RiskEventQuery.jsp</result>
+			<result name="fail">/RiskQuery/RiskEventQuery.jsp</result>
+		</action>
+		<!-- ”涉及的流程文件“ -->
+		<action name="REQSelectedFileAction" class="REQSelectedFileAction"
+			method="reqSelectedFile">
+			<result name="success">/RiskQuery/SelectedFile.jsp</result>
+			<result name="fail">/RiskQuery/SelectedFile.jsp</result>
+		</action>
+		<!-- 企发部之外部门只能看到自己部门录入的风险和归口部门是其部门的风险 -->
+		<action name="RiskEventdepQueryAction" class="RiskEventdepQueryAction"
+			method="requerydep">
+			
+			<result name="success">/RiskQuery/RiskEventdepQuery.jsp</result>
+			<result name="fail">/RiskQuery/RiskEventdepQuery.jsp</result>
+		</action>
+		<action name="REadQueryAction" class="RiskEventdepQueryAction"
+			method="redepadQuery">
+			<result name="success">/RiskQuery/RiskEventdepQuery.jsp</result>
+			<result name="fail">/RiskQuery/RiskEventdepQuery.jsp</result>
+		</action>
+		<action name="eventdepQueryExportAction" class="eventdepQueryExportAction"
+			method="exportExcel">
+			<result name="fail">/DataUnit/Risk/emptyExcel.jsp</result>
+		</action>
+	</package>
+	<!-- 结束”风险事件查询“ -->
+
+
+	<!-- 开始风险事件流转 -->
+	<package name="riskFlow" extends="struts-default">
+		<!-- 风险流程策略设置 -->
+		<action name="getRiskFlows" class="RiskFlowSettingAction"
+			method="getRiskFlow">
+            
+			<result name="success">/SystemManage/FlowsInfo.jsp</result>
+			<result name="fail">/SystemManage/FlowsInfo.jsp</result>
+		</action>
+		<action name="celuQueryAction" class="RiskFlowSettingAction"
+			method="celuchaxun">
+			<result name="success">/SystemManage/FlowsInfo.jsp</result>
+			<result name="fail">/SystemManage/FlowsInfo.jsp</result>
+		</action>
+		<action name="yearQueryAction" class="yearQueryAction" method="anyearquery">
+
+			<result name="success">/SystemManage/FlowsInfo.jsp</result>
+			<result name="fail">/SystemManage/FlowsInfo.jsp</result>
+		</action>
+		<!-- /SystemManage/FlowsInfo.jsp dataUnit/RiskAction     type="redirectAction"-->
+		<action name="updateOrAddRisk" class="RiskFlowSettingAction"
+			method="updateOrAddRisk">
+
+			<!--2019<result name="success" >/SystemManage/FlowsInfo.jsp</result>-->
+			<!--2019<result name="fail">/SystemManage/FlowsInfo.jsp</result>-->
+			<result name="success">/SystemManage/Process.jsp</result>
+			<result name="fail">/SystemManage/Process.jsp</result>
+			
+		</action>
+	
+		<action name="updateOrAddRisk1" class="RiskFlowSettingAction"
+			method="updateOrAddRisk">
+
+			<result name="success" type="redirectAction">dataUnit/RiskAction</result>
+			<result name="fail">dataUnit/RiskAction</result>
+			
+			
+		</action>
+		<action name="addRisk" class="RiskFlowSettingAction" method="addRisk">
+			<result name="success">/SystemManage/Process.jsp</result>
+			<result name="fail">/SystemManage/Process.jsp</result>
+		</action>
+		<action name="updateRisk" class="RiskFlowSettingAction" method="updateRisk">
+
+			<result name="success">/SystemManage/Process.jsp</result>
+			<result name="fail">/SystemManage/Process.jsp</result>
+		</action>
+		<action name="deleteRiskFlow" class="RiskFlowSettingAction"
+			method="deleteRiskFlow">
+
+			<result name="success">/SystemManage/FlowsInfo.jsp</result>
+			<result name="fail">/SystemManage/FlowsInfo.jsp</result>
+		</action>
+		<!-- 显示需要审批的风险事件 -->
+		<action name="RiskStatusAction" class="RiskStatusAction"
+			method="getCheckRisk">
+
+			<result name="success">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="fail">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="nosee">/frame/fxlz.html</result>
+		</action>
+		<action name="RiskStatusAction1" class="RiskStatusAction"
+			method="getCheckRisk1">
+
+			<result name="success">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="fail">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="nosee">/frame/fxlz.html</result>
+		</action>
+		 <action name="CheckedAdvancedQuery1" class="RiskStatusAction"
+			method="getadvancedCheckedRisk1">
+			<result name="success">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="fail">/RiskFlow/RiskStatusQuery.jsp</result>
+		</action>
+		
+		<!-- 显示需要审批的风险事件 -->
+		<!-- 这条链接是从外部系统链接进来的 -->
+		<action name="Out_RiskStatusAction" class="Out_RiskStatusAction"
+			method="Out_getCheckRisk">
+
+			<result name="Out_Success">/frame/Out_frame.html</result>
+			<result name="Out_Fail">/loginQuick.jsp</result>
+		</action>
+		<action name="RiskCheckedAction" class="RiskStatusAction"
+			method="getCheckedRisk">
+			<result name="success">/RiskFlow/CheckedFlowQuery.jsp</result>
+			<result name="fail">/RiskFlow/CheckedFlowQuery.jsp</result>
+		</action>
+		<action name="CheckedAdvancedQuery" class="RiskStatusAction"
+			method="getadvancedCheckedRisk">
+			<result name="success">/RiskFlow/CheckedFlowQuery.jsp</result>
+			<result name="fail">/RiskFlow/CheckedFlowQuery.jsp</result>
+		</action>
+		<!-- 显示风险事件信息 -->
+		<action name="DepVerifyAction" class="DepVerifyAction" method="getriskfordep">
+
+			<result name="success">/RiskFlow/DepartmentCheck.jsp</result>
+		</action>
+		<!-- 部门审核页面 -->
+		<action name="RiskViewSaveAction" class="RiskStatusAction"
+			method="riskviewsave">
+			<result name="success">/RiskFlow/DepartmentCheck.jsp</result>
+		</action>
+		<action name="DepPassAction" class="DepPassAction" method="departmentpass">
+			<result name="success">/RiskFlow/FlowConfirm.jsp</result>
+			<!-- <result name="released">/RiskFlow/PassConfirm.jsp</result> -->
+			<result name="released" type="redirectAction">
+				<param name="actionName">default/processAction_unProcessed</param>
+			</result>
+			<result name="alert">/RiskFlow/RiskStatusQuery.jsp?operator=alert*result=null
+			</result>
+			<result name="fail">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="strChanged">/RiskFlow/RiskStatusQuery.jsp?operator=flowto*result=failget
+			</result>
+		</action>
+		<action name="DepNotPassAction" class="DepPassAction" method="departmentnotPass">
+		
+			<result name="success">/RiskFlow/FlowConfirm.jsp</result>
+			<result name="strChanged">/RiskFlow/RiskStatusQuery.jsp?operator=flowto*result=failget
+			</result>
+		</action>
+
+		<action name="RiskFlowtoAction" class="DepPassAction" method="flowtoNext">
+			<!-- <result name="success">/RiskFlow/RiskStatusQuery.jsp?operator=flowto*result=success
+			</result> -->
+			<result name="success" type="redirectAction">
+				<param name="actionName">default/processAction_unProcessed</param>
+			</result>
+		</action>
+		<action name="RiskEventPassAction" class="DepPassAction"
+			method="riskeventpass">
+			
+			<!-- <result name="success">/RiskFlow/RiskStatusQuery.jsp</result> -->
+			 <result name="success" type="redirectAction">
+				<param name="actionName">default/processAction_unProcessed</param>
+			</result>
+		</action>
+
+		<action name="RiskVerifyAction" class="RiskVerifyAction"
+			method="riskVerify">
+			<result name="success">/RiskFlow/RiskVerifyQuery.jsp</result>
+			<result name="fail">/RiskFlow/RiskVerifyQuery.jsp</result>
+		</action>
+		<action name="depCheckAction" class="RiskStatusAction" method="Queryfordep">
+			<result name="success">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="fail">/RiskFlow/RiskStatusQuery.jsp</result>
+		</action>
+		<action name="funVerifyAction" class="RiskStatusAction" method="Queryforfun">
+			<result name="success">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="fail">/RiskFlow/RiskStatusQuery.jsp</result>
+		</action>
+		<action name="funCheckAction" class="RiskStatusAction" method="Queryforfunleader">
+			<result name="success">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="fail">/RiskFlow/RiskStatusQuery.jsp</result>
+		</action>
+		<action name="planVerifyAction" class="RiskStatusAction"
+			method="Queryforplan">
+			<result name="success">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="fail">/RiskFlow/RiskStatusQuery.jsp</result>
+		</action>
+		<action name="planCheckAction" class="RiskStatusAction" method="Queryforplanleader">
+			<result name="success">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="fail">/RiskFlow/RiskStatusQuery.jsp</result>
+		</action>
+		<action name="preCheckAction" class="RiskStatusAction" method="Queryforpresident">
+			<result name="success">/RiskFlow/RiskStatusQuery.jsp</result>
+			<result name="fail">/RiskFlow/RiskStatusQuery.jsp</result>
+		</action>
+		<action name="RiskFlowChart" class="RiskStatusAction" method="getFlowRule">
+
+			<result name="success">/RiskFlow/FlowStatus.jsp</result>
+			<result name="fail">/RiskFlow/FlowStatus.jsp</result>
+		</action>
+		<!-- 回撤风险事件 -->
+		<!--		333333333333-->
+		<action name="RERecallAction" class="RERecallAction" method="rERecall">
+			<result name="Qsuccess" type="redirectAction">
+				<param name="actionName">riskQuery/RiskEventQueryAction</param>
+    			<param name="current_pagenum">1</param>  
+    			<param name="operation">recall*result=success</param> 
+    		</result>
+    		<result name="DQsuccess" type="redirectAction">
+				<param name="actionName">riskQuery/RiskEventdepQueryAction</param>
+    			<param name="current_pagenum">1</param>  
+    			<param name="operation">recall*result=success</param> 
+    		</result>
+    		<result name="Qfail" type="redirectAction">
+				<param name="actionName">riskQuery/RiskEventQueryAction</param>
+    			<param name="current_pagenum">1</param>  
+    			<param name="operation">recall*result=fail</param> 
+    		</result>
+    		<result name="DQfail" type="redirectAction">
+				<param name="actionName">riskQuery/RiskEventdepQueryAction</param>
+    			<param name="current_pagenum">1</param>  
+    			<param name="operation">recall*result=fail</param> 
+    		</result>
+		</action>
+		<action name="RERevocation" class="RERevocation" method="rERevocation">
+		</action>
+	</package>
+	<!-- 结束风险事件流转 -->
+
+	<!-- 开始风险事件统计 -->
+	<package name="riskStatistic" extends="struts-default">
+
+		<!--按部门统计页面进入  -->
+		<action name="depQueryNew" class="allExcelAction" method="allQueryNew">
+			<result name="success">/RiskStatistics/DepStatistics.jsp</result>
+		</action>
+		<!--按部门统计结果查询  -->
+		<action name="depQueryAction" class="depQueryAction" method="depQuery">
+
+			<result name="success">/RiskStatistics/DepStatistics.jsp</result>
+			<result name="fail">/RiskStatistics/DepStatistics.jsp</result>
+		</action>
+		<!--按部门统计结果导出  -->
+		<action name="depExcelAction" class="depExcelAction" method="exportExcel">
+			<result name="fail">/RiskStatistics/emptyExcel.jsp</result>
+		</action>
+
+
+		<!--按事件编号统计页面进入  -->
+		<action name="eventQueryNew" class="allExcelAction" method="allQueryNew">
+
+			<result name="success">/RiskStatistics/EventStatistics.jsp</result>
+		</action>
+		<!--按事件编号统计页面进入_各部门 录入 -->
+		<action name="eventQueryNew_Part" class="allExcelAction"
+			method="allQueryNew">
+			<result name="success">/RiskStatistics/EventStatistics_part.jsp</result>
+		</action>
+		<!--按事件编号统计结果查询_各部门录入  -->
+		<action name="eventQuery_PartAction" class="eventQueryAction"
+			method="eventQuery_Part">
+			<result name="success">/RiskStatistics/EventStatistics_part.jsp</result>
+			<result name="fail">/RiskStatistics/EventStatistics_part.jsp</result>
+		</action>
+
+		<!--按事件编号统计结果查询  -->
+		<action name="eventQueryAction" class="eventQueryAction"
+			method="eventQuery">
+
+			<result name="success">/RiskStatistics/EventStatistics.jsp</result>
+			<result name="fail">/RiskStatistics/EventStatistics.jsp</result>
+		</action>
+		<!--按事件编号统计结果导出  -->
+		<action name="eventExcelAction" class="eventExcelAction"
+			method="exportExcel">
+			<result name="fail">/RiskStatistics/emptyExcel.jsp</result>
+		</action>
+		<!--按事件编号统计结果后根据部门个数显示具体部门  -->
+		<action name="depnumSQAction" class="depnumSQAction" method="depnumSQAction">
+
+			<result name="success">/RiskStatistics/EventStatisticsDep.jsp</result>
+			<result name="fail">/RiskStatistics/EventStatisticsDep.jsp</result>
+		</action>
+
+
+		<!--按环节统计页面进入  -->
+		<action name="linkQueryNew" class="allExcelAction" method="allQueryNew">
+			<result name="success">/RiskStatistics/LinkStatistics.jsp</result>
+		</action>
+		<!--按环节统计页面进入_各部门录入  -->
+		<action name="linkQueryNew_Part" class="allExcelAction" method="allQueryNew">
+			<result name="success">/RiskStatistics/LinkStatistics_part.jsp</result>
+		</action>
+		<!--按环节统计结果查询_各部门录入  -->
+		<action name="linkQuery_PartAction" class="linkQueryAction"
+			method="linkQuery_Part">
+			<result name="success">/RiskStatistics/LinkStatistics_part.jsp</result>
+			<result name="fail">/RiskStatistics/LinkStatistics_part.jsp</result>
+		</action>
+		<!--按环节统计结果查询  -->
+		<action name="linkQueryAction" class="linkQueryAction" method="linkQuery">
+			<result name="success">/RiskStatistics/LinkStatistics.jsp</result>
+			<result name="fail">/RiskStatistics/LinkStatistics.jsp</result>
+		</action>
+		<!--按环节统计结果导出  -->
+		<action name="linkExcelAction" class="linkExcelAction" method="exportExcel">
+			<result name="fail">/RiskStatistics/emptyExcel.jsp</result>
+		</action>
+		<!--按环节统计结果后根据部门个数显示具体部门  -->
+		<action name="depnumLQAction" class="depnumLQAction" method="depnumLQAction">
+			<result name="success">/RiskStatistics/EventStatisticsDep.jsp</result>
+			<result name="fail">/RiskStatistics/EventStatisticsDep.jsp</result>
+		</action>
+
+		<!--风险事件汇总统计页面进入  -->
+		<action name="allQueryNew" class="allExcelAction" method="allQueryNew">
+			<result name="success">/RiskStatistics/AllStatistics.jsp</result>
+		</action>
+		<!--风险事件汇总统计页面进入_各部门录入  -->
+		<action name="allQueryNew_Part" class="allExcelAction" method="allQueryNew">
+			<result name="success">/RiskStatistics/AllStatistics_part.jsp</result>
+		</action>
+		<!--风险事件汇总统计查询_各部门录入  -->
+		<action name="allQuery_PartAction" class="allQueryAction"
+			method="allQuery_Part">
+			<result name="success">/RiskStatistics/AllStatistics_part.jsp</result>
+			<result name="fail">/RiskStatistics/AllStatistics_part.jsp</result>
+		</action>
+		<!--风险事件汇总统计查询  -->
+		<action name="allQueryAction" class="allQueryAction" method="allQuery">
+			<result name="success">/RiskStatistics/AllStatistics.jsp</result>
+			<result name="fail">/RiskStatistics/AllStatistics.jsp</result>
+		</action>
+		<action name="allDetailAction" class="allQueryAction" method="allQuery">
+			<result name="success">/RiskStatistics/AllStatisticsAll.jsp</result>
+			<result name="fail">/RiskStatistics/AllStatisticsAll.jsp</result>
+		</action>
+		<action name="allDetail_PartAction" class="allQueryAction"
+			method="allQuery_Part">
+			<result name="success">/RiskStatistics/AllStatisticsAll.jsp</result>
+			<result name="fail">/RiskStatistics/AllStatisticsAll.jsp</result>
+		</action>
+
+		<!--风险事件汇总统计结果导出  -->
+		<action name="allExcelAction" class="allExcelAction" method="exportExcel">
+			<result name="fail">/RiskStatistics/emptyExcel.jsp</result>
+		</action>
+
+		<!--汇总统计后点击涉及流程显示具体的文件  -->
+		<action name="flowAQAction" class="flowAQAction" method="flowAQ">
+			<result name="success">/RiskStatistics/AllStatisticsFile.jsp</result>
+			<result name="fail">/RiskStatistics/AllStatisticsFile.jsp</result>
+		</action>
+
+		<!--关键风险列表统计页面进入  -->
+		<action name="keyQueryNew" class="keyExcelAction" method="keyQueryNew">
+			<result name="success">/RiskStatistics/KeyStatistics.jsp</result>
+		</action>
+		<!--关键风险列表统计页面进入_各部门录入  -->
+		<action name="keyQueryNew_Part" class="keyExcelAction" method="keyQueryNew">
+			<result name="success">/RiskStatistics/KeyStatistics_part.jsp</result>
+		</action>
+		<!--关键风险列表统计查询_各部门录入  -->
+		<action name="keyQuery_PartAction" class="keyQueryAction"
+			method="keyQuery_Part">
+			<result name="success">/RiskStatistics/KeyStatistics_part.jsp</result>
+			<result name="fail">/RiskStatistics/KeyStatistics_part.jsp</result>
+		</action>
+		<!--关键风险列表统计查询  -->
+		<action name="keyQueryAction" class="keyQueryAction" method="keyQuery">
+			<result name="success">/RiskStatistics/KeyStatistics.jsp</result>
+			<result name="fail">/RiskStatistics/KeyStatistics.jsp</result>
+		</action>
+
+		<!--关键风险列表统计结果导出  -->
+		<action name="keyExcelAction" class="keyExcelAction" method="exportExcel">
+			<result name="fail">/RiskStatistics/emptyExcel.jsp</result>
+		</action>
+
+		<!--全面风险报告页面进入  -->
+		<action name="reportQueryNew" class="keyExcelAction" method="keyQueryNew">
+			<result name="success">/RiskStatistics/RiskReportNew.jsp</result>
+		</action>
+		<!--全面风险报告查询显示在页面上  -->
+		<action name="reportQueryAction" class="riskReportAction"
+			method="reportQuery">
+			<result name="success">/RiskStatistics/RiskReport.jsp</result>
+		</action>
+		<!--全面风险报告导出  -->
+		<action name="riskReportAction" class="riskReportAction"
+			method="exportWord">
+
+		</action>
+
+	</package>
+	<!-- 结束风险事件统计 -->
+
+	<package name="riskFeedback" extends="struts-default">
+
+		<!-- 开始“风险事件预警”模块 -->
+
+		<!-- "显示风险事件预警查询详细信息" -->
+		<action name="riskWarnAction" class="riskWarnAction" method="getStrategyList">
+			<result name="success">/RiskFeedback/RiskWarnShow.jsp</result>
+			<result name="fail">/RiskFeedback/RiskWarnShow.jsp</result>
+		</action>
+		<!--更多风险事件列表 -->
+		<action name="riskWarnQuery" class="riskWarnAction" method="getWarnList">
+			<result name="success">/RiskFeedback/WarnListChildren.jsp</result>
+			<result name="fail">/RiskFeedback/WarnListChildren.jsp</result>
+		</action>
+		<!-- "按部门查询风险事件" -->
+		<action name="QueryAction" class="riskWarnActionsearch" method="riskQuery">
+			<result name="success">/RiskFeedback/RiskWarn.jsp</result>
+			<result name="fail">/RiskFeedback/RiskWarn.jsp</result>
+		</action>
+		<!-- 查看 -->
+
+
+		<!-- 结束“风险事件预警”模块 -->
+
+		<!-- 开始风险警戒模块 -->
+		<action name="RiskCautionAction" class="riskCautionAction"
+			method="riskCautionShow">
+			<result name="success">/RiskFeedback/RiskCaution.jsp</result>
+			<result name="fail">/RiskFeedback/RiskCaution.jsp</result>
+		</action>
+
+		<action name="RiskCautionqueryAction" class="riskCautionAction"
+			method="riskQuery">
+			<result name="success">/RiskFeedback/RiskCaution.jsp</result>
+			<result name="fail">/RiskFeedback/RiskCaution.jsp</result>
+		</action>
+		<action name="RiskTellAction" class="riskCautionAction" method="riskTellCaution">
+			<result name="success">/RiskFeedback/RiskCaution.jsp?operation=handle*result=success
+			</result>
+			<result name="fail">/RiskFeedback/RiskCaution.jsp?operation=handle*result=fail
+			</result>
+		</action>
+		<action name="depCautionAction" class="DepCaution" method="show">
+			<result name="success">/RiskFeedback/DepCaution.jsp</result>
+			<result name="fail">/RiskFeedback/DepCaution.jsp</result>
+		</action>
+
+		<action name="depCautionMultiDelAction" class="DepCaution"
+			method="multiDel">
+			<result name="success">/RiskFeedback/DepCaution.jsp</result>
+			<result name="fail">/RiskFeedback/DepCaution.jsp</result>
+		</action>
+		<action name="depCautionQueryAction" class="DepCaution" method="query">
+			<result name="success">/RiskFeedback/DepCaution.jsp</result>
+			<result name="fail">/RiskFeedback/DepCaution.jsp</result>
+		</action>
+
+		<action name="depCautionInfAction" class="DepCaution" method="showSelfDepInf">
+			<result name="success">/RiskFeedback/DepCautionInf.jsp</result>
+			<result name="fail">/RiskFeedback/DepCautionInf.jsp</result>
+		</action>
+		<action name="querydepCautionInfAction" class="DepCaution"
+			method="showSelfDepForSearch">
+			<result name="success">/RiskFeedback/DepCautionInf.jsp</result>
+			<result name="fail">/RiskFeedback/DepCautionInf.jsp</result>
+		</action>
+
+	</package>
+
+	<package name="personManage" extends="struts-default">
+		<!--个人信息查看 -->
+		<action name="personInfoQueryAction" class="personInfoAction"
+			method="personInfoQuery">
+			<result name="success">/PersonnalManage/PersonalInfo.jsp</result>
+			<result name="fail">/PersonnalManage/PersonalInfo.jsp</result>
+		</action>
+		<!--个人信息修改 -->
+		<action name="personInfoSaveAction" class="personInfoAction"
+			method="personInfoSave">
+			<result name="success">/PersonnalManage/PersonalInfo.jsp?operation=update*result=success
+			</result>
+			<result name="fail">/PersonnalManage/PersonalInfo.jsp?operation=update*result=fail
+			</result>
+		</action>
+		<!--个人密码查看 -->
+		<action name="passwordQueryAction" class="personInfoAction"
+			method="passwordQuery">
+			<result name="success">/PersonnalManage/PasswordManage.jsp</result>
+			<result name="fail">/PersonnalManage/PasswordManage.jsp</result>
+		</action>
+		<!--个人密码修改 -->
+		<action name="passwordSaveAction" class="personInfoAction"
+			method="passwordSave">
+			<result name="success">/PersonnalManage/PasswordManage.jsp?operation=update*result=success
+			</result>
+			<result name="fail">/PersonnalManage/PasswordManage.jsp?operation=update*result=success
+			</result>
+		</action>
+	</package>
+
+	<package name="systemManage" extends="struts-default">
+		<!--获取角色 -->
+		<action name="roleQueryAction" class="roleQueryAction" method="roleQuery">
+			<result name="success">/SystemManage/LimitManage.jsp</result>
+			<result name="fail">/SystemManage/LimitManage.jsp</result>
+		</action>
+
+		<action name="jueseQueryAction" class="roleQueryAction" method="juesechanxun">
+			<result name="success">/SystemManage/LimitManage.jsp</result>
+			<result name="fail">/SystemManage/LimitManage.jsp</result>
+		</action>
+		<!--获取该角色权限-->
+		<action name="limitQueryAction" class="limitQueryAction"
+			method="limitQuery">
+
+			<result name="success">/SystemManage/LimitAdd.jsp</result>
+			<result name="fail">/SystemManage/LimitAdd.jsp</result>
+		</action>
+		<action name="roleSubmitAction" class="roleSubmitAction"
+			method="submitRole">
+			<result name="success">/SystemManage/LimitManage.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/SystemManage/LimitManage.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!--删除角色-->
+		<action name="roleMultiDelAction" class="roleMultiDelAction"
+			method="roleMultiDel">
+
+			<result name="success">/SystemManage/LimitManage.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/SystemManage/LimitManage.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- 开始”用户管理“模块 -->
+		<!-- ”显示用户信息“ -->
+		<action name="UserManageAction" class="UserManageAction"
+			method="umManage">
+			<result name="success">/SystemManage/UserManage.jsp</result>
+			<result name="fail">/SystemManage/UserManage.jsp</result>
+		</action>
+		<!-- ”新增|编辑“ -->
+		<action name="UMAddUpdateAction" class="UMAddUpdateAction"
+			method="umAddUpdate">
+			<!--2019liu<result name="success">/SystemManage/UserManage.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/SystemManage/UserAddUpdate.jsp?operation=addupdate*result=fail
+			</result>-->
+			<result name="success">/SystemManage/UserAddUpdate.jsp</result>
+		</action>
+			<!-- ”返回2019.4liu“ -->
+		<action name="UUpdateBackAction" class="UUpdateBackAction"
+			method="uUpdateBack">
+			<result name="success">/SystemManage/UserManage.jsp?operation=addupdate*result=success
+			</result>
+			<result name="fail">/SystemManage/UserAddUpdate.jsp?operation=addupdate*result=fail
+			</result>
+		</action>
+		<!-- ”批量删除“ -->
+		<action name="UMMultiDelAction" class="UMMultiDelAction"
+			method="umMultiDel">
+
+			<result name="success">/SystemManage/UserManage.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/SystemManage/UserManage.jsp?operation=delete*result=fail
+			</result>
+		</action>
+		<!-- ”删除“ -->
+		<action name="UMDelAction" class="UMDelAction" method="umDelete">
+			<result name="success">/SystemManage/UserManage.jsp</result>
+			<result name="fail">/SystemManage/UserManage.jsp</result>
+		</action>
+		<!-- ”启用无效用户“ -->
+		<action name="UMMultiEnableAction" class="UMMultiDelAction"
+			method="umMultiEnable">
+
+			<result name="success">/SystemManage/UserManage.jsp?operation=enable*result=success
+			</result>
+			<result name="fail">/SystemManage/UserManage.jsp?operation=enable*result=fail
+			</result>
+		</action>
+
+		<!-- ”编辑前显示要编辑的对象的信息“ -->
+		<action name="UMUpdatePreAction" class="UMUpdatePreAction"
+			method="umUpdatePrepare">
+
+			<result name="success">/SystemManage/UserAddUpdate.jsp</result>
+		</action>
+		<!-- ”新增前显示要编辑的对象的信息“ -->
+		<action name="UMAddPreAction" class="UMAddPreAction" method="umAddPrepare">
+
+			<result name="success">/SystemManage/UserAddUpdate.jsp</result>
+		</action>
+		<!-- ”密码初始化“ -->
+		<action name="UMResetAction" class="UMResetAction" method="umReset">
+			<result name="success">/SystemManage/UserManage.jsp?operation=reset*result=success
+			</result>
+			<result name="fail">/SystemManage/UserManage.jsp</result>
+		</action>
+		<!-- 查询所有无效用户 -->
+		<action name="UMQueryDeletedAction" class="UserManageAction"
+			method="umQueryDeleted">
+
+			<result name="success">/SystemManage/UserManage.jsp</result>
+			<result name="fail">/SystemManage/UserManage.jsp</result>
+		</action>
+		<!-- 条件查询 -->
+		<action name="queryAction" class="UserManageAction" method="allrequery">
+
+			<result name="success">/SystemManage/UserManage.jsp</result>
+			<result name="fail">/SystemManage/UserManage.jsp</result>
+		</action>
+		<!-- 结束”用户管理“模块 -->
+	</package>
+
+	<package name="PolicyRegulations" extends="struts-default">
+		<action name="upload" class="UploadAction" method="execute">
+			<result name="success">/PolicyRegulations/PolicyUpload.jsp?operation=upload*result=success
+			</result>
+			<result name="fail">/PolicyRegulations/PolicyUpload.jsp?operation=upload*result=fail
+			</result>
+		</action>
+		<action name="queryLaw" class="QueryAction" method="lawManage">
+			<result name="success">/PolicyRegulations/PolicyQuery.jsp</result>
+			<result name="fail">/PolicyRegulations/PolicyQuery.jsp</result>
+		</action>
+		<action name="queryLawbyTitle" class="QueryAction" method="findByfileTitle">
+			<result name="success">/PolicyRegulations/PolicyQuery.jsp</result>
+			<result name="fail">/PolicyRegulations/PolicyQuery.jsp</result>
+		</action>
+
+		<action name="download1" class="Download1Action" method="execute">
+			<result name="success" type="stream">
+				<!-- 下载文件类型定义 -->
+				<param name="contentType">application/octet-stream</param>
+				<!-- 下载文件输出流定义 -->
+				<param name="inputName">downloadFile</param>
+				<!-- 下载文件处理方法 attachment;filename="struts2.txt" -->
+				<param name="contentDisposition">attachment;filename="${downloadChineseFileName}"</param>
+				<param name="bufferSize">40960</param>
+			</result>
+		</action>
+		<!-- 进入删除文件页面 -->
+		<action name="lawDeleteshow" class="DeleteAction" method="lawDeleteshow">
+			<result name="success">/PolicyRegulations/PolicyDelete.jsp</result>
+			<result name="fail">/PolicyRegulations/PolicyDelete.jsp</result>
+		</action>
+		<!-- 删除文件 -->
+		<action name="lawDeleteAction" class="DeleteAction" method="lawDelete">
+			<result name="success">/PolicyRegulations/PolicyDelete.jsp?operation=delete*result=success
+			</result>
+			<result name="fail">/PolicyRegulations/PolicyDelete.jsp?operation=delete*result=fail
+			</result>
+		</action>
+
+	</package>
+	<package name="RiskStrategySet" extends="struts-default">
+		<action name="AddStrategyInfo" class="RiskStrategyAction"
+			method="AddStrategyInfo">
+			<result name="success">
+				/RiskStrategySet/AddStrategyInfo.jsp
+		</result>
+		</action>
+		<action name="riskStrategyAction" class="RiskStrategyAction"
+			method="strategyShow">
+			<result name="success">
+				/RiskStrategySet/Strategy.jsp
+		</result>
+			<result name="fail">
+				/RiskStrategySet/Strategy.jsp
+		</result>
+		</action>
+		<action name="riskStrategyInfAction" class="RiskStrategyInfAction"
+			method="readUpdateinfo">
+			<result name="success">
+				/RiskStrategySet/AddStrategyInfo.jsp
+		</result>
+			<result name="fail">
+				/RiskStrategySet/AddStrategyInfo.jsp
+		</result>
+		</action>
+		<action name="updateOrAddSetinfo" class="RiskStrategyInfAction"
+			method="updateOrAddSetinfo">
+			<!--2019<result name="success">/RiskStrategySet/Strategy.jsp</result>
+			<result name="fail">/RiskStrategySet/AddStrategyInfo.jsp</result>-->
+			<result name="success">/RiskStrategySet/AddStrategyInfo.jsp</result>
+			<result name="fail">/RiskStrategySet/AddStrategyInfo.jsp</result>
+		</action>
+		<action name="riskStrategySeekAction" class="RiskStrategySeekAction"
+			method="strategyRead">
+			<result name="success">
+				/RiskStrategySet/InfSeek.jsp
+		</result>
+		</action>
+
+		<action name="riskStrategypupdateAction" class="RiskStrategypupdateAction"
+			method="strategyUpdatePrepare">
+			<result name="success">
+				/RiskStrategySet/StrategyAddUpdate.jsp
+		</result>
+		</action>
+		<action name="riskStrategyUpdateFinishAction" class="RiskStrategypupdateAction"
+			method="addUpdate">
+			<result name="success">
+				/RiskStrategySet/StrategyInf.jsp
+		</result>
+			<result name="fail">
+				/RiskStrategySet/StrategyAddUpdate.jsp
+		</result>
+		</action>
+
+		<action name="riskStrategyDeleteAction" class="RiskStrategypupdateAction"
+			method="strategyDelete">
+			<result name="success">
+				/RiskStrategySet/StrategyInf.jsp
+		</result>
+			<result name="fail">
+				/RiskStrategySet/StrategyInf.jsp
+		</result>
+		</action>
+		<action name="riskStrategyMultiDeleteAction" class="RiskStrategypupdateAction"
+			method="strategyMultiDel">
+			<result name="success">
+				/RiskStrategySet/Strategy.jsp
+		</result>
+			<result name="fail">
+				/RiskStrategySet/Strategy.jsp
+		</result>
+		</action>
+	</package>
+
+	<!-- 开始风险分析 -->
+	<package name="riskAnalysis" extends="struts-default">
+		<action name="GenAnalysisDepAction" class="GenAnalysisAction"
+			method="GeneralAnalysisDep">
+			<result name="success">
+				/RiskAnalysis/GeneralAnalysisDep.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/GeneralAnalysisDep.jsp
+		    </result>
+		</action>
+		<action name="GenAnaDepExcelAction" class="GenAnalysisAction"
+			method="exportExcelByDep">
+			<result name="success">
+				/RiskAnalysis/GeneralAnalysisDep.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/GeneralAnalysisDep.jsp
+		    </result>
+		</action>
+		<action name="GenAnalysisDepByValueAction" class="GenAnalysisAction"
+			method="GeneralAnalysisDepByValue">
+			<result name="success">
+				/RiskAnalysis/GeneralAnalysisDep.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/GeneralAnalysisDep.jsp
+		    </result>
+		</action>
+		
+		<!-- desin by jq 2017-05-05 
+		<action name="chart" class="chart" method="getChart">
+            <result>/RiskAnalysis/GeneralAnalysisRisk.jsp</result>
+        </action>
+		
+		 end! -->
+		
+		<action name="GenAnaAllDepAction" class="GenAnalysisAction"
+			method="GeneralAnalysisDepAllByValue">
+			<result name="success">
+				/RiskAnalysis/GeneralAnalysisAllDep.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/GeneralAnalysisAllDep.jsp
+		    </result>
+		</action>
+		<action name="GenAnaAllDepExcelAction" class="GenAnalysisAction"
+			method="exportExcelAllByDep">
+			<result name="success">
+				/RiskAnalysis/GeneralAnalysisAllDep.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/GeneralAnalysisAllDep.jsp
+		    </result>
+		</action>
+		<action name="GenAnalysisRiskAction" class="GenAnalysisAction"
+			method="GeneralAnalysisRisk">
+			<result name="success">
+				/RiskAnalysis/GeneralAnalysisRisk.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/GeneralAnalysisRisk.jsp
+		    </result>
+		</action>
+		<action name="GenAnaAllRiskAction" class="GenAnalysisAction"
+			method="GeneralAnalysisRiskAllByValue">
+			<result name="success">
+				/RiskAnalysis/GeneralAnalysisAllRisk.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/GeneralAnalysisAllRisk.jsp
+		    </result>
+		</action>
+		<action name="GenAnalysisRiskByValueAction" class="GenAnalysisAction"
+			method="GeneralAnalysisRiskByValue">
+			<result name="success">
+				/RiskAnalysis/GeneralAnalysisRisk.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/GeneralAnalysisRisk.jsp
+		    </result>
+		</action>
+		<action name="GenAnaRiskExcelAction" class="GenAnalysisAction"
+			method="exportExcelByRisk">
+			<result name="success">
+				/RiskAnalysis/GeneralAnalysisRisk.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/GeneralAnalysisRisk.jsp
+		    </result>
+		</action>
+		<action name="GenAnaAllRiskExcelAction" class="GenAnalysisAction"
+			method="exportExcelAllByRisk">
+			<result name="success">
+				/RiskAnalysis/GeneralAnalysisAllRisk.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/GeneralAnalysisAllRisk.jsp
+		    </result>
+		</action>
+		<action name="ajaxGenRiskAction" class="GenAnalysisAction"
+			method="getReportImg">
+		</action>
+		<action name="ajaxGenRiskDiskAction" class="GenAnalysisAction"
+			method="ajaxRiskDisk">
+		</action>
+		<action name="ajaxGenRuleAction" class="GenAnalysisAction"
+			method="ajaxRule">
+		</action>
+		<action name="ajaxGenRiskDiskPieAndBarAction" class="GenAnalysisAction"
+			method="ajaxRiskDiskPieAndBar">
+		</action>
+			<action name="ajaxGenRuleBarAction" class="GenAnalysisAction"
+			method="ajaxRuleBar">
+		</action>
+		<action name="genRiskReportAction" class="GenAnalysisAction"
+			method="exportWordNew">
+		</action>
+			<action name="genRiskReportAction2" class="GenAnalysisAction"
+			method="exportWord2">
+		</action>
+		<action name="GenRiskDetailAction" class="GenAnalysisAction"
+			method="getRiskEventDetailById">
+			<result name="success">
+				/RiskAnalysis/RiskEventDetail.jsp
+		    </result>
+		</action>
+
+		<action name="KeyAnalysisDepAction" class="KeyAnalysisAction"
+			method="keyAnalysisDep">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisDep.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/KeyAnalysisDep.jsp
+		    </result>
+		</action>
+		<action name="KeyAnaDepExcelAction" class="KeyAnalysisAction"
+			method="exportExcelByDep">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisDep.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/KeyAnalysisDep.jsp
+		    </result>
+		</action>
+		<action name="KeyAnalysisDepByValueAction" class="KeyAnalysisAction"
+			method="keyAnalysisDepByValue">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisDep.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/KeyAnalysisDep.jsp
+		    </result>
+		</action>
+		<action name="KeyAnaAllDepAction" class="KeyAnalysisAction"
+			method="KeyAnalysisDepAllByValue">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisAllDep.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/KeyAnalysisAllDep.jsp
+		    </result>
+		</action>
+		<action name="KeyAnalysisRiskAction" class="KeyAnalysisAction"
+			method="keyAnalysisRisk">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisRisk.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/KeyAnalysisRisk.jsp
+		    </result>
+		</action>
+		<action name="KeyAnaAllRiskAction" class="KeyAnalysisAction"
+			method="keyAnalysisRiskAllByValue">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisAllRisk.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/KeyAnalysisAllRisk.jsp
+		    </result>
+		</action>
+		<action name="KeyAnalysisRiskByValueAction" class="KeyAnalysisAction"
+			method="keyAnalysisRiskByValue">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisRisk.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/KeyAnalysisRisk.jsp
+		    </result>
+		</action>
+		<action name="KeyAnaRiskExcelAction" class="KeyAnalysisAction"
+			method="exportExcelByRisk">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisRisk.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/KeyAnalysisRisk.jsp
+		    </result>
+		</action>
+		<action name="KeyAnaRiskStaExcelAction" class="KeyAnalysisAction"
+			method="exportExcelByRiskSta">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisRisk.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/KeyAnalysisRisk.jsp
+		    </result>
+		</action>
+		<action name="KeyAnaAllRiskExcelAction" class="KeyAnalysisAction"
+			method="exportExcelAllByRisk">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisAllRisk.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/KeyAnalysisAllRisk.jsp
+		    </result>
+		</action>
+		<action name="KeyAnaAllDepExcelAction" class="KeyAnalysisAction"
+			method="exportExcelAllByDep">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisAllDep.jsp
+		    </result>
+			<result name="fail">
+				/RiskAnalysis/KeyAnalysisAllDep.jsp
+		    </result>
+		</action>
+		<action name="keyRiskReportAction" class="KeyAnalysisAction"
+			method="exportWordNew">
+		</action>
+		<action name="KeyRiskDetailAction" class="KeyAnalysisAction"
+			method="getRiskEventDetailById">
+			<result name="success">
+				/RiskAnalysis/RiskEventDetail.jsp
+		    </result>
+		</action>
+		<action name="KeyAnalysisRiskDepAction" class="KeyAnalysisAction"
+			method="keyAnalysisRiskDep">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisRiskDep.jsp
+		    </result>
+		</action>
+		<action name="KeyAnalysisRiskDepByValueAction" class="KeyAnalysisAction"
+			method="getRiskDepPie">
+			<result name="success">
+				/RiskAnalysis/KeyAnalysisRiskDep.jsp
+		    </result>
+		</action>
+
+          <action name="KeyAnaDepNumBarExAction" class="KeyAnalysisAction"
+			method="exportWordDep">
+		</action>
+		    <action name="KeyAnaRiskDepBarExAction" class="KeyAnalysisAction"
+			method="exportWordRiskDep">
+		</action>
+	</package>
+	<!-- 结束风险分析 -->
+
+
+	<!--风险应对-->
+	<package name="riskReply" extends="struts-default">
+		<!--应对措施页面进入  -->
+		<action name="replyMeasure" class="riskReplyAction" method="MeasureQuery">
+			<result name="success">/RiskReply/ReplyMeasure.jsp</result>
+			<!--			<result name="success">/login.jsp</result>-->
+		</action>
+
+		<!--风险应对措施列表查询统计结果-->
+		<action name="MeasureQueryAction" class="MeasureQueryAction"
+			method="MeasureAdvancedQuery">
+			<result name="success">/RiskReply/ReplyMeasure.jsp</result>
+			<result name="fail">/RiskReply/ReplyMeasure.jsp</result>
+		</action>
+
+		<!--风险应对措施列表统计结果导出  -->
+		<action name="measureExcelAction" class="measureExcelAction"
+			method="measureExportExcel">
+			<result name="fail">/RiskReply/ReplyMeasure.jsp</result>
+		</action>
+		
+		<!--应对管理页面进入  -->
+		<action name="replyManage" class="replyManageAction" method="ManageQuery">
+			<result name="success">/RiskReply/ReplyManage.jsp</result>
+		</action>
+		
+		<!-- 从待办进入应用管理页面 -->
+		<action name="replyDetailManage" class="riskReplyManageAction" method="ManageDetailQuery">
+			<result name="success">/RiskReply/ReplyManage.jsp</result>
+		</action>
+
+		<action name="RMQueryAction" class="replyManageAction" method="rmAdvancedQuery">
+			<result name="success">/RiskReply/ReplyManage.jsp</result>
+		</action>
+
+		<action name="RMHandleAction" class="replyManageAction" method="RMriskhandle">
+			<result name="success">/RiskReply/ReplyManage.jsp?operation=handled*result=success
+			</result>
+			<result name="fail">/RiskReply/ReplyManage.jsp?operation=handled*result=fail
+			</result>
+		</action>
+
+		<!--应对管理结果导出  -->
+		<action name="manageExcelAction" class="manageExcelAction"
+			method="manageExportExcel">
+			<result name="fail">/RiskReply/emptyExcel.jsp</result>
+		</action>
+		<!--应对风险 -->
+		<action name="RiskHandleAction1" class="riskReplyManageAction"
+			method="riskhandle">
+			<result name="success">/RiskReply/ReplyManage.jsp</result>
+		</action>
+	</package>
+
+	<!--风险监控-->
+	<package name="riskSupervise" extends="struts-default">
+		<!--管理部门监控页面进入  -->
+		<action name="manageDepSupervise" class="riskSuperviseAction"
+			method="SuperviseQuery">
+			<result name="success">/RiskSupervise/ManageDepSupervise.jsp</result>
+		</action>
+
+		<!--管理部门监控的事件列表查询统计结果-->
+		<action name="SuperviseQueryAction" class="riskSuperviseAction"
+			method="getRiskList">
+			<result name="success">/RiskSupervise/ManageDepSupervise.jsp</result>
+			<result name="fail">/RiskSupervise/ManageDepSupervise.jsp</result>
+		</action>
+		<!--对已应对的事件进行监控-->
+		<action name="SuperviseAction" class="riskSuperviseAction"
+			method="riskSupervise">
+			<result name="success">/RiskSupervise/ManageDepSupervise.jsp</result>
+			<result name="fail">/RiskSupervise/ManageDepSupervise.jsp</result>
+		</action>
+		<!--管理部门监控的事件列表统计结果导出  -->
+		<action name="superviseExcelAction" class="superviseExcelAction" method="superviseExportExcel">
+			<result name="fail">/RiskSupervise/ManageDepSupervise.jsp</result>
+			<result name="success">/RiskSupervise/ManageDepSupervise.jsp</result>
+		</action>
+	</package>
+
+
+	<!--风险考核-->
+	<package name="riskAssess" extends="struts-default">
+		<!--风险考核成绩查询-->
+		<action name="riskAssessByNumAction" class="riskAssessByNumAction"
+			method="riskAssessByNum">
+			<result name="success">/RiskAssess/RiskAssessByNum.jsp</result>
+			<result name="fail">/RiskAssess/RiskAssessByNum.jsp</result>
+		</action>
+		<!-- class="riskAssessBySituationAction"   method="riskAssessBySituation"                                                          -->
+		<action name="riskAssessBySituationAction" class="riskAssessBySituationAction"
+			method="riskAssessBySituation">
+			<result name="success">/RiskAssess/RiskAssessBySituation.jsp</result>
+			<result name="fail">/RiskAssess/RiskAssessBySituation.jsp</result>
+		</action>
+		<action name="riskAssessBySynthesizeAction" class="riskAssessBySynthesizeAction"
+			method="riskAssessBySynthesize">
+			<result name="success">/RiskAssess/RiskAssessBySynthesize.jsp</result>
+			<result name="fail">/RiskAssess/RiskAssessBySynthesize.jsp</result>
+		</action>
+
+		<!--风险考核按处理条数查询成绩查询表单提交-->
+		<action name="riskAssessQueryAction" class="riskAssessQueryAction"
+			method="reQuery">
+			<result name="success">/RiskAssess/RiskAssessByNum.jsp</result>
+			<result name="fail">/RiskAssess/RiskAssessByNum.jsp</result>
+		</action>
+		<!--风险考核按应对情况查询成绩查询表单提交-->
+		<action name="riskAssessQueryAction2" class="riskAssessQueryAction2"
+			method="reQuery2">
+			<result name="success">/RiskAssess/RiskAssessBySituation.jsp</result>
+			<result name="fail">/RiskAssess/RiskAssessBySituation.jsp</result>
+		</action>
+		<!--风险考核按应对情况查询成绩查询表单提交-->
+		<action name="riskAssessQueryAction3" class="riskAssessQueryAction3"
+			method="reQuery3">
+			<result name="success">/RiskAssess/RiskAssessBySynthesize.jsp</result>
+			<result name="fail">/RiskAssess/RiskAssessBySynthesize.jsp</result>
+		</action>
+
+		<!--显示未应对风险事件 -->
+		<action name="riskAssessUnFinishedAction" class="riskAssessUnFinishedAction"
+			method="riskAssessUnFinished">
+			<result name="success">/RiskAssess/RiskAssessUnFinished.jsp</result>
+			<result name="fail">/RiskAssess/RiskAssessUnFinished.jsp</result>
+		</action>
+		<!--显示待应对风险事件 -->
+		<action name="riskAssessUnFinishedAction1" class="riskAssessUnFinishedAction"
+			method="riskAssessUnFinished1">
+			<result name="success">/RiskAssess/RiskAssessUnFinished.jsp</result>
+			<result name="fail">/RiskAssess/RiskAssessUnFinished.jsp</result>
+		</action>
+		<!--显示流转中风险事件 -->
+		<action name="riskAssessPassAction" class="riskAssessPassAction"
+			method="riskAssessPass">
+			<result name="success">/RiskAssess/RiskAssessPass.jsp</result>
+			<result name="fail">/RiskAssess/RiskAssessPass.jsp</result>
+		</action>
+		<action name="riskAssessPassedAction" class="riskAssessPassedAction"
+			method="riskAssessPassed">
+			<result name="success">/RiskAssess/RiskAssessPassed.jsp</result>
+			<result name="fail">/RiskAssess/RiskAssessPassed.jsp</result>
+		</action>
+		<!--对风险事件进行考核-->
+		<action name="riskAssessAssessAction" class="riskAssessAssessAction"
+			method="riskAssessAssess">
+			<result name="success">/RiskAssess/RiskAssessPass.jsp
+			</result>
+			<result name="fail">/RiskAssess/RiskAssessPass.jsp
+			</result>
+		</action>
+		<action name="riskAssessAssessedAction" class="riskAssessAssessedAction"
+			method="riskAssessAssessed">
+			<result name="success">/RiskAssess/RiskAssessPassed.jsp
+			</result>
+			<result name="fail">/RiskAssess/RiskAssessPassed.jsp
+			</result>
+		</action>
+	</package>
+
+	<!-- 风险报告 -->
+	<package name="riskReport" extends="struts-default">
+		<!-- 下面是报告启动流程 -->
+		<action name="riskReportInputAction" class="RiskReportInputAction">
+			<result>/RiskReport/RiskReportInput.jsp</result>
+		</action>
+
+		<action name="riskReportInputAction_*" class="RiskReportInputAction"
+			method="{1}">
+			<result>/RiskReport/RiskReportInput.jsp</result>
+			<result name="selectDep">/RiskReport/SelectDepartment.jsp</result>
+			<result name="ReadReport">/RiskReport/RiskReportRead.jsp</result>
+			<result name="fileUpload">/RiskReport/FileUpload.jsp</result>
+			<result name="receiveReport">/RiskReport/RiskReportReceive.jsp</result>
+		</action>
+
+		<action name="riskReportReadAction_*" class="RiskReportReadAction"
+			method="{1}">
+			<result>/RiskReport/RiskReportRead.jsp</result>
+			<result name="readFlow">/RiskReport/ReadFlow.jsp</result>
+		</action>
+		<!-- 上面是报告启动流程 -->
+
+		<!-- 下面是部门报告提交流程 -->
+		<action name="riskReportDepInputAction_*" class="RiskReportDepInputAction"
+			method="{1}">
+			<result name="RiskReportDepInput">/RiskReport/RiskReportDepInput.jsp</result>
+			<result name="fileUpload">/RiskReport/FileUpload.jsp</result>
+			<result name="DepFlowConfirm">/RiskReport/DepFlowConfirm.jsp</result>
+		</action>
+
+		<action name="riskReportDepCheckAction" class="RiskReportDepCheckAction">
+			<result>/RiskReport/RiskReportDepCheck.jsp</result>
+		</action>
+		<action name="riskReportDepCheckAction_*" class="RiskReportDepCheckAction" method="{1}">
+			<result>/RiskReport/RiskReportDepCheck.jsp</result>
+			<result name="DepFlowConfirm">/RiskReport/DepFlowConfirm.jsp</result>
+		</action>
+
+		<action name="riskReportDepReadAction_*" class="RiskReportDepReadAction"
+			method="{1}">
+			<result>/RiskReport/RiskReportDepRead.jsp</result>
+			<result name="readFlow">/RiskReport/ReadFlow.jsp</result>
+		</action>
+		<!-- 上面是部门报告提交流程 -->
+
+		<!--  下面是汇总报告审批流程 -->
+		<action name="riskReportCheckInputAction" class="RiskReportCheckInputAction">
+			<result name="RiskReportCheckInput">/RiskReport/RiskReportCheckInput.jsp</result>
+		</action>
+		<action name="riskReportCheckInputAction_*" class="RiskReportCheckInputAction"
+			method="{1}">
+			<result name="fileUpload">/RiskReport/FileUpload.jsp</result>
+			<result name="CheckFlowConfirm">/RiskReport/CheckFlowConfirm.jsp</result>
+		</action>
+		<action name="riskReportCheckCheckAction_*" class="RiskReportCheckCheckAction"
+			method="{1}">
+			<result name="RiskReportCheckCheck">/RiskReport/RiskReportCheckCheck.jsp</result>
+			<result name="ReadReport" type="chain">riskReportCheckReadAction_ReadReport
+			</result>
+			
+			<result name="CheckFlowConfirm">/RiskReport/CheckFlowConfirm.jsp</result>
+		</action>
+		<action name="riskReportCheckReadAction_*" class="RiskReportCheckReadAction"
+			method="{1}">
+			<result>/RiskReport/RiskReportCheckRead.jsp</result>
+			<result name="readFlow">/RiskReport/ReadFlow.jsp</result>
+		</action>
+		<!--  上面是汇总报告审批流程-->
+
+		<!-- 下面是查询报告处理情况 -->
+		<action name="riskReportProcessAction_*" class="RiskReportProcessAction" method="{1}">
+			<result name="task">/RiskReport/RiskReportTask.jsp</result>
+		</action>
+		<!-- 上面是查询报告处理情况 -->
+		
+		<!-- 下面是查询报告台账-->
+		<action name="riskReportAction_*" class="RiskReportAction" method="{1}">
+			<result name="report">/RiskReport/ReportBook.jsp</result>
+		</action>
+		<action name="reportReadAction" class="ReportReadAction">
+			<result>/RiskReport/ReportRead.jsp</result>
+		</action>
+		<!-- 上面是查询报告台账-->
+		
+		
+	</package>
+</struts>    

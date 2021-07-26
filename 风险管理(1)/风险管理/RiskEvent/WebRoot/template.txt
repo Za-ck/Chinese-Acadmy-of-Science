@@ -1,0 +1,14 @@
+//查询所有的记录条数
+final String queryString2 = "SELECT COUNT(*) " + queryString.substring(0, queryString.indexOf("order by"));
+			ServletActionContext.getRequest().getSession().setAttribute("pagecount",getHibernateTemplate().execute(new HibernateCallback(){
+
+				@Override
+				public Object doInHibernate(Session session)
+						throws HibernateException, SQLException {
+					String result = session.createQuery(queryString2).uniqueResult().toString();
+					session.close();
+					return result;
+				}
+				
+			}));
+			

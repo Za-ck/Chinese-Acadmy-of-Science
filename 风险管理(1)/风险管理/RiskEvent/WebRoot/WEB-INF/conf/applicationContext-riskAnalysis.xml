@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<beans
+ xmlns="http://www.springframework.org/schema/beans"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+ 
+
+
+	<!-- <bean name="GenAnalysisDepAction" class="com.action.analysis.GeneralAnalysisAction">
+		
+		<property name="generalAnalysisViewDao">
+	    	<ref bean="GeneralAnalysisViewDepDAO"/>
+		</property>
+		
+	</bean>
+	 -->
+	
+	
+	<bean name="GenAnalysisAction" class="com.action.analysis.GeneralAnalysisAction">
+		
+		<property name="allAnalysisViewDAO">
+	    	<ref bean="AllAnalysisViewDAO"/>
+		</property>
+		<property name="allAnalysisViewNewDAO">
+	    	<ref bean="AllAnalysisViewNewDAO"/>
+		</property>
+		<property name="allAnalysisViewNew2DAO">
+	    	<ref bean="AllAnalysisViewNew2DAO"/>
+		</property>
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO" />
+		</property>
+		<property name="riskDAO">
+	    	<ref bean="RiskDAO"/>
+	    </property>
+	    <property name="probabilityDao">
+			<ref bean="ProbabilityDAO"/>
+	    </property>
+	    <property name="operationDao">
+			<ref bean="OperationDAO"/>
+		</property>
+		<property name="reportViewDao">
+			<ref bean="ReportViewDAO"/>
+		</property>
+		
+	</bean>
+	
+	<!-- design by jq 2017-05-05 
+	<bean name="chart" class="com.action.analysis.graphicNew">
+		
+		<property name="allAnalysisViewDAO">
+	    	<ref bean="AllAnalysisViewDAO"/>
+		</property>
+		<property name="allAnalysisViewNewDAO">
+	    	<ref bean="AllAnalysisViewNewDAO"/>
+		</property>
+		<property name="allAnalysisViewNew2DAO">
+	    	<ref bean="AllAnalysisViewNew2DAO"/>
+		</property>
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+		</property>
+		<property name="riskTypeDao">
+			<ref bean="RiskTypeDAO" />
+		</property>
+		<property name="riskDAO">
+	    	<ref bean="RiskDAO"/>
+	    </property>
+	    <property name="probabilityDao">
+			<ref bean="ProbabilityDAO"/>
+	    </property>
+	    <property name="operationDao">
+			<ref bean="OperationDAO"/>
+		</property>
+		<property name="reportViewDao">
+			<ref bean="ReportViewDAO"/>
+		</property>
+		
+	</bean>
+	 end! -->
+	
+	<bean name="KeyAnalysisAction" class="com.action.analysis.KeyAnalysisAction">
+		
+		<property name="keyAnalysisViewDAO">
+	    	<ref bean="KeyAnalysisViewDAO"/>
+		</property>
+		<property name="departmentDao">
+	    	<ref bean="DepartmentDAO"/>
+	    </property>
+	    <property name="riskTypeDao">
+			<ref bean="RiskTypeDAO" />
+		</property>
+		<property name="riskDAO">
+	    	<ref bean="RiskDAO"/>
+	    </property>
+	    <property name="probabilityDao">
+			<ref bean="ProbabilityDAO"/>
+	    </property>
+	    <property name="operationDao">
+			<ref bean="OperationDAO"/>
+		</property>
+		<property name="reportViewDao">
+			<ref bean="ReportViewDAO"/>
+		</property>
+		<property name="keyAnalysisViewStaDAO">
+			<ref bean="KeyAnalysisViewStaDAO"/>
+		</property>
+		
+	</bean>
+
+	
+	
+	
+	
+	</beans>

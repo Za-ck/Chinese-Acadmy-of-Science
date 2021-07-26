@@ -1,0 +1,11 @@
+﻿  menu.c
+e:\projects\cbasicexperimentams\ams\menu.c(77): warning C4090: “初始化”: 不同的“const”限定符
+e:\projects\cbasicexperimentams\ams\menu.c(95): warning C4477: “scanf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“char *(*)[100]”
+e:\projects\cbasicexperimentams\ams\menu.c(97): warning C4047: “函数”:“const char *”与“char *[100]”的间接级别不同
+e:\projects\cbasicexperimentams\ams\menu.c(97): warning C4024: “strlen”: 形参和实参 1 的类型不同
+e:\projects\cbasicexperimentams\ams\menu.c(101): warning C4047: “函数”:“const char *”与“char *[100]”的间接级别不同
+e:\projects\cbasicexperimentams\ams\menu.c(101): warning C4024: “queryCard”: 形参和实参 1 的类型不同
+e:\projects\cbasicexperimentams\ams\menu.c(111): warning C4013: “replace”未定义；假设外部返回 int
+e:\projects\cbasicexperimentams\ams\menu.c(110): warning C4477: “printf”: 格式字符串“%-10s”需要类型“char *”的参数，但可变参数 6 拥有了类型“int”
+menu.obj : error LNK2019: 无法解析的外部符号 _replace，该符号在函数 _query 中被引用
+E:\projects\CBasicExperimentAMS\AMS\Debug\AMS.exe : fatal error LNK1120: 1 个无法解析的外部命令
